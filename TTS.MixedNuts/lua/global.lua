@@ -1,149 +1,226 @@
---[[
-global.lua
-global logic and values.
-]]
---[[--------------------------
+local TOKEN_1_GUID = "23a94d"
+local TOKEN_5_GUID = "5c4b70"
+local TOKEN_10_GUID = "b372bd"
 
-Globals
-constants and variables.
+local HIDDEN_ZONE_SCALE = 5
 
-]]
----------------------------
-local waitForDrawToFinishSec = 0.5
+local tokenCreationDescriptors = {
+  { guid = TOKEN_1_GUID,  count = 5, protoype = nil },
+  { guid = TOKEN_5_GUID,  count = 1, protoype = nil },
+  { guid = TOKEN_10_GUID, count = 2, protoype = nil },
+}
+-- === CONFIG ===
+local ZONE_OFFSET = Vector(0, 0, 5) -- relative to hand zone center
 
---[[--------------------------
+-- === INTERNAL STATE ===
+local gPlayerZones = {}  -- color -> zone guid
+local gPlayerTokens = {} -- color -> {guids}
 
-Functions
-Called by system events.
+----===== Genera; Utils
+---
+---    q   q
+local tagRegExp = "setupForPlayer"
+local function debugLog(tag, ...)
+  -- Check the tag reg exp to see if tag is enabled.
+  if string.match(tag, tagRegExp) then
+    print("[" .. tag .. "] " .. string.format(...))
+  end
+end
 
-]]
----------------------------
+-- Utility for printing.-- Flatten table to string.
+function FlattenTable(t, sep, prefix)
+  sep = sep or "."      -- separator between nested keys
+  prefix = prefix or "" -- starting key prefix
+  local parts = {}
 
-local function dump(blob, opt_params)
-  local params = opt_params or {}
-  local indent = params.indent or ""
-  local recursive = true
-  if params.nonRecursive then
-      recursive = false
+  for k, v in pairs(t) do
+    local key = tostring(k)
+    local newPrefix = prefix ~= "" and (prefix .. sep .. key) or key
+
+    if type(v) == "table" then
+      -- recurse into nested table
+      table.insert(parts, FlattenTable(v, sep, newPrefix))
+    else
+      -- convert value to string
+      table.insert(parts, newPrefix .. "=" .. tostring(v))
+    end
   end
 
-  if type(blob) ~= "table" then
-      print("In dump: blob is not a table!")
-      print("In dump: blob = ", blob)
+  return table.concat(parts, ", ")
+end
+
+-- Apply handTransform to [pod, get pos in world spaece.
+function ApplyHandTransformToLocalOffset(handTransform, localOffset)
+  -- This is terrible but best we can do.
+  -- Make a dummy object.
+  local dummyObject = spawnObject({
+    type = "BlockSquare",
+    position = vd,
+    rotation = handTransform.rotation,
+    scale = { 0.1, 0.1, 0.1 },
+    sound = false,
+    snap_to_grid = false
+  })
+  dummyObject.setInvisibleTo(Player.getColors())
+  print("localOffset: ", FlattenTable(localOffset))
+  a
+  -- Use that to get offset position.
+  local worldPos = dummyObject.positionToWorld(localOffset)
+  dummyObject.destroy()
+  return worldPos
+end
+
+function OnPlayerChangeColor(player, color)
+  CleanupForPlayer(player.steam_id)
+  if color ~= "Grey" then
+    SetupForPlayer(color)
+  end
+end
+
+function OnPlayerLeave(player)
+  CleanupForPlayer(player.steam_id)
+end
+
+function SetInvisibleToEveryoneElse(obj, ownerColor)
+  debugLog("setInvisibleToEveryoneElse", "ownerColor: " .. ownerColor)
+
+  obj.setInvisibleTo({}) -- clear first
+  local allPossiblePlayerColorsInTTS = {
+    "White", "Brown", "Red", "Orange", "Yellow", "Green", "Teal", "Blue", "Purple", "Pink"
+  }
+  -- Build a list.
+  local invisibleToColors = {}
+  for i = 1, #allPossiblePlayerColorsInTTS do
+    local playerColor = allPossiblePlayerColorsInTTS[i]
+    debugLog("setInvisibleToEveryoneElse", "playerColor = " .. playerColor)
+    if playerColor ~= ownerColor and playerColor ~= "Grey" then
+      debugLog("setInvisibleToEveryoneElse", "adding to table ='" .. FlattenTable(invisibleToColors) .. "'")
+      table.insert(invisibleToColors, playerColor)
+      debugLog("setInvisibleToEveryoneElse", "#invisibleToColors = " .. #invisibleToColors)
+    end
+  end
+  debugLog("setInvisibleToEveryoneElse", "outside Loop: #invisibleToColors = " .. #invisibleToColors)
+  debugLog("setInvisibleToEveryoneElse", "invisibleToColors[1]", invisibleToColors[1])
+  local invisibleToColorsAsString = table.concat(invisibleToColors, ", ")
+  debugLog("setInvisibleToEveryoneElse", "invisibleToColorsAsString: " .. invisibleToColorsAsString)
+
+  obj.setInvisibleTo(invisibleToColors)
+end
+
+function AddTokensForZone(zonePos, color)
+  debugLog("addTokens", "color: " .. color)
+  for i = 1, #tokenCreationDescriptors do
+    local tokenCreationDescriptor = tokenCreationDescriptors[i]
+    if not tokenCreationDescriptor.prototype then
+      print("Error: No prototype for token with guid " .. tokenCreationDescriptor.guid)
       return
-  end
+    end
+    for j = 1, tokenCreationDescriptor.count + 1 do
+      local flattededTokenDescri
+      ptor = FlattenTable(tokenCreationDescriptor)
 
-  local newParams = {}
-  newParams.indent = indent .. "  "
-  newParams.nonRecursive = false
-  for key, value in pairs(blob) do
-      local prefix = indent .. key .. " = "
-      print(prefix, value)
-      if recursive and type(value) == "table" then
-          dump(value, newParams)
+      debugLog("AddTokensforZone", "encodedDescriptor = ", flattededTokenDescriptor)
+      local token = tokenCreationDescriptor.prototype.clone({
+        position = zonePos + Vector(math.random() - 0.5, 1, math.random() - 0.5),
+      })
+      -- Tint the token with the color.
+      token.setColorTint(color)
+
+      table.insert(gPlayerTokens[color], token.getGUID())
+      print("Added token " .. token.getGUID() .. " for " .. color)
+    end
+  end
+end
+
+function AddZoneForPlayer(color)
+  debugLog("setupForPlayer", "color: " .. color)
+  local handTransform = Player[color].getHandTransform()
+  if not handTransform then return end
+
+  -- Position new zone next to hand zone
+  local zonePos = ApplyHandTransformToLocalOffset(handTransform, ZONE_OFFSET)
+  local zoneRot = { 0, handTransform.rotation.y, 0 }
+
+  local zone = spawnObject({
+    type = "FogOfWarTrigger",
+    position = zonePos,
+    rotation = zoneRot,
+    scale = { HIDDEN_ZONE_SCALE, HIDDEN_ZONE_SCALE, HIDDEN_ZONE_SCALE },
+  })
+  debugLog("setupForPlayer", "Added zone for " .. color)
+  zone.setColorTint(color)
+  debugLog("tintedTheZone : " .. color);
+
+  SetInvisibleToEveryoneElse(zone, color)
+  return zone
+end
+
+-- Create hidden zone + tokens
+function SetupForPlayer(color)
+  local zone = AddZoneForPlayer(color)
+
+  gPlayerZones[color] = zone.getGUID()
+  gPlayerTokens[color] = {}
+
+
+  -- Spawn tokens inside
+  AddTokensForZone(zone.getPosition(), color)
+end
+
+-- Clean up when leaving/changing
+function CleanupForPlayer(idOrColor)
+  local color = nil
+  if type(idOrColor) == "string" then
+    color = idOrColor
+  else
+    -- lookup by steam_id
+    for c, _ in pairs(gPlayerZones) do
+      if Player[c].steam_id == idOrColor then
+        color = c
+        break
       end
-  end
-end
-
-
-local notecardGuidToZoneGuidsHoldingNotecard = {}
-local allColors = {"White", "Red", "Blue", "Green", "Yellow", "Orange", "Brown", "Teal", "Purple", "Pink"}
-
-function subtractColor(colorsArray, colorToRemove)
-  local newColorsArray = {}
-  for _, color in ipairs(colorsArray) do
-    if color ~= colorToRemove then
-      table.insert(newColorsArray, color)
     end
   end
-  return newColorsArray
+  if not color then return end
+
+  -- Destroy zone
+  if gPlayerZones[color] then
+    local zone = getObjectFromGUID(gPlayerZones[color])
+    if zone then zone.destroy() end
+    gPlayerZones[color] = nil
+  end
+
+  -- Destroy tokens
+  if gPlayerTokens[color] then
+    for _, guid in ipairs(gPlayerTokens[color]) do
+      local obj = getObjectFromGUID(guid)
+      if obj then obj.destroy() end
+    end
+    gPlayerTokens[color] = nil
+  end
 end
 
-
--- Whenever a card leaves a deck, give it the same tags as that deck
-function onObjectEnterZone(zone, object)
-  print("Doug: onObjectEnterZone 001")
-  if not (zone.type == "Hand" and object.type == "Notecard") then
-    print("Doug: onObjectEnterZone 002")
-    return
-  end
-
-  print("Doug: onObjectEnterZone 003")
-  -- This notecard entered this zone.  Record that in map of notecard GUID to Zones Its In.
-  local zoneGuidsHoldingNotecard = notecardGuidToZoneGuidsHoldingNotecard[object.guid]
-  if zoneGuidsHoldingNotecard == nil then
-    zoneGuidsHoldingNotecard = {}
-  end
-  zoneGuidsHoldingNotecard[zone.guid] = true
-  notecardGuidToZoneGuidsHoldingNotecard[object.guid] = zoneGuidsHoldingNotecard
-  print("Doug: onObjectEnterZone 004.4")
-
-  -- Wait a bit to update GUI.
-  Wait.time(function()
-    -- Things may change during the wait.
-    local zoneGuidsHoldingNotecard = notecardGuidToZoneGuidsHoldingNotecard[object.guid]
-    if zoneGuidsHoldingNotecard == nil then
-      print("Doug: onObjectEnterZone 005.6")
+function LoadTokenObjects()
+  for i = 1, #tokenCreationDescriptors do
+    local desc = tokenCreationDescriptors[i]
+    desc.prototype = getObjectFromGUID(desc.guid)
+    debugPrin(("Loaded object frmo guidL %s))="):format(desc.guid))
+    if not desc.prototype then
+      print("Error: Could not find token with guid " .. desc.guid)
       return
     end
-    print("Doug: onObjectEnterZone 006")
-    local isStillInZone = zoneGuidsHoldingNotecard[zone.guid]
-    if not isStillInZone then
-      print("Doug: onObjectEnterZone 007")
-      return
-    end
-    -- make the card invisible to everyone but the owner of the zone.
-    print("Doug: onObjectEnterZone 008")
-    dump(object)
-
-    local holdingColor = zone.getData()["FogColor"]
-    print("Doug: holdingColor = ", holdingColor)
-
-    local allOtherColors = subtractColor(allColors, holdingColor)
-    print("Doug: allOtherColors = ", allOtherColors)
-
-    object.setInvisibleTo(allOtherColors)
-
-    -- What is the rotation?
-    print("Doug: onObjectEnterZone 010")
-    local rotation = object.getRotation()
-    print("Doug: onObjectEnterZone rotation = " .. rotation[1] .. ", " .. rotation[2] .. ", " .. rotation[3])
-    object.setRotationSmooth({0, 0, 0}, false, true)
-  end, waitForDrawToFinishSec)
+  end
 end
 
-function onObjectLeaveZone(zone, object)
-  print("Doug: onObjectLeaveZone 001")
-  if not (zone.type == "Hand" and object.type == "Notecard") then
-    print("Doug: onObjectLeaveZone 002")
-    return
-  end
-
-  print("Doug: onObjectLeaveZone 003")
-  -- This notecard is leaving this zone. Update map of notecard GUID to Zones Its In.
-  local zoneGuidsHoldingNotecard = notecardGuidToZoneGuidsHoldingNotecard[object.guid]
-  if zoneGuidsHoldingNotecard ~= nil then
-    zoneGuidsHoldingNotecard[zone.guid] = false
-    notecardGuidToZoneGuidsHoldingNotecard[object.guid] = zoneGuidsHoldingNotecard
-  end
-  print("Doug: onObjectLeaveZone 005")
-
-  -- Wait a bit to update GUI.
-  Wait.time(function()
-    print("Doug: onObjectLeaveZone 006")
-    -- Things may change during the wait: if not still gone, skip it.
-    local zoneGuidsHoldingNotecard = notecardGuidToZoneGuidsHoldingNotecard[object.guid]
-    if zoneGuidsHoldingNotecard ~= nil then
-      print("Doug: onObjectLeaveZone 007")
-      local isBackInZone = zoneGuidsHoldingNotecard[zone.guid]
-      if isBackInZone then
-        print("Doug: onObjectLeaveZone 008")
-        return
-      end
+function onLoad()
+  debugLog("onLoad", "onLoad")
+  -- Load the token objects
+  LoadTokenObjects()
+  -- Do the setup for all players in the game.
+  for _, player in pairs(Player.getPlayers()) do
+    debugLog("onLoad", "in for loop")
+    if player.color ~= "Grey" then
+      SetupForPlayer(player.color)
     end
-    print("Doug: onObjectLeaveZone 009")
-    -- make the card visible to everyone.
-    print("Doug: onObjectLeaveZone 010")
-    object.setInvisibleTo({})
-  end, waitForDrawToFinishSec)
+  end
 end
