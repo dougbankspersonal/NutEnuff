@@ -7,17 +7,14 @@
   filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5));
 }
 
+.pseudo-image.special-image.discard-nut-n-times {
+  height: 120px;
+  width: 120px;
+}
+
 .pseudo-image.floor,
-.pseudo-image.special_image {
-  height: 60px;
-  width: 60px;
-}
-
-.pseudo-image.coin {
-  height: 60px;
-  width: 60px;
-}
-
+.pseudo-image.special-image,
+.pseudo-image.coin,
 .pseudo-image.desk {
   height: 60px;
   width: 60px;
@@ -183,8 +180,10 @@
         width: 50px;
       }
 
-      .pseudo-image.plus-one-pt {
-        width: 70px;
+      .pseudo-image.discard-nut-n-times {
+        aspect-ratio: 5.1/3.59;
+        height: auto !important;
+        width: 180px;
       }
 
       .nut-rows {

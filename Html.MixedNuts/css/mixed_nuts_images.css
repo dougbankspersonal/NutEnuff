@@ -26,6 +26,10 @@ div.pseudo-image.bad-nut {
   background-image: url("../images/Cards/bad-nut.png");
 }
 
+div.pseudo-image.squirrel {
+  background-image: url("../images/Cards/squirrel.png");
+}
+
 div.pseudo-image.raisin {
   background-image: url("../images/Cards/raisin.png");
 }
@@ -50,8 +54,8 @@ div.pseudo-image.no-symbol {
   background-image: url("../images/Cards/no-symbol.png");
 }
 
-div.pseudo-image.plus-one-pt {
-  width: 60px;
+div.pseudo-image.discard-nut-n-times {
+  background-image: url("../images/Cards/discard-nut-n-times.png");
 }
 
 div.pseudo-image.player_mat_image {

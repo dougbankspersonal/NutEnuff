@@ -1,18 +1,18 @@
 define([
-  "javascript/gameInfo",
+  "dojo/dom-style",
   "sharedJavascript/cards",
   "sharedJavascript/debugLog",
   "sharedJavascript/htmlUtils",
+  "javascript/gameInfo",
   "javascript/mixedNutsCardData",
-  "dojo/dom-style",
   "dojo/domReady!",
 ], function (
-  gameInfo,
+  domStyle,
   cards,
   debugLogModule,
   htmlUtils,
-  mixedNutsCardData,
-  domStyle
+  gameInfo,
+  mixedNutsCardData
 ) {
   var debugLog = debugLogModule.debugLog;
 
@@ -157,7 +157,7 @@ define([
     if (separator && opt_index && opt_index > 0) {
       htmlUtils.addDiv(
         parent,
-        ["special_image_spacer"],
+        ["special-image_spacer"],
         "specialImageSpacer",
         separator
       );
@@ -187,7 +187,7 @@ define([
     } else {
       htmlUtils.addImage(
         imagesWrapper,
-        ["special_image", specialImageClass, "dark-shadowed"],
+        ["special-image", specialImageClass, "dark-shadowed"],
         "specialImage"
       );
     }
@@ -256,18 +256,23 @@ define([
       "Doug: addPlayerIndicator: indexWithinConfig = " + indexWithinConfig
     );
 
+    // Handled by the if statement below but just to make it explicit:
+    if (!countConfigs || countConfigs.length <= 1) {
+      return null;
+    }
+
     // Count configs says, in order of players & increasing card count, for this
     // many players, use this many cards.
     // For 2 players we don't need a count indicator: they always go in.
     // For a 3 player game, we want the delta from 3 to 4 to player to be marked 3+.
     // Etc.
     for (var i = 1; i < countConfigs.length; i++) {
-      var previousConfig = countConfigs[i - 1];
-      var thisConfig = countConfigs[i];
+      var previousCountConfig = countConfigs[i - 1];
+      var thisCountConfig = countConfigs[i];
 
       if (
-        indexWithinConfig >= previousConfig.numCards &&
-        indexWithinConfig < thisConfig.numCards
+        indexWithinConfig >= previousCountConfig.count &&
+        indexWithinConfig < thisCountConfig.count
       ) {
         var playerIndicatorNode = htmlUtils.addDiv(
           parent,
@@ -276,12 +281,13 @@ define([
         );
         htmlUtils.addImage(playerIndicatorNode, ["player"], "player");
 
-        var maybePlus = thisConfig.numPlayers == gameInfo.maxPlayers ? "" : "+";
+        var maybePlus =
+          thisCountConfig.numPlayers == gameInfo.maxPlayers ? "" : "+";
         htmlUtils.addDiv(
           playerIndicatorNode,
           ["player_count"],
           "playerCount",
-          thisConfig.numPlayers.toString() + maybePlus
+          thisCountConfig.numPlayers.toString() + maybePlus
         );
         return playerIndicatorNode;
       }
@@ -471,30 +477,25 @@ define([
   }
 
   function addCardFrontAtIndex(parent, index) {
-    console.assert(parent, "parent is null");
-    var cardConfig = cards.getCardConfigAtIndex(
-      mixedNutsCardData.cardConfigs,
-      index
-    );
-    var indexWithinConfig = cards.getIndexWithinConfig(
-      mixedNutsCardData.cardConfigs,
-      index
-    );
-
     debugLog(
       "addCardFrontAtIndex",
       "Doug: addCardFrontAtIndex: index = " + index
     );
+    var cardConfigs = mixedNutsCardData.getCardConfigs();
     debugLog(
       "addCardFrontAtIndex",
-      "Doug: addCardFrontAtIndex: cardConfigs = " +
-        JSON.stringify(mixedNutsCardData.cardConfigs)
+      "Doug: addCardFrontAtIndex: cardConfigs = " + JSON.stringify(cardConfigs)
     );
 
+    console.assert(cardConfigs, "cardConfigs is null");
+    console.assert(parent, "parent is null");
+    var cardConfig = cards.getCardConfigAtIndex(cardConfigs, index);
     debugLog(
       "addCardFrontAtIndex",
-      "Doug addCardFrontAtIndex cardConfig = " + JSON.stringify(cardConfig)
+      "cardConfig = " + JSON.stringify(cardConfig)
     );
+
+    var indexWithinConfig = cards.getIndexWithinConfig(cardConfigs, index);
 
     addCardFront(parent, cardConfig, index, indexWithinConfig);
   }
@@ -503,7 +504,7 @@ define([
   function getNumCards() {
     // Wait until we're asked to calculate so system configs can be applied.
     if (gNumCards === 0) {
-      for (cardConfig of mixedNutsCardData.cardConfigs) {
+      for (cardConfig of mixedNutsCardData.getCardConfigs()) {
         debugLog("getNumCards", "Doug: cardConfig.title = " + cardConfig.title);
         debugLog(
           "getNumCards",
@@ -511,13 +512,15 @@ define([
         );
       }
 
-      gNumCards = cards.getNumCardsFromConfigs(mixedNutsCardData.cardConfigs);
+      gNumCards = cards.getNumCardsFromConfigs(
+        mixedNutsCardData.getCardConfigs()
+      );
       debugLog("getNumCards", "Doug: gNumCards = " + gNumCards);
 
       // While we're here: how many in a game?  We only use 3 specials.
       var specialCount = 0;
       var cardsPerGameByPlayer = {};
-      for (cardConfig of mixedNutsCardData.cardConfigs) {
+      for (cardConfig of mixedNutsCardData.getCardConfigs()) {
         var countConfigs = cardConfig.countConfigs;
         if (cardConfig.playType == "special") {
           specialCount += 1;
@@ -530,7 +533,7 @@ define([
         for (var i = 0; i < countConfigs.length; i++) {
           var countConfig = countConfigs[i];
           var numPlayers = countConfig.numPlayers;
-          var numCards = countConfig.numCards;
+          var numCards = countConfig.count;
           if (!cardsPerGameByPlayer[numPlayers]) {
             cardsPerGameByPlayer[numPlayers] = 0;
           }
@@ -562,8 +565,9 @@ define([
   }
 
   function getCardConfigByTitle(title) {
-    for (var i = 0; i < mixedNutsCardData.cardConfigs.length; i++) {
-      var cardConfig = mixedNutsCardData.cardConfigs[i];
+    var cardConfigs = mixedNutsCardData.getCardConfigs();
+    for (var i = 0; i < cardConfigs.length; i++) {
+      var cardConfig = cardConfigs[i];
       if (cardConfig.title == title) {
         return cardConfig;
       }
