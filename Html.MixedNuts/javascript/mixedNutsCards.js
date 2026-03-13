@@ -3,6 +3,7 @@ define([
   "sharedJavascript/cards",
   "sharedJavascript/debugLog",
   "sharedJavascript/htmlUtils",
+  "sharedJavascript/systemConfigs",
   "javascript/gameInfo",
   "javascript/mixedNutsCardData",
   "dojo/domReady!",
@@ -11,8 +12,9 @@ define([
   cards,
   debugLogModule,
   htmlUtils,
+  systemConfigs,
   gameInfo,
-  mixedNutsCardData
+  mixedNutsCardData,
 ) {
   var debugLog = debugLogModule.debugLog;
 
@@ -21,15 +23,12 @@ define([
   // Constants
   //
   //-----------------------------------------
-  const minicardWidth = 30;
-  const minicardBorderWidth = 4;
-  const minicardHeight = minicardWidth * 1.4;
   const dropShadowClass = "drop_shadow";
-
-  const minicardCollectionWidth = minicardWidth * 3;
-  const minicardCollectionHeight = minicardHeight + 2 * minicardBorderWidth;
-
   const defaultFontSizePx = 36;
+
+  const collectableItemSize = 55;
+  const collectableItemInitialRotate = -20;
+  const collectableIteFinalRotate = -collectableItemInitialRotate;
 
   //-----------------------------------------
   //
@@ -42,7 +41,7 @@ define([
   function insertSomethingEqualsPointsNode(
     parentNode,
     points,
-    opt_pointsPrefix
+    opt_pointsPrefix,
   ) {
     console.assert(Number.isInteger(points), "Points must be an integer");
     var pointsString;
@@ -57,13 +56,13 @@ define([
       parentNode,
       ["colon_and_points"],
       "colonAndPoints",
-      pointsString
+      pointsString,
     );
 
     htmlUtils.addImage(parentNode, ["coin", "dark-shadowed"], "coin");
   }
 
-  function renderMixedNutsCustom(parentNode, customRendering) {
+  function renderTrailMixCustom(parentNode, customRendering) {
     // Parent is a flex row.
     domStyle.set(parentNode, {
       display: "flex",
@@ -79,13 +78,13 @@ define([
     htmlUtils.addImage(
       firstRowNode,
       ["peanut", "dark-shadowed", "nut-image"],
-      "peanut"
+      "peanut",
     );
     htmlUtils.addDiv(firstRowNode, ["plus"], "plus", "+");
     htmlUtils.addImage(
       firstRowNode,
       ["almond", "dark-shadowed", "nut-image"],
-      "almond"
+      "almond",
     );
     htmlUtils.addDiv(firstRowNode, ["plus"], "plus", "+");
 
@@ -94,25 +93,67 @@ define([
     htmlUtils.addImage(
       secondRowNode,
       ["cashew", "dark-shadowed", "nut-image"],
-      "cashew"
+      "cashew",
     );
     htmlUtils.addDiv(secondRowNode, ["plus"], "plus", "+");
     htmlUtils.addImage(
       secondRowNode,
       ["macadamia", "dark-shadowed", "nut-image"],
-      "macadamia"
+      "macadamia",
     );
 
     // Right of row: n points node.
     insertSomethingEqualsPointsNode(parentNode, customRendering.points);
   }
 
-  function renderHotSpiceCustom(parentNode, customRendering) {
+  function renderHotSpiceCustom(parentNode, _) {
     // +1 per peanut.
     htmlUtils.addDiv(parentNode, ["plus"], "plus", "+1");
     htmlUtils.addImage(parentNode, ["coin", "dark-shadowed"], "coin");
     htmlUtils.addDiv(parentNode, ["per"], "per", "/");
     htmlUtils.addImage(parentNode, ["peanut", "dark-shadowed"], "peanut");
+  }
+
+  function renderAcornCustom(parentNode, customRendering) {
+    craftingNode = htmlUtils.addDiv(
+      parentNode,
+      ["craft-wrapper", "unbroken-row"],
+      "craftWrapper",
+    );
+
+    addNthSpecialImage(craftingNode, "desk", 0);
+    insertSomethingEqualsPointsNode(craftingNode, customRendering.points);
+  }
+
+  function renderWalnutCustom(parentNode, _) {
+    debugLog("renderWalnutCustom", "Rendering walnut custom");
+
+    for (var i = 0; i < 5; i++) {
+      var itemCount = i + 1;
+      var points = (itemCount * (itemCount + 1)) / 2;
+      addStandardCraftingInfo(
+        parentNode,
+        mixedNutsCardData.itemTypes.Walnut,
+        itemCount,
+        points,
+      );
+    }
+  }
+
+  function renderMysteryCustom(parentNode, _) {
+    // Desk, arrow, mystery card.
+    var deskNode = htmlUtils.addImage(
+      cannotBeCraftedNode,
+      ["desk", "dark-shadowed"],
+      "desk",
+    );
+
+    var wrapperNode = htmlUtils.addDiv(
+      parentNode,
+      ["mystery-card-wrapper"],
+      "mysteryCardWrapper",
+    );
+    htmlUtils.addImage(wrapperNode, ["mystery", "dark-shadowed"], "mystery");
   }
 
   function renderHoneyRoastedCustom(parentNode, customRendering) {
@@ -138,7 +179,7 @@ define([
       htmlUtils.addImage(
         rowNode,
         [nut, "dark-shadowed", "nut-image"],
-        nut + "Image"
+        nut + "Image",
       );
       // Add an equals and the points.
       insertSomethingEqualsPointsNode(rowNode, nutToBonusMap[nut]);
@@ -146,9 +187,12 @@ define([
   }
 
   const gCustomRenderersByClass = {
-    "mixed-nuts": renderMixedNutsCustom,
-    "hot-spice": renderHotSpiceCustom,
-    "honey-roasted": renderHoneyRoastedCustom,
+    [mixedNutsCardData.specialTypes.TrailMix]: renderTrailMixCustom,
+    [mixedNutsCardData.specialTypes.HotSpice]: renderHotSpiceCustom,
+    [mixedNutsCardData.specialTypes.HoneyRoasted]: renderHoneyRoastedCustom,
+    [mixedNutsCardData.specialTypes.Mystery]: renderMysteryCustom,
+    [mixedNutsCardData.itemTypes.Walnut]: renderWalnutCustom,
+    [mixedNutsCardData.itemTypes.Acorn]: renderAcornCustom,
   };
 
   function maybeAddSpacer(parent, opt_index, opt_separator) {
@@ -159,36 +203,39 @@ define([
         parent,
         ["special-image_spacer"],
         "specialImageSpacer",
-        separator
+        separator,
       );
     }
   }
 
-  function makeMinicard(parent) {
-    var minicard = htmlUtils.addDiv(parent, ["minicard"], "minicard");
-    domStyle.set(minicard, {
-      height: `${minicardHeight}px`,
-      width: `${minicardWidth}px`,
-      border: `${minicardBorderWidth}px solid #000`,
+  function addCollectableItem(parent, itemClass) {
+    var node = htmlUtils.addImage(
+      parent,
+      ["collectable-item", itemClass],
+      "collectable-item",
+    );
+    domStyle.set(node, {
+      height: `${collectableItemSize}px`,
+      width: `${collectableItemSize}px`,
     });
-    return minicard;
+    return node;
   }
 
   function addNthSpecialImage(
     imagesWrapper,
     specialImageClass,
     opt_index,
-    opt_separator
+    opt_separator,
   ) {
     maybeAddSpacer(imagesWrapper, opt_index, opt_separator);
 
     if (specialImageClass == "card") {
-      makeMinicard(imagesWrapper);
+      addCollectableItem(imagesWrapper);
     } else {
       htmlUtils.addImage(
         imagesWrapper,
         ["special-image", specialImageClass, "dark-shadowed"],
-        "specialImage"
+        "specialImage",
       );
     }
   }
@@ -200,15 +247,15 @@ define([
 
     var customRenderingWrapperNode = htmlUtils.addDiv(
       parentNode,
-      ["custom-rendering-wrapper", cardConfig.class],
-      "custom-rendering-wrapper"
+      ["custom-rendering-wrapper", cardConfig.cardClass],
+      "custom-rendering-wrapper",
     );
 
     if (customRendering.useClassToIndexFunction) {
-      var customRenderer = gCustomRenderersByClass[cardConfig.class];
+      var customRenderer = gCustomRenderersByClass[cardConfig.cardClass];
       console.assert(
         customRenderer,
-        "No custom renderer for " + cardConfig.class
+        "No custom renderer for " + cardConfig.cardClass,
       );
       customRenderer(customRenderingWrapperNode, customRendering);
     } else {
@@ -222,7 +269,7 @@ define([
             customRenderingWrapperNode,
             customRendering.customRenderingImageClasses[i],
             i,
-            customRendering.specialImagesSeparator
+            customRendering.specialImagesSeparator,
           );
         }
       }
@@ -230,12 +277,12 @@ define([
     debugLog(
       "addCustomRendering",
       "customRendering = ",
-      JSON.stringify(customRendering)
+      JSON.stringify(customRendering),
     );
     debugLog(
       "addCustomRendering",
       "customRendering.wrapperScale = ",
-      JSON.stringify(customRendering.wrapperScale)
+      JSON.stringify(customRendering.wrapperScale),
     );
     if (customRendering.wrapperScale) {
       var scale = customRendering.wrapperScale;
@@ -253,7 +300,7 @@ define([
     var countConfigs = cardConfig.countConfigs;
     debugLog(
       "Cards",
-      "Doug: addPlayerIndicator: indexWithinConfig = " + indexWithinConfig
+      "Doug: addPlayerIndicator: indexWithinConfig = " + indexWithinConfig,
     );
 
     // Handled by the if statement below but just to make it explicit:
@@ -277,7 +324,7 @@ define([
         var playerIndicatorNode = htmlUtils.addDiv(
           parent,
           ["player_indicator"],
-          "playerIndicator"
+          "playerIndicator",
         );
         htmlUtils.addImage(playerIndicatorNode, ["player"], "player");
 
@@ -287,7 +334,7 @@ define([
           playerIndicatorNode,
           ["player_count"],
           "playerCount",
-          thisCountConfig.numPlayers.toString() + maybePlus
+          thisCountConfig.numPlayers.toString() + maybePlus,
         );
         return playerIndicatorNode;
       }
@@ -295,65 +342,114 @@ define([
     return null;
   }
 
-  // A display if n fixed-sized cards in some fixed width.
-  function addMiniCardCollection(parentNode, craftConfig) {
-    var number = craftConfig.number;
-    console.assert(number > 0, "Number must be defined");
+  // A display of n fixed-sized items
+  function addCollectibleItemSetIndicator(parentNode, itemClass, itemCount) {
+    var sc = systemConfigs.getSystemConfigs();
+    var collectableItemSetWidthPx = sc.cardWidthPx * 0.4;
+    var collectableItemSetHeightPx = collectableItemSize;
 
-    var cardCollectionNode = htmlUtils.addDiv(
+    console.assert(itemCount > 0, "Item count must be defined");
+
+    var collectableItemSetNode = htmlUtils.addDiv(
       parentNode,
-      ["card-collection"],
-      "cardCollection"
+      ["collectable-item-set", itemClass],
+      "collectable-item-set",
     );
 
-    domStyle.set(cardCollectionNode, {
-      width: `${minicardCollectionWidth}px`,
-      height: `${minicardCollectionHeight}px`,
+    domStyle.set(collectableItemSetNode, {
+      width: `${collectableItemSetWidthPx}px`,
+      height: `${collectableItemSetHeightPx}px`,
     });
 
-    var widthMinusPoofedCard =
-      minicardCollectionWidth - minicardWidth - minicardBorderWidth * 2;
-    var leftChunk = widthMinusPoofedCard / (number - 1);
+    var widthMinusPoofedItem = collectableItemSetWidthPx - collectableItemSize;
+    var leftChunk = widthMinusPoofedItem / (itemCount - 1);
 
-    for (var i = 0; i < number; i++) {
-      var minicardNode = makeMinicard(cardCollectionNode);
+    var rotationStep =
+      (-collectableItemInitialRotate - collectableItemInitialRotate) /
+      (itemCount - 1);
+    for (var i = 0; i < itemCount; i++) {
+      var childNode = addCollectableItem(collectableItemSetNode, itemClass);
       var cardLeft = i * leftChunk;
-      domStyle.set(minicardNode, {
+
+      domStyle.set(childNode, {
         left: `${cardLeft}px`,
+        rotate: `${collectableItemInitialRotate + rotationStep * i}deg`,
       });
     }
 
-    return cardCollectionNode;
+    return collectableItemSetNode;
   }
 
   function addCardCorners(parent, cardConfig) {
-    var cardClass = cardConfig.class;
+    var cornerClass = cardConfig.itemClass
+      ? cardConfig.itemClass
+      : cardConfig.cardClass;
+    debugLog(
+      "addCardCorners",
+      "Doug: cardConfig = " + JSON.stringify(cardConfig),
+    );
+    debugLog(
+      "addCardCorners",
+      "cornerClass = " +
+        cornerClass +
+        " for cardConfig.title = " +
+        cardConfig.title,
+    );
 
-    htmlUtils.addImage(
-      parent,
-      [cardClass, dropShadowClass, "component_image", "index0"],
-      "component_image"
-    );
-    htmlUtils.addImage(
-      parent,
-      [cardClass, dropShadowClass, "component_image", "index1"],
-      "component_image"
-    );
+    var classes = [cornerClass, dropShadowClass, "component_image"];
+
+    var index0Classes = [...classes, "index0"];
+    var index1Classes = [...classes, "index1"];
+    if (cardConfig.extraCorner) {
+      index0Classes.push("first");
+      index1Classes.push("first");
+    }
+
+    htmlUtils.addImage(parent, index0Classes, "component_image");
+    htmlUtils.addImage(parent, index1Classes, "component_image");
+
+    if (cardConfig.extraCorner) {
+      var index0Classes = [
+        ...classes,
+        cardConfig.extraCorner,
+        "index0",
+        "second",
+      ];
+      var index1Classes = [
+        ...classes,
+        cardConfig.extraCorner,
+        "index1",
+        "second",
+      ];
+      htmlUtils.addImage(parent, index0Classes, "component_image");
+      htmlUtils.addImage(parent, index1Classes, "component_image");
+    }
   }
 
   function addCannotBeCraftedNode(parent) {
     var cannotBeCraftedNode = htmlUtils.addDiv(
       parent,
       ["cannot-be-crafted"],
-      "cannotBeCrafted"
+      "cannotBeCrafted",
     );
     var deskNode = htmlUtils.addImage(
       cannotBeCraftedNode,
       ["desk", "dark-shadowed"],
-      "desk"
+      "desk",
     );
     htmlUtils.addImage(cannotBeCraftedNode, ["no-symbol"], "no-symbol");
     return cannotBeCraftedNode;
+  }
+
+  function addStandardCraftingInfo(parentNode, itemClass, itemCount, points) {
+    craftingNode = htmlUtils.addDiv(
+      parentNode,
+      ["craft-wrapper", "unbroken-row"],
+      "craftWrapper",
+    );
+
+    addCollectibleItemSetIndicator(craftingNode, itemClass, itemCount);
+    insertSomethingEqualsPointsNode(craftingNode, points);
   }
 
   function maybeAddStandardCraftingInfo(parentNode, cardConfig) {
@@ -361,13 +457,15 @@ define([
     if (cardConfig.craft) {
       var craftConfig = cardConfig.craft;
       if (craftConfig.number > 0) {
-        craftingNode = htmlUtils.addDiv(
+        var itemClass = cardConfig.itemClass
+          ? cardConfig.itemClass
+          : cardConfig.cardClass;
+        addStandardCraftingInfo(
           parentNode,
-          ["craft-wrapper", "unbroken-row"],
-          "craftWrapper"
+          itemClass,
+          craftConfig.number,
+          craftConfig.points,
         );
-        addMiniCardCollection(craftingNode, craftConfig);
-        insertSomethingEqualsPointsNode(craftingNode, craftConfig.points);
       } else {
         craftingNode = addCannotBeCraftedNode(parentNode);
       }
@@ -380,12 +478,12 @@ define([
       var floorWrapperNode = htmlUtils.addDiv(
         parentNode,
         ["floor_wrapper", "unbroken-row"],
-        "floorWrapper"
+        "floorWrapper",
       );
       var floorImageNode = htmlUtils.addImage(
         floorWrapperNode,
         ["floor"],
-        "floor"
+        "floor",
       );
       insertSomethingEqualsPointsNode(floorWrapperNode, cardConfig.floor);
     }
@@ -402,7 +500,7 @@ define([
         mainWrapper,
         ["title"],
         "title",
-        cardConfig.title
+        cardConfig.title,
       );
       var fontSize = defaultFontSizePx;
       if (cardConfig.fontAdjustment) {
@@ -420,12 +518,11 @@ define([
     maybeAddStandardFloorPenalty(mainWrapper, cardConfig);
   }
 
-  function addCardBack(parent, index) {
-    var backNode = htmlUtils.addCard(
-      parent,
-      ["back", "mixed-nuts"],
-      "back-" + index
-    );
+  function addCardBack(parent, index, extraClasses) {
+    var classes = extraClasses
+      ? ["back", "mixed-nuts", ...extraClasses]
+      : ["back", "mixed-nuts"];
+    var backNode = htmlUtils.addCard(parent, classes, "back-" + index);
 
     cards.setCardSize(backNode);
 
@@ -434,13 +531,13 @@ define([
     var imageNode = htmlUtils.addImage(
       insetNode,
       ["mixed-nuts"],
-      "mixed-nuts-back-image-" + index
+      "mixed-nuts-back-image-" + index,
     );
     htmlUtils.addDiv(
       insetNode,
       ["title", "small"],
       "title-small-" + index,
-      "Mixed"
+      "Mixed",
     );
     htmlUtils.addDiv(insetNode, ["title", "big"], "title-big-" + index, "Nuts");
 
@@ -456,7 +553,8 @@ define([
 
     var classArray = [];
     classArray.push("mixed-nuts-component");
-    classArray.push(cardConfig.class);
+    classArray.push(cardConfig.cardClass);
+    classArray.push(cardConfig.deckId);
     var cardFrontNode = cards.addCardFront(parent, classArray, id);
 
     var gradient = `linear-gradient(
@@ -469,7 +567,6 @@ define([
 
     domStyle.set(cardFrontNode, {
       background: gradient,
-      "border-color": cardConfig.borderColor,
     });
 
     addFields(cardFrontNode, cardConfig, indexWithinConfig);
@@ -479,12 +576,12 @@ define([
   function addCardFrontAtIndex(parent, index) {
     debugLog(
       "addCardFrontAtIndex",
-      "Doug: addCardFrontAtIndex: index = " + index
+      "Doug: addCardFrontAtIndex: index = " + index,
     );
     var cardConfigs = mixedNutsCardData.getCardConfigs();
     debugLog(
       "addCardFrontAtIndex",
-      "Doug: addCardFrontAtIndex: cardConfigs = " + JSON.stringify(cardConfigs)
+      "Doug: addCardFrontAtIndex: cardConfigs = " + JSON.stringify(cardConfigs),
     );
 
     console.assert(cardConfigs, "cardConfigs is null");
@@ -492,7 +589,7 @@ define([
     var cardConfig = cards.getCardConfigAtIndex(cardConfigs, index);
     debugLog(
       "addCardFrontAtIndex",
-      "cardConfig = " + JSON.stringify(cardConfig)
+      "cardConfig = " + JSON.stringify(cardConfig),
     );
 
     var indexWithinConfig = cards.getIndexWithinConfig(cardConfigs, index);
@@ -508,12 +605,12 @@ define([
         debugLog("getNumCards", "Doug: cardConfig.title = " + cardConfig.title);
         debugLog(
           "getNumCards",
-          "Doug: countConfigs = " + JSON.stringify(cardConfig.countConfigs)
+          "Doug: countConfigs = " + JSON.stringify(cardConfig.countConfigs),
         );
       }
 
       gNumCards = cards.getNumCardsFromConfigs(
-        mixedNutsCardData.getCardConfigs()
+        mixedNutsCardData.getCardConfigs(),
       );
       debugLog("getNumCards", "Doug: gNumCards = " + gNumCards);
 
@@ -543,7 +640,7 @@ define([
       debugLog(
         "getNumCards",
         "How many cards are put into the deck in a real game: all the basics plus 3 specials: ",
-        JSON.stringify(cardsPerGameByPlayer)
+        JSON.stringify(cardsPerGameByPlayer),
       );
 
       var cardsNeededByPlayer = {};
@@ -558,7 +655,7 @@ define([
       debugLog(
         "getNumCards",
         "How many cards are dealt out of the deck in a real game: some multiple of num players plus remainder: ",
-        JSON.stringify(cardsNeededByPlayer)
+        JSON.stringify(cardsNeededByPlayer),
       );
     }
     return gNumCards;

@@ -1,37 +1,65 @@
+div.pseudo-image.pistachio {
+  background-image: url("../images/Cards/nut-sprites-2.png");
+  background-size: calc(200% + 5px) calc(200% + 5px);
+  background-position: -2.5px -2.5px;
+}
+
+div.pseudo-image.walnut {
+  background-image: url("../images/Cards/nut-sprites-2.png");
+  background-size: calc(200% + 5px) calc(200% + 5px);
+  background-position: calc(100% + 2.5px) -2.5px;
+}
+
+div.pseudo-image.acorn {
+  background-image: url("../images/Cards/nut-sprites-2.png");
+  background-size: calc(200% + 5px) calc(200% + 5px);
+  background-position: -2.5px calc(100% + 2.5px);
+}
+
+div.pseudo-image.mystery {
+  background-image: url("../images/Cards/mystery.png");
+}
+
+div.pseudo-image.mystery-card {
+  background-image: url("../images/Cards/mystery-card.png");
+}
+
+div.pseudo-image.plus-coin {
+  background-image: url("../images/Cards/plus-coin.png");
+}
+
 div.pseudo-image.peanut {
   background-image: url("../images/Cards/nut-sprites.png");
-  background-position: 0% 0%;
-  background-size: 200% 200%;
+  background-size: calc(200% + 5px) calc(200% + 5px);
+  background-position: -2.5px -2.5px;
 }
 
 div.pseudo-image.almond {
   background-image: url("../images/Cards/nut-sprites.png");
-  background-position: 100% 0%;
-  background-size: 200% 200%;
+  background-size: calc(200% + 5px) calc(200% + 5px);
+  background-position: calc(100% + 2.5px) -2.5px;
 }
 
 div.pseudo-image.cashew {
   background-image: url("../images/Cards/nut-sprites.png");
-  background-position: 0% 100%;
-  background-size: 200% 200%;
+  background-size: calc(200% + 5px) calc(200% + 5px);
+  background-position: -2.5px calc(100% + 2.5px);
 }
 
 div.pseudo-image.macadamia {
   background-image: url("../images/Cards/nut-sprites.png");
-  background-position: 100% 100%;
-  background-size: 200% 200%;
+  background-size: calc(200% + 5px) calc(200% + 5px);
+  background-position: calc(100% + 2.5px) calc(100% + 2.5px);
 }
 
 div.pseudo-image.bad-nut {
   background-image: url("../images/Cards/bad-nut.png");
 }
 
-div.pseudo-image.squirrel {
-  background-image: url("../images/Cards/squirrel.png");
-}
-
 div.pseudo-image.raisin {
-  background-image: url("../images/Cards/raisin.png");
+  background-image: url("../images/Cards/nut-sprites-2.png");
+  background-size: calc(200% + 5px) calc(200% + 5px);
+  background-position: calc(100% + 2.5px) calc(100% + 2.5px);
 }
 
 div.pseudo-image.honey-roasted {
@@ -54,8 +82,8 @@ div.pseudo-image.no-symbol {
   background-image: url("../images/Cards/no-symbol.png");
 }
 
-div.pseudo-image.discard-nut-n-times {
-  background-image: url("../images/Cards/discard-nut-n-times.png");
+div.pseudo-image.discard-2-cards {
+  background-image: url("../images/Cards/discard-2-cards.png");
 }
 
 div.pseudo-image.player_mat_image {
@@ -91,6 +119,14 @@ div.pseudo-image.gloves {
   background-image: url("../images/Cards/special-sprites-1.png");
   background-size: 200% 200%;
   background-position: 0% 100%;
+}
+
+div.pseudo-image.trail-mix {
+  background-image: url("../images/Cards/trail-mix.png");
+}
+
+div.pseudo-image.snack {
+  background-image: url("../images/Cards/snack.png");
 }
 
 div.pseudo-image.mixed-nuts {
