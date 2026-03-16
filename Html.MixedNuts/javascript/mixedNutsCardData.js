@@ -343,7 +343,7 @@ define([
       },
       playType: "premium-nut",
       color: peanutBackgroundColor,
-      extraCorner: "coin",
+      extraCorner: "plus-coin-corner",
       itemClass: gItemTypes.Peanut,
     },
     {
@@ -358,7 +358,7 @@ define([
         customRenderingImageClasses: ["plus-coin"],
       },
       playType: "nut",
-      extraCorner: "coin",
+      extraCorner: "plus-coin-corner",
       itemClass: gAlmond,
     },
     {
@@ -374,7 +374,7 @@ define([
         customRenderingImageClasses: ["plus-coin"],
       },
       playType: "nut",
-      extraCorner: "coin",
+      extraCorner: "plus-coin-corner",
       itemClass: gCashew,
     },
     {
@@ -389,7 +389,7 @@ define([
         customRenderingImageClasses: ["plus-coin"],
       },
       playType: "nut",
-      extraCorner: "coin",
+      extraCorner: "plus-coin-corner",
       fontAdjustment: 0.8,
       itemClass: gMacadamia,
     },

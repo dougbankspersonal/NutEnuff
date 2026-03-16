@@ -396,10 +396,10 @@ define([
         cardConfig.title,
     );
 
-    var classes = [cornerClass, dropShadowClass, "component_image"];
+    var classes = [dropShadowClass, "component_image"];
 
-    var index0Classes = [...classes, "index0"];
-    var index1Classes = [...classes, "index1"];
+    var index0Classes = [...classes, cornerClass, "index0"];
+    var index1Classes = [...classes, cornerClass, "index1"];
     if (cardConfig.extraCorner) {
       index0Classes.push("first");
       index1Classes.push("first");
@@ -530,16 +530,21 @@ define([
 
     var imageNode = htmlUtils.addImage(
       insetNode,
-      ["mixed-nuts"],
+      ["four-nuts"],
       "mixed-nuts-back-image-" + index,
     );
     htmlUtils.addDiv(
       insetNode,
       ["title", "small"],
       "title-small-" + index,
-      "Mixed",
+      "Nut",
     );
-    htmlUtils.addDiv(insetNode, ["title", "big"], "title-big-" + index, "Nuts");
+    htmlUtils.addDiv(
+      insetNode,
+      ["title", "big"],
+      "title-big-" + index,
+      "Enuff",
+    );
 
     return backNode;
   }
