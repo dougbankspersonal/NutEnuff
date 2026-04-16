@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.card_array > .page-of-items-contents > .card.mixed-nuts-component {
+.card-array > .page-of-items-contents > .card.mixed-nuts-component {
   box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.5);
 }
 
@@ -18,6 +18,11 @@
 .pseudo-image.desk {
   height: 60px;
   width: 60px;
+}
+
+.pseudo-image.coin {
+  height: 40px;
+  width: 40px;
 }
 
 .card.mixed-nuts-component {
@@ -86,10 +91,6 @@
 }
 .card.front.mixed-nuts-component .component_image.index0.second {
   left: 40px;
-  transform: rotate(7deg);
-}
-.card.front.mixed-nuts-component .component_image.index1.second {
-  transform: rotate5(7deg);
 }
 .card.front.mixed-nuts-component .component_image.index_xl {
   top: -50%;
@@ -131,11 +132,17 @@
   justify-content: center;
   flex-wrap: wrap;
   position: relative;
-  padding-right: 10px;
 }
 .card.front.mixed-nuts-component .main_wrapper .craft-wrapper .collectable-item-set .collectable-item {
   position: absolute;
   top: 0px;
+}
+.card.front.mixed-nuts-component .main_wrapper .craft-wrapper .collectable-item-set .set-count {
+  display: inline-block;
+}
+.card.front.mixed-nuts-component .main_wrapper .craft-wrapper .collectable-item-set .nut {
+  height: 60px;
+  width: 60px;
 }
 .card.front.mixed-nuts-component .main_wrapper .cannot-be-crafted {
   display: flex;
@@ -152,15 +159,17 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.card.front.mixed-nuts-component .main_wrapper .floor_wrapper .colon_and_points .negative {
+.card.front.mixed-nuts-component .main_wrapper .floor_wrapper .colon-and-points .negative {
   color: #994444;
 }
-.card.front.mixed-nuts-component .main_wrapper .colon_and_points {
+.card.front.mixed-nuts-component .main_wrapper .colon-and-points {
   white-space: nowrap;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .card.front.mixed-nuts-component .main_wrapper .minicard {
   border-radius: 10px;
@@ -170,9 +179,20 @@
 }
 .card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
-.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper .pseudo-image {
+.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper .text-node {
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  margin-top: 10px;
+}
+.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper .custom-rendering-images {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper .custom-rendering-images .pseudo-image {
   height: 50px;
   width: 50px;
 }
@@ -193,6 +213,10 @@
   width: 100px;
   height: 100px;
 }
+.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper .pseudo-image.vote {
+  width: 100px;
+  height: 100px;
+}
 .card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper .nut-rows {
   display: flex;
   flex-direction: column;
@@ -204,6 +228,10 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper .nut-rows .nut-row .nut-image {
+  height: 40px;
+  width: 40px;
 }
 .card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper.walnut {
   flex-direction: column;
@@ -251,7 +279,7 @@
   border-radius: 0;
   position: relative;
 }
-.card.back.mixed-nuts .inset .four-nuts {
+.card.back.mixed-nuts .inset .squirrel {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -259,7 +287,7 @@
   width: 150px;
   height: 150px;
   position: absolute;
-  top: 40px;
+  top: 20px;
   z-index: 1;
 }
 .card.back.mixed-nuts .inset .title {
@@ -288,4 +316,4 @@
   z-index: 3;
 }
 
-/*# sourceMappingURL=mixed_nuts_components.css.map */
+/*# sourceMappingURL=mixed-nuts-components.css.map */

@@ -8,7 +8,7 @@
     />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/main.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/image.css" />
-    <link rel="stylesheet" href="../css/player_mat.css" />
+    <link rel="stylesheet" href="../css/player-mat.css" />
     <link rel="stylesheet" href="../css/mixed-nuts-images.css" />
     <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
     <style type="text/css"></style>
@@ -55,7 +55,7 @@
         htmlUtils,
         gameInfo,
         dom,
-        domStyle
+        domStyle,
       ) {
         var originalImageWidth = 1536;
         var originalImageHeight = 1024;
@@ -65,7 +65,7 @@
 
         var matsPerPage = Math.floor(
           genericMeasurements.printedPagePortraitHeightPx /
-            (desiredImageHeight + genericMeasurements.standardPageGap)
+            (desiredImageHeight + genericMeasurements.standardPageGap),
         );
 
         function addPlayerMat(pageNode, index) {
@@ -74,13 +74,13 @@
           var outerFrameNode = htmlUtils.addDiv(
             pageNode,
             classes,
-            "clearBackground"
+            "clearBackground",
           );
 
           var playerMatNode = htmlUtils.addImage(
             outerFrameNode,
             ["player_mat_image"],
-            "mainDiv"
+            "mainDiv",
           );
 
           domStyle.set(playerMatNode, {
@@ -92,14 +92,14 @@
             playerMatNode,
             ["text_block"],
             "toyBinText",
-            "Toy Bin"
+            "Toy Bin",
           );
 
           var floorTextNode = htmlUtils.addDiv(
             playerMatNode,
             ["text_block"],
             "floorText",
-            "Floor"
+            "Floor",
           );
         }
 

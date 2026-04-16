@@ -48,10 +48,7 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.card-array.page-of-items
-  .page-of-items-contents
-  .card-array-row
-  .mixed-nuts-component.card {
+.card-array.page-of-items .page-of-items-contents .card-array-row .mixed-nuts-component.card {
   box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.18);
 }
 

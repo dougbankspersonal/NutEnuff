@@ -21,13 +21,11 @@ define([
   const macadamiaBackgroundColor = "#a9745d";
   const badNutBackgroundColor = "#e6b3a1";
 
-  const honeyRoastedBackgroundColor = "#FF8844";
   const raisinBackgroundColor = "#FF8888";
   const mysteryBackgroundColor = "#FFFF88";
-  const glovesBackgroundColor = "#FF4488";
+  const quantunNutBackgroundColor = "#FF4488";
   const mixedNutsBackgroundColor = "#FF88FF";
-  const coffeeBreakBackgroundColor = "#884444";
-  const hotSpiceBackgroundColor = "#FFCC44";
+  const voteBackgroundColor = "#aa99ff";
 
   const CustomTypeText = "Text";
   const CustomTypePtsText = "PtsText";
@@ -85,95 +83,68 @@ define([
     Macadamia: gPremiumTypeMacadamia,
   };
 
-  const gSpecialTypeCoffeeBreak = "coffee-break";
-  const gSpecialTypeGloves = "gloves";
-  const gSpecialTypeHoneyRoasted = "honey-roasted";
-  const gSpecialTypeHotSpice = "hot-spice";
   const gSpecialTypeTrailMix = "trail-mix";
   const gSpecialTypeMystery = "mystery";
-  const gSpecialTypeRaisin = "raisin";
+  const gSpecialTypeQuantumNut = "quantum-nut";
   const gSpecialTypeSnack = "snack";
+  const gSpecialTypeVote = "vote";
+  const gSpecialTypeRaisin = "raisin";
 
   const gSpecialTypes = {
-    CoffeeBreak: gSpecialTypeCoffeeBreak,
-    Gloves: gSpecialTypeGloves,
-    HoneyRoasted: gSpecialTypeHoneyRoasted,
-    HotSpice: gSpecialTypeHotSpice,
-    TrailMix: gSpecialTypeTrailMix,
-    Mystery: gSpecialTypeMystery,
+    QuantumNut: gSpecialTypeQuantumNut,
     Raisin: gSpecialTypeRaisin,
     Snack: gSpecialTypeSnack,
+    TrailMix: gSpecialTypeTrailMix,
+    Vote: gSpecialTypeVote,
+    Mystery: gSpecialTypeMystery,
   };
 
   const gBadTypeBadNut = "bad-nut";
 
-  const gSpecialTypesArray = Object.keys(gSpecialTypes);
-
-  // Some math around numbers for uniform deck.
-  const baseCardsPerPlayerPerSeason = 5;
-  const explodingCardsPerPlayerSeason1 = 5;
-  const explodingCardsPerPlayerSeason2 = 6;
-  const explodingCardsPerPlayerSeason3 = 6;
-  const explodingCardsPerPlayerSeason4 = 7;
-
-  const gDeckTotalMin =
-    gMaxPlayers *
-    (explodingCardsPerPlayerSeason1 +
-      explodingCardsPerPlayerSeason2 +
-      explodingCardsPerPlayerSeason3 +
-      explodingCardsPerPlayerSeason4);
-
-  const gBadNutCount = 6;
-  const gCountPerSpecialCard = 2;
-
   const gDeckToTypeToCountMap = {
     day: {
-      [gSpecialTypeRaisin]: 2,
-      [gItemTypes.Peanut]: 15,
-      [gItemTypes.Almond]: 12,
-      [gItemTypes.Cashew]: 9,
+      [gItemTypes.Peanut]: 17,
+      [gItemTypes.Almond]: 14,
+      [gItemTypes.Cashew]: 10,
       [gItemTypes.Macadamia]: 4,
       [gItemTypes.Acorn]: 3,
-      [gDoubleTypePeanut]: 6,
-      [gDoubleTypeAlmond]: 4,
-      [gDoubleTypeCashew]: 2,
-      [gDoubleTypeMacadamia]: 1,
-      [gSpecialTypeSnack]: 1,
+      [gDoubleTypePeanut]: 3,
+      [gDoubleTypeAlmond]: 2,
+      [gDoubleTypeCashew]: 1,
+      [gSpecialTypeRaisin]: 2,
+      [gBadTypeBadNut]: 9,
+      [gSpecialTypeQuantumNut]: 2,
+
+      /*
       [gSpecialTypeTrailMix]: 1,
-      [gBadTypeBadNut]: 2,
       [gSpecialTypeMystery]: 1,
+      [gSpecialTypeVote]: 8,
+      [gSpecialTypeSnack]: 1,
+      */
     },
     night: {
-      [gItemTypes.Pistachio]: 7,
-      [gSpecialTypeRaisin]: 1,
-      [gItemTypes.Peanut]: 9,
-      [gItemTypes.Almond]: 8,
-      [gItemTypes.Cashew]: 6,
+      [gItemTypes.Peanut]: 11,
+      [gItemTypes.Almond]: 10,
+      [gItemTypes.Cashew]: 8,
       [gItemTypes.Macadamia]: 5,
-      [gSpecialTypeSnack]: 3,
-      [gSpecialTypeTrailMix]: 2,
-      [gBadTypeBadNut]: 5,
-      [gBadTypeBadNut]: 5,
+      [gItemTypes.Pistachio]: 7,
+      [gItemTypes.Walnut]: 5,
       [gPremiumTypePeanut]: 4,
       [gPremiumTypeAlmond]: 4,
       [gPremiumTypeCashew]: 3,
       [gPremiumTypeMacadamia]: 5,
+      [gSpecialTypeRaisin]: 1,
+      [gBadTypeBadNut]: 9,
+      [gSpecialTypeQuantumNut]: 2,
+
+      /*
+      [gSpecialTypeTrailMix]: 2,
+      [gSpecialTypeSnack]: 3,
       [gSpecialTypeMystery]: 3,
-      [gWalnut]: 5,
+      [gSpecialTypeVote]: 11,
+      */
     },
   };
-
-  const gUniformDeckSpecialCounts = [
-    {
-      count: gCountPerSpecialCard,
-    },
-  ];
-
-  const gUniformDeckBadCounts = [
-    {
-      count: gBadNutCount,
-    },
-  ];
 
   function cardsPerPlayerPerSeason(numPlayers) {
     return 5 * numPlayers + 2;
@@ -219,14 +190,6 @@ define([
       count: count,
     });
     return retVal;
-  }
-
-  function generateBadCardDistribution() {
-    return gUniformDeckBadCounts;
-  }
-
-  function generateSpecialCardDistribution() {
-    return gUniformDeckSpecialCounts;
   }
 
   const gSharedDeckConfigs = [
@@ -424,6 +387,7 @@ define([
       customRendering: {
         useClassToIndexFunction: true,
         points: 3,
+        text: "Score 3 Coins if the Acorn is on your desk at the end of the game.",
       },
       playType: "special",
       color: acornBackgroundColor,
@@ -432,33 +396,11 @@ define([
     {
       title: "Bad Nut",
       cardClass: gBadTypeBadNut,
-      floor: -2,
+      customRendering: {
+        text: "Bad Nut cannot be packaged.",
+      },
       playType: "bad",
       color: badNutBackgroundColor,
-    },
-    {
-      title: "Mystery",
-      cardClass: gSpecialTypeMystery,
-      customRendering: {
-        customRenderingImageClasses: ["desk", "right-arrow", "mystery-card"],
-      },
-      playType: "special",
-      color: mysteryBackgroundColor,
-    },
-    {
-      title: "Honey Roasted",
-      cardClass: gSpecialTypeHoneyRoasted,
-      customRendering: {
-        nutToBonusMap: {
-          peanut: 1,
-          almond: 2,
-          cashew: 3,
-          macadamia: 4,
-        },
-        wrapperScale: 0.6,
-      },
-      playType: "special",
-      color: honeyRoastedBackgroundColor,
     },
     {
       title: "Raisin",
@@ -466,18 +408,41 @@ define([
       customRendering: {
         customRenderingImageClasses: ["peanut", "almond", "cashew"],
         specialImagesSeparator: "/",
+        text: "May be used as Peanut, Almond, or Cashew.",
       },
       playType: "special",
       color: raisinBackgroundColor,
     },
     {
-      title: "Gloves",
-      cardClass: gSpecialTypeGloves,
-      playType: "special",
+      title: "Quantum Nut",
+      cardClass: gSpecialTypeQuantumNut,
       customRendering: {
-        customRenderingImageClasses: ["floor", "right-arrow", "desk"],
+        customRenderingImageClasses: ["floor", "double-arrow", "desk"],
+        text: "During Production, you may place this card on the floor and place a card from your floor back onto your desk.",
       },
-      color: glovesBackgroundColor,
+      playType: "special",
+      color: quantunNutBackgroundColor,
+    },
+
+    // Expansion cards.
+    {
+      title: "Mystery",
+      cardClass: gSpecialTypeMystery,
+      customRendering: {
+        customRenderingImageClasses: ["desk", "right-arrow", "mystery-card"],
+        text: "Upon collecting, draw 2 cards from the current deck: keep one, discard Mystery and the other card.",
+      },
+      playType: "special",
+      color: mysteryBackgroundColor,
+    },
+    {
+      title: "Vote",
+      cardClass: gSpecialTypeVote,
+      customRendering: {
+        customRenderingImageClasses: ["vote"],
+      },
+      playType: "special",
+      color: voteBackgroundColor,
     },
     {
       title: "Trail Mix",
@@ -490,26 +455,6 @@ define([
       playType: "special",
       color: mixedNutsBackgroundColor,
     },
-    {
-      title: "Coffee Break",
-      cardClass: gSpecialTypeCoffeeBreak,
-      customRendering: {
-        customRenderingImageClasses: ["desk", "double-arrow", "desk"],
-      },
-      playType: "special",
-      color: coffeeBreakBackgroundColor,
-    },
-    {
-      title: "Hot Spice",
-      cardClass: gSpecialTypeHotSpice,
-      customRendering: {
-        points: 1,
-        useClassToIndexFunction: true,
-      },
-      playType: "special",
-      color: hotSpiceBackgroundColor,
-    },
-
     {
       title: "Snack",
       cardClass: gSpecialTypeSnack,
@@ -550,7 +495,6 @@ define([
     console.assert(gSetupCalled, "setupCardConfigs not called yet");
 
     debugLog("getCardConfigs", "gCardConfigs:", JSON.stringify(gCardConfigs));
-    debugLog("getCardConfigs", "gDeckTotalMin:", gDeckTotalMin);
     debugLog(
       "getCardConfigs",
       "number of cards: ",

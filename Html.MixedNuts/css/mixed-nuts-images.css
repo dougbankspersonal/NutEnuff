@@ -1,0 +1,173 @@
+div.pseudo-image.pistachio {
+  background-image: url("../images/Cards/v-pistachio.png");
+}
+
+div.pseudo-image.walnut {
+  background-image: url("../images/Cards/v-walnut.png");
+}
+
+div.pseudo-image.acorn {
+  background-image: url("../images/Cards/v-acorn.png");
+}
+
+div.pseudo-image.mystery {
+  background-image: url("../images/Cards/mystery.png");
+}
+
+div.pseudo-image.mystery-card {
+  background-image: url("../images/Cards/mystery-card.png");
+}
+
+div.pseudo-image.plus-coin {
+  background-image: url("../images/Cards/plus-coin.png");
+}
+
+div.pseudo-image.quantum-nut {
+  background-image: url("../images/Cards/v-quantum-nut.png");
+}
+
+div.pseudo-image.peanut {
+  background-image: url("../images/Cards/v-peanut.png");
+}
+
+div.pseudo-image.almond {
+  background-image: url("../images/Cards/v-almond.png");
+}
+
+div.pseudo-image.cashew {
+  background-image: url("../images/Cards/v-cashew.png");
+}
+
+div.pseudo-image.macadamia {
+  background-image: url("../images/Cards/v-macadamia.png");
+}
+
+div.pseudo-image.bad-nut {
+  background-image: url("../images/Cards/v-bad-nut.png");
+}
+
+div.pseudo-image.raisin {
+  background-image: url("../images/Cards/v-raisin.png");
+}
+
+div.pseudo-image.plus-coin-corner {
+  background-image: url("../images/Cards/plus-coin-corner.png");
+}
+
+div.pseudo-image.package {
+  background-image: url("../images/Cards/package.png");
+}
+
+div.pseudo-image.checkbox {
+  background-image: url("../images/Cards/checkbox.png");
+}
+
+div.pseudo-image.vote {
+  background-image: url("../images/Cards/vote.png");
+}
+
+div.pseudo-image.broom {
+  background-image: url("../images/Cards/special-sprites-1.png");
+  background-position: 100% 0%;
+  background-size: 200% 200%;
+}
+
+div.pseudo-image.no-symbol {
+  background-image: url("../images/Cards/no-symbol.png");
+}
+
+div.pseudo-image.discard-2-cards {
+  background-image: url("../images/Cards/discard-2-cards.png");
+}
+
+div.pseudo-image.player_mat_image {
+  background-image: url("../images/PlayerMat/playerMat.png");
+}
+
+div.pseudo-image.hot-spice {
+  background-image: url("../images/Cards/special-sprites-2.png");
+  background-size: 200% 200%;
+  background-position: 0% 100%;
+}
+
+div.pseudo-image.whistle {
+  background-image: url("../images/Cards/whistle.png");
+}
+
+div.pseudo-image.handshake {
+  background-image: url("../images/Cards/handshake.png");
+}
+
+div.pseudo-image.knife {
+  background-image: url("../images/Cards/knife.png");
+}
+
+div.pseudo-image.right-arrow {
+  background-image: url("../images/Cards/v-right-arrow.png");
+}
+
+div.pseudo-image.two-cards {
+  background-image: url("../images/Cards/two-cards.png");
+}
+
+div.pseudo-image.gloves {
+  background-image: url("../images/Cards/special-sprites-1.png");
+  background-size: 200% 200%;
+  background-position: 0% 100%;
+}
+
+div.pseudo-image.trail-mix {
+  background-image: url("../images/Cards/v-trail-mix.png");
+}
+
+div.pseudo-image.snack {
+  background-image: url("../images/Cards/v-squirrel.png");
+}
+
+div.pseudo-image.squirrel {
+  background-image: url("../images/Cards/v-squirrel.png");
+}
+
+div.pseudo-image.four-nuts {
+  background-image: url("../images/Cards/four-nuts.png");
+}
+
+div.pseudo-image.coffee-break {
+  background-image: url("../images/Cards/special-sprites-2.png");
+  background-size: 200% 200%;
+  background-position: 100% 0%;
+}
+
+div.pseudo-image.floor {
+  background-image: url("../images/Cards/floor.png");
+}
+
+div.pseudo-image.boss {
+  background-image: url("../images/Cards/boss.png");
+}
+
+div.pseudo-image.boss-head {
+  background-image: url("../images/Trackers/boss-head.png");
+}
+
+div.pseudo-image.double-arrow {
+  background-image: url("../images/Cards/v-double-arrow.png");
+}
+
+div.pseudo-image.player {
+  background-image: url("../images/Cards/player.png");
+}
+
+div.pseudo-image.coin {
+  background-image: url("../images/Cards/v-coin.png");
+}
+
+div.pseudo-image.desk {
+  background-image: url("../images/Cards/desk.png");
+}
+
+div.pseudo-image.x {
+  background-image: url("../images/Cards/X.png");
+}
+
+/*# sourceMappingURL=mixed-nuts-images.css.map */

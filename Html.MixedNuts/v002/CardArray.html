@@ -1,8 +1,8 @@
 <html>
   <head>
-    <link rel="stylesheet" href="../css/mixed_nuts_images.css" />
-    <link rel="stylesheet" href="../css/mixed_nuts_components.css" />
-    <link rel="stylesheet" href="../css/card_array.css" />
+    <link rel="stylesheet" href="../css/mixed-nuts-images.css" />
+    <link rel="stylesheet" href="../css/mixed-nuts-components.css" />
+    <link rel="stylesheet" href="../css/card-array.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/card.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/main.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/image.css" />
@@ -59,7 +59,7 @@
         genericUtils,
         htmlUtils,
         systemConfigs,
-        mixedNutsCards
+        mixedNutsCards,
       ) {
         var debugLog = debugLogModule.debugLog;
 
@@ -130,7 +130,7 @@
           var randomDegrees = genericUtils.getRandomIntInRange(
             -gCardWiggleDegrees,
             gCardWiggleDegrees,
-            getRandomZeroToOne
+            getRandomZeroToOne,
           );
           debugLog("CardArray", "randomDegrees: " + randomDegrees);
 
@@ -142,7 +142,7 @@
 
         var randomizedCardConfigTitles = genericUtils.generateRandomizedArray(
           sortedCardConfigTitles,
-          getRandomZeroToOne
+          getRandomZeroToOne,
         );
 
         var bodyNode = dom.byId("body");
@@ -154,7 +154,7 @@
           var bidsRowNode = htmlUtils.addDiv(
             pageOfItemsContentsNode,
             ["bids-row"],
-            "bidsRow"
+            "bidsRow",
           );
 
           for (var i = 0; i < bidDetails.length; i++) {
@@ -163,7 +163,7 @@
               bidsRowNode,
               ["bid", bidDetail.color],
               "bid" + i,
-              bidDetail.bid
+              bidDetail.bid,
             );
             addRandomWiggleToNode(bidNode, bidDetails.length - i);
           }
@@ -178,7 +178,7 @@
             cardArrayNode = htmlUtils.addDiv(
               pageOfItemsContentsNode,
               ["card-array-row"],
-              "cardArrayRow" + Math.floor(i / rowLength)
+              "cardArrayRow" + Math.floor(i / rowLength),
             );
           }
 
@@ -196,7 +196,7 @@
                 cardArrayNode,
                 cardConfig,
                 i,
-                0
+                0,
               );
             }
             addRandomWiggleToNode(cardNode, myListOfTitles.length - i);

@@ -1,7 +1,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="../css/mixed-nuts-images.css" />
-    <link rel="stylesheet" href="../css/mixed-nuts-components.css" />
+    <link rel="stylesheet" href="../css/motions-cards.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/card.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/main.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/image.css" />
@@ -46,28 +46,20 @@
         "sharedJavascript/debugLog",
         "sharedJavascript/genericUtils",
         "sharedJavascript/systemConfigs",
-        "javascript/mixedNutsCardData",
-        "javascript/mixedNutsCards",
-      ], function (
-        cards,
-        debugLog,
-        genericUtils,
-        systemConfigs,
-        mixedNutsCardData,
-        mixedNutsCards,
-      ) {
+        "javascript/motionsCards",
+      ], function (cards, debugLog, genericUtils, systemConfigs, motionsCards) {
         var sc = systemConfigs.getCardSystemConfigs();
+        sc.cardWidthPx = sc.cardHeightPx;
+        sc.cardBackFontSize = 64;
         systemConfigs.setSystemConfigs(sc);
 
-        mixedNutsCardData.setupCardConfigs("night");
-
         cards.addCards(
-          mixedNutsCards.getNumCards(),
-          mixedNutsCards.addCardFrontAtIndex,
+          motionsCards.getNumCards(),
+          motionsCards.addCardFrontAtIndex,
           {
-            callback: function (parent, index) {
-              mixedNutsCards.addCardBack(parent, index, ["night"]);
-            },
+            hexColorString: "#4444ff",
+            title: "Motion",
+            classes: ["motions"],
           },
         );
       });

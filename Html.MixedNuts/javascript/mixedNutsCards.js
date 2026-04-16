@@ -24,11 +24,9 @@ define([
   //
   //-----------------------------------------
   const dropShadowClass = "drop_shadow";
-  const defaultFontSizePx = 36;
+  const defaultFontSizePx = 32;
 
   const collectableItemSize = 55;
-  const collectableItemInitialRotate = -20;
-  const collectableIteFinalRotate = -collectableItemInitialRotate;
 
   //-----------------------------------------
   //
@@ -54,7 +52,7 @@ define([
 
     htmlUtils.addDiv(
       parentNode,
-      ["colon_and_points"],
+      ["colon-and-points"],
       "colonAndPoints",
       pointsString,
     );
@@ -112,6 +110,10 @@ define([
     htmlUtils.addImage(parentNode, ["coin", "dark-shadowed"], "coin");
     htmlUtils.addDiv(parentNode, ["per"], "per", "/");
     htmlUtils.addImage(parentNode, ["peanut", "dark-shadowed"], "peanut");
+  }
+
+  function insertTextNode(parentNode, text) {
+    return htmlUtils.addDiv(parentNode, ["text-node"], "textNode", text);
   }
 
   function renderAcornCustom(parentNode, customRendering) {
@@ -260,13 +262,18 @@ define([
       customRenderer(customRenderingWrapperNode, customRendering);
     } else {
       if (customRendering.customRenderingImageClasses) {
+        var customRenderingImagesNode = htmlUtils.addDiv(
+          customRenderingWrapperNode,
+          ["custom-rendering-images"],
+          "customRenderingImages",
+        );
         for (
           var i = 0;
           i < customRendering.customRenderingImageClasses.length;
           i++
         ) {
           addNthSpecialImage(
-            customRenderingWrapperNode,
+            customRenderingImagesNode,
             customRendering.customRenderingImageClasses[i],
             i,
             customRendering.specialImagesSeparator,
@@ -274,6 +281,11 @@ define([
         }
       }
     }
+
+    if (customRendering.text) {
+      insertTextNode(customRenderingWrapperNode, customRendering.text);
+    }
+
     debugLog(
       "addCustomRendering",
       "customRendering = ",
@@ -352,30 +364,26 @@ define([
 
     var collectableItemSetNode = htmlUtils.addDiv(
       parentNode,
-      ["collectable-item-set", itemClass],
+      ["collectable-item-set"],
       "collectable-item-set",
     );
 
     domStyle.set(collectableItemSetNode, {
-      width: `${collectableItemSetWidthPx}px`,
       height: `${collectableItemSetHeightPx}px`,
     });
 
-    var widthMinusPoofedItem = collectableItemSetWidthPx - collectableItemSize;
-    var leftChunk = widthMinusPoofedItem / (itemCount - 1);
+    htmlUtils.addDiv(
+      collectableItemSetNode,
+      ["set-count"],
+      "set-count",
+      itemCount,
+    );
 
-    var rotationStep =
-      (-collectableItemInitialRotate - collectableItemInitialRotate) /
-      (itemCount - 1);
-    for (var i = 0; i < itemCount; i++) {
-      var childNode = addCollectableItem(collectableItemSetNode, itemClass);
-      var cardLeft = i * leftChunk;
-
-      domStyle.set(childNode, {
-        left: `${cardLeft}px`,
-        rotate: `${collectableItemInitialRotate + rotationStep * i}deg`,
-      });
-    }
+    htmlUtils.addImage(
+      collectableItemSetNode,
+      [itemClass, "nut", "dark-shadowed"],
+      "item",
+    );
 
     return collectableItemSetNode;
   }
@@ -511,11 +519,11 @@ define([
 
     maybeAddStandardCraftingInfo(mainWrapper, cardConfig);
 
+    maybeAddStandardFloorPenalty(mainWrapper, cardConfig);
+
     if (cardConfig.customRendering) {
       addCustomRendering(mainWrapper, cardConfig);
     }
-
-    maybeAddStandardFloorPenalty(mainWrapper, cardConfig);
   }
 
   function addCardBack(parent, index, extraClasses) {
@@ -530,7 +538,7 @@ define([
 
     var imageNode = htmlUtils.addImage(
       insetNode,
-      ["four-nuts"],
+      ["squirrel"],
       "mixed-nuts-back-image-" + index,
     );
     htmlUtils.addDiv(
