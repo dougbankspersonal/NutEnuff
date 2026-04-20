@@ -71,16 +71,18 @@ define([
     Macadamia: gDoubleTypeMacadamia,
   };
 
-  const gPremiumTypePeanut = "premium-peanut";
-  const gPremiumTypeAlmond = "premium-almond";
-  const gPremiumTypeCashew = "premium-cashew";
-  const gPremiumTypeMacadamia = "premium-macadamia";
+  const gDeluxeTypePeanut = "deluxe-peanut";
+  const gDeluxeTypeAlmond = "deluxe-almond";
+  const gDeluxeTypeCashew = "deluxe-cashew";
+  const gDeluxeTypeMacadamia = "deluxe-macadamia";
+  const gDeluxeTypePistachio = "deluxe-pistachio";
 
-  const gPremiumTypes = {
-    Peanut: gPremiumTypePeanut,
-    Almond: gPremiumTypeAlmond,
-    Cashew: gPremiumTypeCashew,
-    Macadamia: gPremiumTypeMacadamia,
+  const gDeluxeTypes = {
+    Peanut: gDeluxeTypePeanut,
+    Almond: gDeluxeTypeAlmond,
+    Cashew: gDeluxeTypeCashew,
+    Macadamia: gDeluxeTypeMacadamia,
+    Pistachio: gDeluxeTypePistachio,
   };
 
   const gSpecialTypeTrailMix = "trail-mix";
@@ -103,17 +105,20 @@ define([
 
   const gDeckToTypeToCountMap = {
     day: {
-      [gItemTypes.Peanut]: 17,
-      [gItemTypes.Almond]: 14,
+      [gItemTypes.Peanut]: 18,
+      [gItemTypes.Almond]: 13,
       [gItemTypes.Cashew]: 10,
-      [gItemTypes.Macadamia]: 4,
-      [gItemTypes.Acorn]: 3,
-      [gDoubleTypePeanut]: 3,
-      [gDoubleTypeAlmond]: 2,
-      [gDoubleTypeCashew]: 1,
+      [gItemTypes.Macadamia]: 5,
+      [gItemTypes.Pistachio]: 4,
       [gSpecialTypeRaisin]: 2,
-      [gBadTypeBadNut]: 9,
+      [gBadTypeBadNut]: 3,
+      [gItemTypes.Walnut]: 2,
+      [gItemTypes.Acorn]: 6,
       [gSpecialTypeQuantumNut]: 2,
+      [gDoubleTypePeanut]: 2,
+      [gDoubleTypeAlmond]: 2,
+      [gDoubleTypeCashew]: 2,
+      [gDoubleTypeMacadamia]: 1,
 
       /*
       [gSpecialTypeTrailMix]: 1,
@@ -125,17 +130,17 @@ define([
     night: {
       [gItemTypes.Peanut]: 11,
       [gItemTypes.Almond]: 10,
-      [gItemTypes.Cashew]: 8,
-      [gItemTypes.Macadamia]: 5,
-      [gItemTypes.Pistachio]: 7,
-      [gItemTypes.Walnut]: 5,
-      [gPremiumTypePeanut]: 4,
-      [gPremiumTypeAlmond]: 4,
-      [gPremiumTypeCashew]: 3,
-      [gPremiumTypeMacadamia]: 5,
-      [gSpecialTypeRaisin]: 1,
-      [gBadTypeBadNut]: 9,
+      [gItemTypes.Cashew]: 9,
+      [gItemTypes.Macadamia]: 7,
+      [gItemTypes.Pistachio]: 6,
+      [gBadTypeBadNut]: 4,
+      [gItemTypes.Walnut]: 4,
       [gSpecialTypeQuantumNut]: 2,
+      [gDeluxeTypePeanut]: 3,
+      [gDeluxeTypeAlmond]: 4,
+      [gDeluxeTypeCashew]: 4,
+      [gDeluxeTypePistachio]: 4,
+      [gDeluxeTypeMacadamia]: 4,
 
       /*
       [gSpecialTypeTrailMix]: 2,
@@ -196,29 +201,29 @@ define([
     // Basic nuts
     {
       title: "Peanut",
-      cardClass: gPeanut,
+      cardClass: gItemTypes.Peanut,
       craft: {
         number: 3,
         points: 2,
       },
       playType: "nut",
       color: peanutBackgroundColor,
-      itemClass: gPeanut,
+      itemClass: gItemTypes.Peanut,
     },
     {
       title: "Almond",
-      cardClass: gAlmond,
+      cardClass: gItemTypes.Almond,
       color: almondBackgroundColor,
       craft: {
         number: 3,
         points: 3,
       },
       playType: "nut",
-      itemClass: gAlmond,
+      itemClass: gItemTypes.Almond,
     },
     {
       title: "Cashew",
-      cardClass: gCashew,
+      cardClass: gItemTypes.Cashew,
       color: cashewBackgroundColor,
 
       craft: {
@@ -226,11 +231,11 @@ define([
         points: 4,
       },
       playType: "nut",
-      itemClass: gCashew,
+      itemClass: gItemTypes.Cashew,
     },
     {
       title: "Macadamia",
-      cardClass: gMacadamia,
+      cardClass: gItemTypes.Macadamia,
       color: macadamiaBackgroundColor,
       craft: {
         number: 4,
@@ -238,7 +243,74 @@ define([
       },
       playType: "nut",
       fontAdjustment: 0.8,
-      itemClass: gMacadamia,
+      itemClass: gItemTypes.Macadamia,
+    },
+    {
+      title: "Pistachio",
+      cardClass: gItemTypes.Pistachio,
+      craft: {
+        number: 2,
+        points: 3,
+      },
+      playType: "nut",
+      color: pistachioBackgroundColor,
+      itemClass: gItemTypes.Pistachio,
+    },
+    {
+      title: "Raisin",
+      cardClass: gSpecialTypeRaisin,
+      customRendering: {
+        customRenderingImageClasses: ["peanut", "almond", "cashew"],
+        specialImagesSeparator: "/",
+        text: "May be used as Peanut, Almond, or Cashew.",
+      },
+      playType: "special",
+      color: raisinBackgroundColor,
+    },
+    {
+      title: "Bad Nut",
+      cardClass: gBadTypeBadNut,
+      customRendering: {
+        customRenderingImageClasses: ["floor", "two-cards"],
+        specialImagesSeparator: ":",
+        text: "Cannot be packaged.<p>Counts as two cards on the floor.",
+      },
+      playType: "bad",
+      color: badNutBackgroundColor,
+    },
+
+    {
+      title: "Walnut",
+      cardClass: gWalnut,
+      customRendering: {
+        useClassToIndexFunction: true,
+      },
+
+      playType: "nut",
+      color: walnutBackgroundColor,
+      itemClass: gWalnut,
+    },
+    {
+      title: "Acorn",
+      cardClass: gAcorn,
+      customRendering: {
+        useClassToIndexFunction: true,
+        points: 3,
+        text: "3 Coins if the Acorn is on Desk.",
+      },
+      playType: "special",
+      color: acornBackgroundColor,
+      itemClass: gAcorn,
+    },
+    {
+      title: "Quantum Nut",
+      cardClass: gSpecialTypeQuantumNut,
+      customRendering: {
+        customRenderingImageClasses: ["floor", "double-arrow", "desk"],
+        text: "Production: may place on the Floor and move a card from the Floor back to Desk.",
+      },
+      playType: "special",
+      color: quantunNutBackgroundColor,
     },
 
     // Double nuts
@@ -292,11 +364,10 @@ define([
       extraCorner: gItemTypes.Macadamia,
       itemClass: gItemTypes.Macadamia,
     },
-
-    // Premium nuts
+    // Deluxe nuts
     {
-      title: "Premium Peanut",
-      cardClass: gPremiumTypePeanut,
+      title: "Deluxe Peanut",
+      cardClass: gDeluxeTypePeanut,
       craft: {
         number: 3,
         points: 2,
@@ -304,14 +375,14 @@ define([
       customRendering: {
         customRenderingImageClasses: ["plus-coin"],
       },
-      playType: "premium-nut",
+      playType: "deluxe-nut",
       color: peanutBackgroundColor,
       extraCorner: "plus-coin-corner",
       itemClass: gItemTypes.Peanut,
     },
     {
-      title: "Premium Almond",
-      cardClass: gPremiumTypeAlmond,
+      title: "Deluxe Almond",
+      cardClass: gDeluxeTypeAlmond,
       color: almondBackgroundColor,
       craft: {
         number: 3,
@@ -325,8 +396,8 @@ define([
       itemClass: gAlmond,
     },
     {
-      title: "Premium Cashew",
-      cardClass: gPremiumTypeCashew,
+      title: "Deluxe Cashew",
+      cardClass: gDeluxeTypeCashew,
       color: cashewBackgroundColor,
 
       craft: {
@@ -341,8 +412,8 @@ define([
       itemClass: gCashew,
     },
     {
-      title: "Premium Macadamia",
-      cardClass: gPremiumTypeMacadamia,
+      title: "Deluxe Macadamia",
+      cardClass: gDeluxeTypeMacadamia,
       color: macadamiaBackgroundColor,
       craft: {
         number: 4,
@@ -357,71 +428,21 @@ define([
       itemClass: gMacadamia,
     },
 
-    // Special nuts
     {
-      title: "Pistachio",
-      cardClass: gPistachio,
+      title: "Deluxe Pistachio",
+      cardClass: gDeluxeTypePistachio,
+      color: pistachioBackgroundColor,
       craft: {
         number: 2,
-        points: 6,
-      },
-      playType: "nut",
-      color: pistachioBackgroundColor,
-      itemClass: gPistachio,
-    },
-
-    {
-      title: "Walnut",
-      cardClass: gWalnut,
-      customRendering: {
-        useClassToIndexFunction: true,
-      },
-
-      playType: "nut",
-      color: walnutBackgroundColor,
-      itemClass: gWalnut,
-    },
-    {
-      title: "Acorn",
-      cardClass: gAcorn,
-      customRendering: {
-        useClassToIndexFunction: true,
         points: 3,
-        text: "Score 3 Coins if the Acorn is on your desk at the end of the game.",
       },
-      playType: "special",
-      color: acornBackgroundColor,
-      itemClass: gAcorn,
-    },
-    {
-      title: "Bad Nut",
-      cardClass: gBadTypeBadNut,
       customRendering: {
-        text: "Bad Nut cannot be packaged.",
+        customRenderingImageClasses: ["plus-coin"],
       },
-      playType: "bad",
-      color: badNutBackgroundColor,
-    },
-    {
-      title: "Raisin",
-      cardClass: gSpecialTypeRaisin,
-      customRendering: {
-        customRenderingImageClasses: ["peanut", "almond", "cashew"],
-        specialImagesSeparator: "/",
-        text: "May be used as Peanut, Almond, or Cashew.",
-      },
-      playType: "special",
-      color: raisinBackgroundColor,
-    },
-    {
-      title: "Quantum Nut",
-      cardClass: gSpecialTypeQuantumNut,
-      customRendering: {
-        customRenderingImageClasses: ["floor", "double-arrow", "desk"],
-        text: "During Production, you may place this card on the floor and place a card from your floor back onto your desk.",
-      },
-      playType: "special",
-      color: quantunNutBackgroundColor,
+      playType: "nut",
+      extraCorner: "plus-coin-corner",
+      fontAdjustment: 0.8,
+      itemClass: gPistachio,
     },
 
     // Expansion cards.
