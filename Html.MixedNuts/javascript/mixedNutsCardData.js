@@ -119,6 +119,7 @@ define([
       [gDoubleTypeAlmond]: 2,
       [gDoubleTypeCashew]: 2,
       [gDoubleTypeMacadamia]: 1,
+      [gSpecialTypeSnack]: 2,
 
       /*
       [gSpecialTypeTrailMix]: 1,
@@ -136,11 +137,12 @@ define([
       [gBadTypeBadNut]: 4,
       [gItemTypes.Walnut]: 4,
       [gSpecialTypeQuantumNut]: 2,
-      [gDeluxeTypePeanut]: 3,
-      [gDeluxeTypeAlmond]: 4,
-      [gDeluxeTypeCashew]: 4,
-      [gDeluxeTypePistachio]: 4,
-      [gDeluxeTypeMacadamia]: 4,
+      [gDeluxeTypes.Peanut]: 3,
+      [gDeluxeTypes.Almond]: 4,
+      [gDeluxeTypes.Cashew]: 4,
+      [gDeluxeTypes.Pistachio]: 4,
+      [gDeluxeTypes.Macadamia]: 4,
+      [gSpecialTypeSnack]: 2,
 
       /*
       [gSpecialTypeTrailMix]: 2,
@@ -307,7 +309,7 @@ define([
       cardClass: gSpecialTypeQuantumNut,
       customRendering: {
         customRenderingImageClasses: ["floor", "double-arrow", "desk"],
-        text: "Production: may place on the Floor and move a card from the Floor back to Desk.",
+        text: "During Packaging: may place on the Floor and move a card from the Floor back to Desk.",
       },
       playType: "special",
       color: quantunNutBackgroundColor,
@@ -373,7 +375,7 @@ define([
         points: 2,
       },
       customRendering: {
-        customRenderingImageClasses: ["plus-coin"],
+        text: "A package scores +1 coin if it contains one or more Deluxe nuts.",
       },
       playType: "deluxe-nut",
       color: peanutBackgroundColor,
@@ -389,7 +391,7 @@ define([
         points: 3,
       },
       customRendering: {
-        customRenderingImageClasses: ["plus-coin"],
+        text: "A package scores +1 coin if it contains one or more Deluxe nuts.",
       },
       playType: "nut",
       extraCorner: "plus-coin-corner",
@@ -399,13 +401,12 @@ define([
       title: "Deluxe Cashew",
       cardClass: gDeluxeTypeCashew,
       color: cashewBackgroundColor,
-
       craft: {
         number: 3,
         points: 4,
       },
       customRendering: {
-        customRenderingImageClasses: ["plus-coin"],
+        text: "A package scores +1 coin if it contains one or more Deluxe nuts.",
       },
       playType: "nut",
       extraCorner: "plus-coin-corner",
@@ -420,7 +421,7 @@ define([
         points: 7,
       },
       customRendering: {
-        customRenderingImageClasses: ["plus-coin"],
+        text: "A package scores +1 coin if it contains one or more Deluxe nuts.",
       },
       playType: "nut",
       extraCorner: "plus-coin-corner",
@@ -437,7 +438,7 @@ define([
         points: 3,
       },
       customRendering: {
-        customRenderingImageClasses: ["plus-coin"],
+        text: "A package scores +1 coin if it contains one or more Deluxe nuts.",
       },
       playType: "nut",
       extraCorner: "plus-coin-corner",
@@ -483,6 +484,7 @@ define([
       color: badNutBackgroundColor,
       customRendering: {
         customRenderingImageClasses: ["discard-2-cards"],
+        text: "Upon collecting, discard Snack and two more cards from your Desk.",
       },
     },
   ];

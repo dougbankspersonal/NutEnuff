@@ -27,7 +27,11 @@
 
 .card.mixed-nuts-component {
   font-family: "Luckiest Guy";
-  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  text-shadow:
+    -1px -1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px 1px 0 #fff;
   font-weight: bold;
 }
 
@@ -79,7 +83,7 @@
   left: 10px;
 }
 .card.front.mixed-nuts-component .component_image.index1 {
-  top: 10px;
+  bottom: 10px;
   right: 10px;
 }
 .card.front.mixed-nuts-component .component_image.index0.first {
@@ -91,6 +95,7 @@
 }
 .card.front.mixed-nuts-component .component_image.index0.second {
   left: 40px;
+  z-index: 10;
 }
 .card.front.mixed-nuts-component .component_image.index_xl {
   top: -50%;
@@ -125,7 +130,10 @@
   white-space: pre-line;
   line-height: 1;
 }
-.card.front.mixed-nuts-component .main_wrapper .craft-wrapper .collectable-item-set {
+.card.front.mixed-nuts-component
+  .main_wrapper
+  .craft-wrapper
+  .collectable-item-set {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -133,14 +141,26 @@
   flex-wrap: wrap;
   position: relative;
 }
-.card.front.mixed-nuts-component .main_wrapper .craft-wrapper .collectable-item-set .collectable-item {
+.card.front.mixed-nuts-component
+  .main_wrapper
+  .craft-wrapper
+  .collectable-item-set
+  .collectable-item {
   position: absolute;
   top: 0px;
 }
-.card.front.mixed-nuts-component .main_wrapper .craft-wrapper .collectable-item-set .set-count {
+.card.front.mixed-nuts-component
+  .main_wrapper
+  .craft-wrapper
+  .collectable-item-set
+  .set-count {
   display: inline-block;
 }
-.card.front.mixed-nuts-component .main_wrapper .craft-wrapper .collectable-item-set .nut {
+.card.front.mixed-nuts-component
+  .main_wrapper
+  .craft-wrapper
+  .collectable-item-set
+  .nut {
   height: 60px;
   width: 60px;
 }
@@ -159,7 +179,11 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.card.front.mixed-nuts-component .main_wrapper .floor_wrapper .colon-and-points .negative {
+.card.front.mixed-nuts-component
+  .main_wrapper
+  .floor_wrapper
+  .colon-and-points
+  .negative {
   color: #994444;
 }
 .card.front.mixed-nuts-component .main_wrapper .colon-and-points {
@@ -181,22 +205,35 @@
   display: flex;
   flex-direction: column;
 }
-.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper .text-node {
+.card.front.mixed-nuts-component
+  .main_wrapper
+  .custom-rendering-wrapper
+  .text-node {
   font-family: "Roboto", sans-serif;
   font-size: 15px;
   margin-top: 10px;
 }
-.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper .custom-rendering-images {
+.card.front.mixed-nuts-component
+  .main_wrapper
+  .custom-rendering-wrapper
+  .custom-rendering-images {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper .custom-rendering-images .pseudo-image {
+.card.front.mixed-nuts-component
+  .main_wrapper
+  .custom-rendering-wrapper
+  .custom-rendering-images
+  .pseudo-image {
   height: 50px;
   width: 50px;
 }
-.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper .mystery-card-wrapper {
+.card.front.mixed-nuts-component
+  .main_wrapper
+  .custom-rendering-wrapper
+  .mystery-card-wrapper {
   height: 70px;
   width: 50px;
   border-radius: 10px;
@@ -209,35 +246,58 @@
   /* horizontal centering */
   align-items: center;
 }
-.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper .pseudo-image.discard-2-cards {
+.card.front.mixed-nuts-component
+  .main_wrapper
+  .custom-rendering-wrapper
+  .pseudo-image.discard-2-cards {
   width: 100px;
   height: 100px;
 }
-.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper .pseudo-image.vote {
+.card.front.mixed-nuts-component
+  .main_wrapper
+  .custom-rendering-wrapper
+  .pseudo-image.vote {
   width: 100px;
   height: 100px;
 }
-.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper .nut-rows {
+.card.front.mixed-nuts-component
+  .main_wrapper
+  .custom-rendering-wrapper
+  .nut-rows {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper .nut-rows .nut-row {
+.card.front.mixed-nuts-component
+  .main_wrapper
+  .custom-rendering-wrapper
+  .nut-rows
+  .nut-row {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
-.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper .nut-rows .nut-row .nut-image {
+.card.front.mixed-nuts-component
+  .main_wrapper
+  .custom-rendering-wrapper
+  .nut-rows
+  .nut-row
+  .nut-image {
   height: 40px;
   width: 40px;
 }
-.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper.walnut {
+.card.front.mixed-nuts-component
+  .main_wrapper
+  .custom-rendering-wrapper.walnut {
   flex-direction: column;
   zoom: 0.5;
 }
-.card.front.mixed-nuts-component .main_wrapper .custom-rendering-wrapper.mixed-nuts .nut-rows {
+.card.front.mixed-nuts-component
+  .main_wrapper
+  .custom-rendering-wrapper.mixed-nuts
+  .nut-rows {
   padding-right: 10px;
 }
 .card.front.mixed-nuts-component .main_wrapper .custom {
@@ -293,7 +353,11 @@
 .card.back.mixed-nuts .inset .title {
   position: absolute;
   font-family: "Luckiest Guy";
-  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  text-shadow:
+    -1px -1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px 1px 0 #fff;
   font-weight: bold;
   width: 80%;
   color: #332211;

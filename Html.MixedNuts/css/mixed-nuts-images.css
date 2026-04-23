@@ -76,6 +76,10 @@ div.pseudo-image.no-symbol {
   background-image: url("../images/Cards/no-symbol.png");
 }
 
+div.pseudo-image.discard-two-cards {
+  background-image: url("../images/Cards/two-cards.png");
+}
+
 div.pseudo-image.discard-2-cards {
   background-image: url("../images/Cards/discard-2-cards.png");
 }
@@ -106,10 +110,6 @@ div.pseudo-image.right-arrow {
   background-image: url("../images/Cards/v-right-arrow.png");
 }
 
-div.pseudo-image.two-cards {
-  background-image: url("../images/Cards/two-cards.png");
-}
-
 div.pseudo-image.gloves {
   background-image: url("../images/Cards/special-sprites-1.png");
   background-size: 200% 200%;
@@ -117,15 +117,11 @@ div.pseudo-image.gloves {
 }
 
 div.pseudo-image.trail-mix {
-  background-image: url("../images/Cards/v-trail-mix.png");
+  background-image: url("../images/Cards/trail-mix.png");
 }
 
 div.pseudo-image.snack {
-  background-image: url("../images/Cards/v-squirrel.png");
-}
-
-div.pseudo-image.squirrel {
-  background-image: url("../images/Cards/v-squirrel.png");
+  background-image: url("../images/Cards/v-snack.png");
 }
 
 div.pseudo-image.four-nuts {

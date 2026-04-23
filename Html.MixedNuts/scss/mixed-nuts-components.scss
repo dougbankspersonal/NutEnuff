@@ -87,7 +87,7 @@
   }
 
   .component_image.index1 {
-    top: 10px;
+    bottom: 10px;
     right: 10px;
   }
 
@@ -102,6 +102,7 @@
 
   .component_image.index0.second {
     left: 40px;
+    z-index: 10;
   }
 
   .component_image.index1.second {}

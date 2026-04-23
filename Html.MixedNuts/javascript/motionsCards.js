@@ -26,8 +26,8 @@ define([
     },
     {
       motions: [
-        "2 squirrels with cleanest floors (ties friendly) can exchange a card from their hand during Production.",
-        "2 squirrels with messiest floors (ties friendly) may put a card from the floor back in their hand during Production.",
+        "2 squirrels with cleanest floors (ties friendly) can exchange a card from their hand during Packaging.",
+        "2 squirrels with messiest floors (ties friendly) may put a card from the floor back in their hand during Packaging.",
       ],
     },
     {

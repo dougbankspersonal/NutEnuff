@@ -407,14 +407,11 @@ define([
     var classes = [dropShadowClass, "component_image"];
 
     var index0Classes = [...classes, cornerClass, "index0"];
-    var index1Classes = [...classes, cornerClass, "index1"];
     if (cardConfig.extraCorner) {
       index0Classes.push("first");
-      index1Classes.push("first");
     }
 
     htmlUtils.addImage(parent, index0Classes, "component_image");
-    htmlUtils.addImage(parent, index1Classes, "component_image");
 
     if (cardConfig.extraCorner) {
       var index0Classes = [
@@ -423,14 +420,7 @@ define([
         "index0",
         "second",
       ];
-      var index1Classes = [
-        ...classes,
-        cardConfig.extraCorner,
-        "index1",
-        "second",
-      ];
       htmlUtils.addImage(parent, index0Classes, "component_image");
-      htmlUtils.addImage(parent, index1Classes, "component_image");
     }
   }
 
