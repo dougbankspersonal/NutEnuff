@@ -32,30 +32,12 @@
   font-weight: bold;
 }
 
-.card.front {
-  .player_indicator {
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    bottom: 20px;
-    left: 0px;
-    width: 100%;
-
-    .player {
-      width: 36px;
-      height: 36px;
-    }
-
-    .player_count {
-      font-size: 28px;
-    }
-  }
-}
-
 .card.front.day {
   border-color: #fde456;
+}
+
+.card.front.starter {
+  border-color: #f1b863;
 }
 
 .card.front.night {
@@ -69,6 +51,13 @@
   position: relative;
   border-width: 10px;
   border-style: solid;
+
+  .starter-text {
+    font-size: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
 
   .component_image {
     width: 60px;
@@ -231,6 +220,10 @@
           height: 50px;
           width: 50px;
         }
+
+        .pseudo-image.bad-nut-floor {
+          width: 100px;
+        }
       }
 
       .mystery-card-wrapper {
@@ -306,7 +299,8 @@
   margin: 0 6px;
 }
 
-.card.back.mixed-nuts.day {
+.card.back.mixed-nuts.day,
+.card.back.mixed-nuts.starter {
   border-color: #fde456;
   background: radial-gradient(#cdcdfa 50%, #c4c4fd);
 }

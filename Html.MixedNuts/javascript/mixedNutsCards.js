@@ -308,50 +308,11 @@ define([
     return customRenderingWrapperNode;
   }
 
-  function addPlayerIndicator(parent, cardConfig, indexWithinConfig) {
-    var countConfigs = cardConfig.countConfigs;
-    debugLog(
-      "Cards",
-      "Doug: addPlayerIndicator: indexWithinConfig = " + indexWithinConfig,
-    );
-
-    // Handled by the if statement below but just to make it explicit:
-    if (!countConfigs || countConfigs.length <= 1) {
-      return null;
-    }
-
-    // Count configs says, in order of players & increasing card count, for this
-    // many players, use this many cards.
-    // For 2 players we don't need a count indicator: they always go in.
-    // For a 3 player game, we want the delta from 3 to 4 to player to be marked 3+.
-    // Etc.
-    for (var i = 1; i < countConfigs.length; i++) {
-      var previousCountConfig = countConfigs[i - 1];
-      var thisCountConfig = countConfigs[i];
-
-      if (
-        indexWithinConfig >= previousCountConfig.count &&
-        indexWithinConfig < thisCountConfig.count
-      ) {
-        var playerIndicatorNode = htmlUtils.addDiv(
-          parent,
-          ["player_indicator"],
-          "playerIndicator",
-        );
-        htmlUtils.addImage(playerIndicatorNode, ["player"], "player");
-
-        var maybePlus =
-          thisCountConfig.numPlayers == gameInfo.maxPlayers ? "" : "+";
-        htmlUtils.addDiv(
-          playerIndicatorNode,
-          ["player_count"],
-          "playerCount",
-          thisCountConfig.numPlayers.toString() + maybePlus,
-        );
-        return playerIndicatorNode;
-      }
-    }
-    return null;
+  var starterIconsAdded = 0;
+  function addStarterIcons(parent) {
+    starterIconsAdded += 1;
+    var text = "Player " + starterIconsAdded;
+    return htmlUtils.addDiv(parent, ["starter-text"], "starterText", text);
   }
 
   // A display of n fixed-sized items
@@ -490,7 +451,6 @@ define([
   function addFields(parent, cardConfig, indexWithinConfig) {
     // These are the icons in upper left and lower corner of card.
     addCardCorners(parent, cardConfig);
-    addPlayerIndicator(parent, cardConfig, indexWithinConfig);
 
     var mainWrapper = htmlUtils.addDiv(parent, ["main_wrapper"], "mainWapper");
     if (cardConfig.title) {
@@ -513,6 +473,10 @@ define([
 
     if (cardConfig.customRendering) {
       addCustomRendering(mainWrapper, cardConfig);
+    }
+
+    if (cardConfig.deckId == "starter") {
+      addStarterIcons(mainWrapper);
     }
   }
 
@@ -548,6 +512,8 @@ define([
   }
 
   function addCardFront(parent, cardConfig, index, opt_indexWithinConfig) {
+    debugLog("addCardFront", "cardConfig = " + JSON.stringify(cardConfig));
+
     var indexWithinConfig =
       opt_indexWithinConfig !== undefined ? opt_indexWithinConfig : 0;
 

@@ -104,21 +104,29 @@ define([
   const gBadTypeBadNut = "bad-nut";
 
   const gDeckToTypeToCountMap = {
+    starter: {
+      [gItemTypes.Peanut]: 1,
+      [gItemTypes.Almond]: 1,
+      [gItemTypes.Cashew]: 1,
+      [gDoubleTypePeanut]: 1,
+      [gDoubleTypeAlmond]: 1,
+    },
+
     day: {
-      [gItemTypes.Peanut]: 18,
-      [gItemTypes.Almond]: 13,
+      [gItemTypes.Peanut]: 19,
+      [gItemTypes.Almond]: 14,
       [gItemTypes.Cashew]: 10,
-      [gItemTypes.Macadamia]: 5,
-      [gItemTypes.Pistachio]: 4,
+      [gItemTypes.Macadamia]: 6,
+      [gItemTypes.Pistachio]: 0,
       [gSpecialTypeRaisin]: 2,
       [gBadTypeBadNut]: 3,
       [gItemTypes.Walnut]: 2,
       [gItemTypes.Acorn]: 6,
-      [gSpecialTypeQuantumNut]: 2,
+      [gSpecialTypeQuantumNut]: 3,
       [gDoubleTypePeanut]: 2,
       [gDoubleTypeAlmond]: 2,
       [gDoubleTypeCashew]: 2,
-      [gDoubleTypeMacadamia]: 1,
+      [gDoubleTypeMacadamia]: 2,
       [gSpecialTypeSnack]: 2,
 
       /*
@@ -132,17 +140,17 @@ define([
       [gItemTypes.Peanut]: 11,
       [gItemTypes.Almond]: 10,
       [gItemTypes.Cashew]: 9,
-      [gItemTypes.Macadamia]: 7,
-      [gItemTypes.Pistachio]: 6,
+      [gItemTypes.Macadamia]: 8,
+      [gItemTypes.Pistachio]: 7,
       [gBadTypeBadNut]: 4,
       [gItemTypes.Walnut]: 4,
       [gSpecialTypeQuantumNut]: 2,
       [gDeluxeTypes.Peanut]: 3,
       [gDeluxeTypes.Almond]: 4,
       [gDeluxeTypes.Cashew]: 4,
-      [gDeluxeTypes.Pistachio]: 4,
-      [gDeluxeTypes.Macadamia]: 4,
-      [gSpecialTypeSnack]: 2,
+      [gDeluxeTypes.Macadamia]: 5,
+      [gDeluxeTypes.Pistachio]: 3,
+      [gSpecialTypeSnack]: 3,
 
       /*
       [gSpecialTypeTrailMix]: 2,
@@ -273,9 +281,9 @@ define([
       title: "Bad Nut",
       cardClass: gBadTypeBadNut,
       customRendering: {
-        customRenderingImageClasses: ["floor", "two-cards"],
+        customRenderingImageClasses: ["floor", "bad-nut-floor"],
         specialImagesSeparator: ":",
-        text: "Cannot be packaged.<p>Counts as two cards on the floor.",
+        text: "<b>Final Scoring</b>: Counts as two cards on the Floor, <b><i>but</i></b> a set of 4 Bad Nuts may be removed from the Floor.",
       },
       playType: "bad",
       color: badNutBackgroundColor,
@@ -308,8 +316,8 @@ define([
       title: "Quantum Nut",
       cardClass: gSpecialTypeQuantumNut,
       customRendering: {
-        customRenderingImageClasses: ["floor", "double-arrow", "desk"],
-        text: "During Packaging: may place on the Floor and move a card from the Floor back to Desk.",
+        customRenderingImageClasses: ["desk", "double-arrow", "floor"],
+        text: "<b>Packaging</b>: swap with a card on the Floor.",
       },
       playType: "special",
       color: quantunNutBackgroundColor,
