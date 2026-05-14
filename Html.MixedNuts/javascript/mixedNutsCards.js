@@ -49,15 +49,13 @@ define([
     } else {
       pointsString = ` : ${pointsPrefix}${points}`;
     }
-
+    pointsString += "🪙";
     htmlUtils.addDiv(
       parentNode,
       ["colon-and-points"],
       "colonAndPoints",
       pointsString,
     );
-
-    htmlUtils.addImage(parentNode, ["coin", "dark-shadowed"], "coin");
   }
 
   function renderTrailMixCustom(parentNode, customRendering) {
@@ -210,10 +208,10 @@ define([
     }
   }
 
-  function addCollectableItem(parent, itemClass) {
+  function addCollectableItem(parent, itemType) {
     var node = htmlUtils.addImage(
       parent,
-      ["collectable-item", itemClass],
+      ["collectable-item", itemType],
       "collectable-item",
     );
     domStyle.set(node, {
@@ -247,17 +245,19 @@ define([
     var customRendering = cardConfig.customRendering;
     console.assert(customRendering, "customRendering is null");
 
+    var classes = mixedNutsCardData.getClassesForCardConfig(cardConfig);
+    classes = classes.concat(["custom-rendering-wrapper"]);
     var customRenderingWrapperNode = htmlUtils.addDiv(
       parentNode,
-      ["custom-rendering-wrapper", cardConfig.cardClass],
+      classes,
       "custom-rendering-wrapper",
     );
 
     if (customRendering.useClassToIndexFunction) {
-      var customRenderer = gCustomRenderersByClass[cardConfig.cardClass];
+      var customRenderer = gCustomRenderersByClass[cardConfig.cardType];
       console.assert(
         customRenderer,
-        "No custom renderer for " + cardConfig.cardClass,
+        "No custom renderer for " + cardConfig.cardType,
       );
       customRenderer(customRenderingWrapperNode, customRendering);
     } else {
@@ -316,7 +316,7 @@ define([
   }
 
   // A display of n fixed-sized items
-  function addCollectibleItemSetIndicator(parentNode, itemClass, itemCount) {
+  function addCollectibleItemSetIndicator(parentNode, itemType, itemCount) {
     var sc = systemConfigs.getSystemConfigs();
     var collectableItemSetWidthPx = sc.cardWidthPx * 0.4;
     var collectableItemSetHeightPx = collectableItemSize;
@@ -342,46 +342,63 @@ define([
 
     htmlUtils.addImage(
       collectableItemSetNode,
-      [itemClass, "nut", "dark-shadowed"],
+      [itemType, "nut", "dark-shadowed"],
       "item",
     );
 
     return collectableItemSetNode;
   }
 
-  function addCardCorners(parent, cardConfig) {
-    var cornerClass = cardConfig.itemClass
-      ? cardConfig.itemClass
-      : cardConfig.cardClass;
+  function addCardImage(parent, cardConfig) {
+    var imageClass = cardConfig.itemType
+      ? cardConfig.itemType
+      : cardConfig.cardType;
     debugLog(
-      "addCardCorners",
+      "addCardImage",
       "Doug: cardConfig = " + JSON.stringify(cardConfig),
     );
     debugLog(
-      "addCardCorners",
+      "addCardImage",
       "cornerClass = " +
-        cornerClass +
+        imageClass +
         " for cardConfig.title = " +
         cardConfig.title,
     );
 
-    var classes = [dropShadowClass, "component_image"];
+    var cardConfigClasses =
+      mixedNutsCardData.getClassesForCardConfig(cardConfig);
+    cardConfigClasses = cardConfigClasses.concat(["image-wrapper"]);
+    var imageWrapperNode = htmlUtils.addDiv(
+      parent,
+      cardConfigClasses,
+      "image-wrapper",
+    );
 
-    var index0Classes = [...classes, cornerClass, "index0"];
-    if (cardConfig.extraCorner) {
+    var classes = [dropShadowClass, "component-image"];
+
+    var index0Classes = [...classes, imageClass, "index0"];
+    if (cardConfig.extraImage) {
       index0Classes.push("first");
     }
 
-    htmlUtils.addImage(parent, index0Classes, "component_image");
+    htmlUtils.addImage(
+      imageWrapperNode,
+      index0Classes,
+      "component-image-first",
+    );
 
-    if (cardConfig.extraCorner) {
+    if (cardConfig.extraImage) {
       var index0Classes = [
         ...classes,
-        cardConfig.extraCorner,
+        cardConfig.extraImage,
         "index0",
         "second",
       ];
-      htmlUtils.addImage(parent, index0Classes, "component_image");
+      htmlUtils.addImage(
+        imageWrapperNode,
+        index0Classes,
+        "component-image-second",
+      );
     }
   }
 
@@ -400,14 +417,14 @@ define([
     return cannotBeCraftedNode;
   }
 
-  function addStandardCraftingInfo(parentNode, itemClass, itemCount, points) {
+  function addStandardCraftingInfo(parentNode, itemType, itemCount, points) {
     craftingNode = htmlUtils.addDiv(
       parentNode,
       ["craft-wrapper", "unbroken-row"],
       "craftWrapper",
     );
 
-    addCollectibleItemSetIndicator(craftingNode, itemClass, itemCount);
+    addCollectibleItemSetIndicator(craftingNode, itemType, itemCount);
     insertSomethingEqualsPointsNode(craftingNode, points);
   }
 
@@ -416,12 +433,12 @@ define([
     if (cardConfig.craft) {
       var craftConfig = cardConfig.craft;
       if (craftConfig.number > 0) {
-        var itemClass = cardConfig.itemClass
-          ? cardConfig.itemClass
-          : cardConfig.cardClass;
+        var itemType = cardConfig.itemType
+          ? cardConfig.itemType
+          : cardConfig.cardType;
         addStandardCraftingInfo(
           parentNode,
-          itemClass,
+          itemType,
           craftConfig.number,
           craftConfig.points,
         );
@@ -448,14 +465,30 @@ define([
     }
   }
 
-  function addFields(parent, cardConfig, indexWithinConfig) {
-    // These are the icons in upper left and lower corner of card.
-    addCardCorners(parent, cardConfig);
-
-    var mainWrapper = htmlUtils.addDiv(parent, ["main_wrapper"], "mainWapper");
+  function addTitleNode(parent, cardConfig, index) {
     if (cardConfig.title) {
-      var imageNode = htmlUtils.addDiv(
-        mainWrapper,
+      var titleOuterWrapperNode = htmlUtils.addDiv(
+        parent,
+        ["title-outer-wrapper"],
+        "title-outer-wrapper",
+      );
+      var titleInnerWrapperNode = htmlUtils.addDiv(
+        titleOuterWrapperNode,
+        ["title-inner-wrapper"],
+        "title-inner-wrapper",
+      );
+
+      var colorIndex = index % mixedNutsCardData.numCardColors;
+      var titleColor = mixedNutsCardData.cardColors[colorIndex];
+      var titleColorLight = mixedNutsCardData.cardColorsLight[colorIndex];
+
+      domStyle.set(titleInnerWrapperNode, {
+        "border-color": titleColor,
+        background: titleColorLight,
+      });
+
+      var titleNode = htmlUtils.addDiv(
+        titleInnerWrapperNode,
         ["title"],
         "title",
         cardConfig.title,
@@ -464,8 +497,16 @@ define([
       if (cardConfig.fontAdjustment) {
         fontSize = Math.floor(fontSize * cardConfig.fontAdjustment);
       }
-      domStyle.set(imageNode, "font-size", `${fontSize}px`);
+      domStyle.set(titleNode, {
+        "font-size": `${fontSize}px`,
+      });
     }
+  }
+
+  function addFields(parent, cardConfig, index, indexWithinConfig) {
+    var mainWrapper = htmlUtils.addDiv(parent, ["main_wrapper"], "mainWapper");
+    // These are the icons in upper left and lower corner of card.
+    addCardImage(mainWrapper, cardConfig);
 
     maybeAddStandardCraftingInfo(mainWrapper, cardConfig);
 
@@ -478,9 +519,12 @@ define([
     if (cardConfig.deckId == "starter") {
       addStarterIcons(mainWrapper);
     }
+
+    addTitleNode(parent, cardConfig, index);
   }
 
   function addCardBack(parent, index, extraClasses) {
+    debugLog("addCardBack", "index = " + index);
     var classes = extraClasses
       ? ["back", "mixed-nuts", ...extraClasses]
       : ["back", "mixed-nuts"];
@@ -522,23 +566,16 @@ define([
 
     var classArray = [];
     classArray.push("mixed-nuts-component");
-    classArray.push(cardConfig.cardClass);
+    classArray.push(cardConfig.cardType);
     classArray.push(cardConfig.deckId);
     var cardFrontNode = cards.addCardFront(parent, classArray, id);
 
-    var gradient = `linear-gradient(
-      to bottom,
-      ${cardConfig.color} 0%,
-      white 15%,
-      white 85%,
-      ${cardConfig.color} 100%
-    )`;
-
     domStyle.set(cardFrontNode, {
-      background: gradient,
+      "border-radius": "20px",
+      background: `radial-gradient(#ffffff 50%, ${cardConfig.color}`,
     });
 
-    addFields(cardFrontNode, cardConfig, indexWithinConfig);
+    addFields(cardFrontNode, cardConfig, index, indexWithinConfig);
     return cardFrontNode;
   }
 

@@ -59,17 +59,23 @@
         var sc = systemConfigs.getCardSystemConfigs();
         systemConfigs.setSystemConfigs(sc);
 
-        mixedNutsCardData.setupCardConfigs("day");
-        mixedNutsCardData.setupCardConfigs("night");
+        mixedNutsCardData.setupCardConfigs();
 
         cards.addCards(
           mixedNutsCards.getNumCards(),
           mixedNutsCards.addCardFrontAtIndex,
-          {
-            callback: function (parent, index) {
-              mixedNutsCards.addCardBack(parent, index, ["day"]);
+          [
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
             },
-          },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+          ],
         );
       });
     </script>

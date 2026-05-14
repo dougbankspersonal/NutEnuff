@@ -11,21 +11,24 @@ define([
   // Constants
   //
   //-----------------------------------------
-  const pistachioBackgroundColor = "#238f52ff";
-  const walnutBackgroundColor = "#4b3c1fff";
-  const acornBackgroundColor = "#7e420aff";
+  const pistachioBackgroundColor = "rgb(168, 225, 193)";
+  const walnutBackgroundColor = "rgb(135, 124, 103)";
+  const acornBackgroundColor = "rgb(232, 185, 144)";
 
-  const peanutBackgroundColor = "#f5deb3";
-  const almondBackgroundColor = "#deb887";
-  const cashewBackgroundColor = "#d2a679";
-  const macadamiaBackgroundColor = "#a9745d";
-  const badNutBackgroundColor = "#e6b3a1";
+  const peanutBackgroundColor = "#ffe7bb";
+  const almondBackgroundColor = "#f98f8f";
+  const cashewBackgroundColor = "#a1dbff";
+  const macadamiaBackgroundColor = "#dba4ff";
+  const badNutBackgroundColor = "#9e9e9e";
 
-  const raisinBackgroundColor = "#FF8888";
+  const raisinBackgroundColor = "#8bf3b1";
   const mysteryBackgroundColor = "#FFFF88";
-  const quantunNutBackgroundColor = "#FF4488";
-  const mixedNutsBackgroundColor = "#FF88FF";
-  const voteBackgroundColor = "#aa99ff";
+  const quantunNutBackgroundColor = "#fb80ad";
+  const mixedNutsBackgroundColor = "#fdadfd";
+  const voteBackgroundColor = "#cec5fb";
+
+  const gCardColors = ["#e62495", "#501fe4", "#f3fb0f"];
+  const gCardColorsLight = ["#fcb0e8", "#bdb1ff", "#fef3a5"];
 
   const CustomTypeText = "Text";
   const CustomTypePtsText = "PtsText";
@@ -37,6 +40,11 @@ define([
     Image: CustomTypeImage,
   };
 
+  const gPeanutSpecialString =
+    "<b>Most:</b> +🪙/package<br><b>Fewest:</b> -🪙/package";
+
+  const gAlmondSpecialString = "<b>Most:</b> +5🪙<br><b>Fewest:</b> -5🪙";
+  const gCashewSpecialString = "<b>Packaging:</b> Trade 1";
   const gCustomTypesArray = Object.keys(gCustomTypes);
   const gMinPlayers = 2;
   const gMaxPlayers = 5;
@@ -118,18 +126,18 @@ define([
       [gItemTypes.Cashew]: 10,
       [gItemTypes.Macadamia]: 6,
       [gItemTypes.Pistachio]: 0,
-      [gSpecialTypeRaisin]: 2,
-      [gBadTypeBadNut]: 3,
       [gItemTypes.Walnut]: 2,
       [gItemTypes.Acorn]: 6,
-      [gSpecialTypeQuantumNut]: 3,
       [gDoubleTypePeanut]: 2,
       [gDoubleTypeAlmond]: 2,
       [gDoubleTypeCashew]: 2,
       [gDoubleTypeMacadamia]: 2,
-      [gSpecialTypeSnack]: 2,
+      [gSpecialTypeRaisin]: 2,
+      [gBadTypeBadNut]: 3,
 
       /*
+      [gSpecialTypeQuantumNut]: 3,
+      [gSpecialTypeSnack]: 2,
       [gSpecialTypeTrailMix]: 1,
       [gSpecialTypeMystery]: 1,
       [gSpecialTypeVote]: 8,
@@ -142,17 +150,17 @@ define([
       [gItemTypes.Cashew]: 9,
       [gItemTypes.Macadamia]: 8,
       [gItemTypes.Pistachio]: 7,
-      [gBadTypeBadNut]: 4,
       [gItemTypes.Walnut]: 4,
-      [gSpecialTypeQuantumNut]: 2,
       [gDeluxeTypes.Peanut]: 3,
       [gDeluxeTypes.Almond]: 4,
       [gDeluxeTypes.Cashew]: 4,
       [gDeluxeTypes.Macadamia]: 5,
       [gDeluxeTypes.Pistachio]: 3,
-      [gSpecialTypeSnack]: 3,
+      [gBadTypeBadNut]: 4,
 
       /*
+      [gSpecialTypeQuantumNut]: 2,
+      [gSpecialTypeSnack]: 3,
       [gSpecialTypeTrailMix]: 2,
       [gSpecialTypeSnack]: 3,
       [gSpecialTypeMystery]: 3,
@@ -188,16 +196,16 @@ define([
       "countForDeck:",
       JSON.stringify(countForDeck),
     );
-    var count = countForDeck[cardConfig.cardClass] || 0;
+    var count = countForDeck[cardConfig.cardType] || 0;
 
     console.assert(
       count >= 0,
-      "generateNutCardDistribution: unexpected count for cardClass " +
-        cardConfig.cardClass,
+      "generateNutCardDistribution: unexpected count for cardType " +
+        cardConfig.cardType,
     );
     debugLog(
       "addCardCountToConfig",
-      "count for " + cardConfig.cardClass + ":",
+      "count for " + cardConfig.cardType + ":",
       count,
     );
 
@@ -207,45 +215,59 @@ define([
     return retVal;
   }
 
+  // Fields:
+  // cardType: a unique string iding the type of card. A peanut might be "peanut" and double peanut would be "double-peanut".
+  // itemType: for core type of nut.  For peanut, deluxe peanut, and double peanut, it's "peanut".
+  // classes: array of extra css classes to aid in rendering common concepts, like "deluxe".
   const gSharedDeckConfigs = [
     // Basic nuts
     {
       title: "Peanut",
-      cardClass: gItemTypes.Peanut,
+      cardType: gItemTypes.Peanut,
       craft: {
         number: 3,
         points: 2,
       },
+      customRendering: {
+        text: gPeanutSpecialString,
+      },
       playType: "nut",
       color: peanutBackgroundColor,
-      itemClass: gItemTypes.Peanut,
+      itemType: gItemTypes.Peanut,
     },
     {
       title: "Almond",
-      cardClass: gItemTypes.Almond,
+      cardType: gItemTypes.Almond,
       color: almondBackgroundColor,
       craft: {
         number: 3,
         points: 3,
       },
       playType: "nut",
-      itemClass: gItemTypes.Almond,
+      itemType: gItemTypes.Almond,
+      customRendering: {
+        text: gAlmondSpecialString,
+      },
     },
     {
       title: "Cashew",
-      cardClass: gItemTypes.Cashew,
+      cardType: gItemTypes.Cashew,
       color: cashewBackgroundColor,
-
+      customRendering: {
+        text: gCashewSpecialString,
+      },
       craft: {
         number: 3,
         points: 4,
       },
       playType: "nut",
-      itemClass: gItemTypes.Cashew,
+      itemType: gItemTypes.Cashew,
     },
+
+    // Higher value nuts.
     {
       title: "Macadamia",
-      cardClass: gItemTypes.Macadamia,
+      cardType: gItemTypes.Macadamia,
       color: macadamiaBackgroundColor,
       craft: {
         number: 4,
@@ -253,22 +275,187 @@ define([
       },
       playType: "nut",
       fontAdjustment: 0.8,
-      itemClass: gItemTypes.Macadamia,
+      itemType: gItemTypes.Macadamia,
     },
     {
       title: "Pistachio",
-      cardClass: gItemTypes.Pistachio,
+      cardType: gItemTypes.Pistachio,
       craft: {
         number: 2,
         points: 3,
       },
       playType: "nut",
       color: pistachioBackgroundColor,
-      itemClass: gItemTypes.Pistachio,
+      itemType: gItemTypes.Pistachio,
     },
     {
+      title: "Walnut",
+      cardType: gWalnut,
+      customRendering: {
+        useClassToIndexFunction: true,
+      },
+
+      playType: "nut",
+      color: walnutBackgroundColor,
+      itemType: gWalnut,
+    },
+    {
+      title: "Acorn",
+      cardType: gAcorn,
+      customRendering: {
+        useClassToIndexFunction: true,
+        points: 3,
+        text: "3 Coins if the Acorn is on Desk.",
+      },
+      playType: "special",
+      color: acornBackgroundColor,
+      itemType: gAcorn,
+    },
+
+    // Double nuts
+    {
+      title: "Double Peanut",
+      cardType: gDoubleTypePeanut,
+      craft: {
+        number: 3,
+        points: 2,
+      },
+      playType: "double-nut",
+      color: peanutBackgroundColor,
+      extraImage: gItemTypes.Peanut,
+      itemType: gItemTypes.Peanut,
+      fontAdjustment: 0.8,
+      customRendering: {
+        text: gPeanutSpecialString,
+      },
+    },
+    {
+      title: "Double Almond",
+      cardType: gDoubleTypeAlmond,
+      color: almondBackgroundColor,
+      craft: {
+        number: 3,
+        points: 3,
+      },
+      playType: "double-nut",
+      extraImage: gItemTypes.Almond,
+      itemType: gItemTypes.Almond,
+      fontAdjustment: 0.8,
+      customRendering: {
+        text: gAlmondSpecialString,
+      },
+    },
+    {
+      title: "Double Cashew",
+      cardType: gDoubleTypeCashew,
+      color: cashewBackgroundColor,
+      customRendering: {
+        text: gCashewSpecialString,
+      },
+      craft: {
+        number: 3,
+        points: 4,
+      },
+      playType: "double-nut",
+      extraImage: gItemTypes.Cashew,
+      itemType: gItemTypes.Cashew,
+      fontAdjustment: 0.8,
+    },
+    {
+      title: "Double Macadamia",
+      cardType: gDoubleTypeMacadamia,
+      color: macadamiaBackgroundColor,
+      craft: {
+        number: 4,
+        points: 7,
+      },
+      playType: "double-nut",
+      fontAdjustment: 0.8,
+      extraImage: gItemTypes.Macadamia,
+      itemType: gItemTypes.Macadamia,
+      fontAdjustment: 0.5,
+    },
+    // Deluxe nuts
+    {
+      title: "Deluxe Peanut",
+      cardType: gDeluxeTypePeanut,
+      craft: {
+        number: 3,
+        points: 3,
+      },
+      classes: ["deluxe"],
+      playType: "deluxe-nut",
+      color: peanutBackgroundColor,
+      itemType: gItemTypes.Peanut,
+      fontAdjustment: 0.8,
+      customRendering: {
+        text: gPeanutSpecialString,
+      },
+    },
+    {
+      title: "Deluxe Almond",
+      cardType: gDeluxeTypeAlmond,
+      color: almondBackgroundColor,
+      craft: {
+        number: 3,
+        points: 4,
+      },
+      classes: ["deluxe"],
+      playType: "nut",
+      itemType: gAlmond,
+      fontAdjustment: 0.8,
+      customRendering: {
+        text: gAlmondSpecialString,
+      },
+    },
+    {
+      title: "Deluxe Cashew",
+      cardType: gDeluxeTypeCashew,
+      color: cashewBackgroundColor,
+      craft: {
+        number: 3,
+        points: 5,
+      },
+      customRendering: {
+        text: gCashewSpecialString,
+      },
+      classes: ["deluxe"],
+      playType: "nut",
+      itemType: gCashew,
+      fontAdjustment: 0.8,
+    },
+    {
+      title: "Deluxe Macadamia",
+      cardType: gDeluxeTypeMacadamia,
+      color: macadamiaBackgroundColor,
+      craft: {
+        number: 4,
+        points: 8,
+      },
+      classes: ["deluxe"],
+      playType: "nut",
+      itemType: gMacadamia,
+      fontAdjustment: 0.6,
+    },
+
+    {
+      title: "Deluxe Pistachio",
+      cardType: gDeluxeTypePistachio,
+      color: pistachioBackgroundColor,
+      craft: {
+        number: 2,
+        points: 4,
+      },
+      classes: ["deluxe"],
+      playType: "nut",
+      itemType: gPistachio,
+      fontAdjustment: 0.6,
+    },
+
+    // Specials
+    {
       title: "Raisin",
-      cardClass: gSpecialTypeRaisin,
+      cardType: gSpecialTypeRaisin,
       customRendering: {
         customRenderingImageClasses: ["peanut", "almond", "cashew"],
         specialImagesSeparator: "/",
@@ -279,185 +466,34 @@ define([
     },
     {
       title: "Bad Nut",
-      cardClass: gBadTypeBadNut,
+      cardType: gBadTypeBadNut,
       customRendering: {
-        customRenderingImageClasses: ["floor", "bad-nut-floor"],
+        //        customRenderingImageClasses: ["floor", "bad-nut-floor"],
+        //    text: "<b>Final Scoring</b>: Counts as two cards on the Floor, <b><i>but</i></b> a set of 4 Bad Nuts may be removed from the Floor.",
+        customRenderingImageClasses: ["floor", "two-cards"],
         specialImagesSeparator: ":",
-        text: "<b>Final Scoring</b>: Counts as two cards on the Floor, <b><i>but</i></b> a set of 4 Bad Nuts may be removed from the Floor.",
+        text: "<b>Final Scoring</b>: Counts as two cards on the Floor.",
       },
       playType: "bad",
       color: badNutBackgroundColor,
     },
 
     {
-      title: "Walnut",
-      cardClass: gWalnut,
-      customRendering: {
-        useClassToIndexFunction: true,
-      },
-
-      playType: "nut",
-      color: walnutBackgroundColor,
-      itemClass: gWalnut,
-    },
-    {
-      title: "Acorn",
-      cardClass: gAcorn,
-      customRendering: {
-        useClassToIndexFunction: true,
-        points: 3,
-        text: "3 Coins if the Acorn is on Desk.",
-      },
-      playType: "special",
-      color: acornBackgroundColor,
-      itemClass: gAcorn,
-    },
-    {
       title: "Quantum Nut",
-      cardClass: gSpecialTypeQuantumNut,
+      cardType: gSpecialTypeQuantumNut,
       customRendering: {
         customRenderingImageClasses: ["desk", "double-arrow", "floor"],
         text: "<b>Packaging</b>: swap with a card on the Floor.",
       },
       playType: "special",
       color: quantunNutBackgroundColor,
-    },
-
-    // Double nuts
-    {
-      title: "Peanut x 2",
-      cardClass: gDoubleTypePeanut,
-      craft: {
-        number: 3,
-        points: 2,
-      },
-      playType: "double-nut",
-      color: peanutBackgroundColor,
-      extraCorner: gItemTypes.Peanut,
-      itemClass: gItemTypes.Peanut,
-    },
-    {
-      title: "Almond x 2",
-      cardClass: gDoubleTypeAlmond,
-      color: almondBackgroundColor,
-      craft: {
-        number: 3,
-        points: 3,
-      },
-      playType: "double-nut",
-      extraCorner: gItemTypes.Almond,
-      itemClass: gItemTypes.Almond,
-    },
-    {
-      title: "Cashew x 2",
-      cardClass: gDoubleTypeCashew,
-      color: cashewBackgroundColor,
-
-      craft: {
-        number: 3,
-        points: 4,
-      },
-      playType: "double-nut",
-      extraCorner: gItemTypes.Cashew,
-      itemClass: gItemTypes.Cashew,
-    },
-    {
-      title: "Macadamia x 2",
-      cardClass: gDoubleTypeMacadamia,
-      color: macadamiaBackgroundColor,
-      craft: {
-        number: 4,
-        points: 7,
-      },
-      playType: "double-nut",
       fontAdjustment: 0.8,
-      extraCorner: gItemTypes.Macadamia,
-      itemClass: gItemTypes.Macadamia,
-    },
-    // Deluxe nuts
-    {
-      title: "Deluxe Peanut",
-      cardClass: gDeluxeTypePeanut,
-      craft: {
-        number: 3,
-        points: 2,
-      },
-      customRendering: {
-        text: "A package scores +1 coin if it contains one or more Deluxe nuts.",
-      },
-      playType: "deluxe-nut",
-      color: peanutBackgroundColor,
-      extraCorner: "plus-coin-corner",
-      itemClass: gItemTypes.Peanut,
-    },
-    {
-      title: "Deluxe Almond",
-      cardClass: gDeluxeTypeAlmond,
-      color: almondBackgroundColor,
-      craft: {
-        number: 3,
-        points: 3,
-      },
-      customRendering: {
-        text: "A package scores +1 coin if it contains one or more Deluxe nuts.",
-      },
-      playType: "nut",
-      extraCorner: "plus-coin-corner",
-      itemClass: gAlmond,
-    },
-    {
-      title: "Deluxe Cashew",
-      cardClass: gDeluxeTypeCashew,
-      color: cashewBackgroundColor,
-      craft: {
-        number: 3,
-        points: 4,
-      },
-      customRendering: {
-        text: "A package scores +1 coin if it contains one or more Deluxe nuts.",
-      },
-      playType: "nut",
-      extraCorner: "plus-coin-corner",
-      itemClass: gCashew,
-    },
-    {
-      title: "Deluxe Macadamia",
-      cardClass: gDeluxeTypeMacadamia,
-      color: macadamiaBackgroundColor,
-      craft: {
-        number: 4,
-        points: 7,
-      },
-      customRendering: {
-        text: "A package scores +1 coin if it contains one or more Deluxe nuts.",
-      },
-      playType: "nut",
-      extraCorner: "plus-coin-corner",
-      fontAdjustment: 0.8,
-      itemClass: gMacadamia,
     },
 
-    {
-      title: "Deluxe Pistachio",
-      cardClass: gDeluxeTypePistachio,
-      color: pistachioBackgroundColor,
-      craft: {
-        number: 2,
-        points: 3,
-      },
-      customRendering: {
-        text: "A package scores +1 coin if it contains one or more Deluxe nuts.",
-      },
-      playType: "nut",
-      extraCorner: "plus-coin-corner",
-      fontAdjustment: 0.8,
-      itemClass: gPistachio,
-    },
-
-    // Expansion cards.
+    // Expansion cards
     {
       title: "Mystery",
-      cardClass: gSpecialTypeMystery,
+      cardType: gSpecialTypeMystery,
       customRendering: {
         customRenderingImageClasses: ["desk", "right-arrow", "mystery-card"],
         text: "Upon collecting, draw 2 cards from the current deck: keep one, discard Mystery and the other card.",
@@ -467,7 +503,7 @@ define([
     },
     {
       title: "Vote",
-      cardClass: gSpecialTypeVote,
+      cardType: gSpecialTypeVote,
       customRendering: {
         customRenderingImageClasses: ["vote"],
       },
@@ -476,7 +512,7 @@ define([
     },
     {
       title: "Trail Mix",
-      cardClass: gSpecialTypeTrailMix,
+      cardType: gSpecialTypeTrailMix,
       customRendering: {
         points: 5,
         useClassToIndexFunction: true,
@@ -487,7 +523,7 @@ define([
     },
     {
       title: "Snack",
-      cardClass: gSpecialTypeSnack,
+      cardType: gSpecialTypeSnack,
       playType: "special",
       color: badNutBackgroundColor,
       customRendering: {
@@ -499,27 +535,26 @@ define([
 
   var gCardConfigs;
 
-  function addCountConfigInfo(deckId) {
-    for (var cardConfig of gCardConfigs) {
+  function addCountConfigInfo(deckId, cardConfigs) {
+    for (var cardConfig of cardConfigs) {
       cardConfig.countConfigs = addCardCountToConfig(cardConfig, deckId);
     }
   }
 
   var gSetupCalled = false;
-  function setupCardConfigs(deckId) {
-    console.assert(!gSetupCalled, "setupCardConfigs called more than once");
-    gSetupCalled = true;
+  function generateCardConfigsForDeck(deckId) {
     // Must be done before doing anything else.
-    //    gCardConfigs = structuredClone(gUniformDeckCardConfigs);
-    gCardConfigs = structuredClone(gSharedDeckConfigs);
+    var newCardConfigs = structuredClone(gSharedDeckConfigs);
 
-    addCountConfigInfo(deckId);
+    addCountConfigInfo(deckId, newCardConfigs);
 
-    for (var cardConfig of gCardConfigs) {
+    for (var cardConfig of newCardConfigs) {
       var lastIndex = cardConfig.countConfigs.length - 1;
       cardConfig.count = cardConfig.countConfigs[lastIndex].count;
       cardConfig.deckId = deckId;
     }
+
+    return newCardConfigs;
   }
 
   function getCardConfigs() {
@@ -534,15 +569,41 @@ define([
     return gCardConfigs;
   }
 
+  function getClassesForCardConfig(cardConfig) {
+    var classes = [cardConfig.cardType];
+    if (cardConfig.classes) {
+      classes = classes.concat(cardConfig.classes);
+    }
+    return classes;
+  }
+
+  function setupCardConfigs() {
+    console.assert(
+      !gSetupCalled,
+      "setupCardConfigs should only be called once",
+    );
+    gSetupCalled = true;
+    gCardConfigs = [];
+    var dayConfigs = generateCardConfigsForDeck("day");
+    var nightConfigs = generateCardConfigsForDeck("night");
+    gCardConfigs = gCardConfigs.concat(dayConfigs);
+    gCardConfigs = gCardConfigs.concat(nightConfigs);
+  }
+
   // This returned object becomes the defined value of this module
   return {
     customTypes: gCustomTypes,
     customTypesArray: gCustomTypesArray,
     specialTypes: gSpecialTypes,
     itemTypes: gItemTypes,
+    cardColors: gCardColors,
+    numCardColors: gCardColors.length,
+    cardColorsLight: gCardColorsLight,
 
+    generateCardConfigsForDeck: generateCardConfigsForDeck,
     setupCardConfigs: setupCardConfigs,
     totalCardsPerPlayer: totalCardsPerPlayer,
     getCardConfigs: getCardConfigs,
+    getClassesForCardConfig: getClassesForCardConfig,
   };
 });
