@@ -115,7 +115,7 @@ define([
   }
 
   function renderAcornCustom(parentNode, customRendering) {
-    craftingNode = htmlUtils.addDiv(
+    var craftingNode = htmlUtils.addDiv(
       parentNode,
       ["craft-wrapper", "unbroken-row"],
       "craftWrapper",
@@ -138,22 +138,6 @@ define([
         points,
       );
     }
-  }
-
-  function renderMysteryCustom(parentNode, _) {
-    // Desk, arrow, mystery card.
-    var deskNode = htmlUtils.addImage(
-      cannotBeCraftedNode,
-      ["desk", "dark-shadowed"],
-      "desk",
-    );
-
-    var wrapperNode = htmlUtils.addDiv(
-      parentNode,
-      ["mystery-card-wrapper"],
-      "mysteryCardWrapper",
-    );
-    htmlUtils.addImage(wrapperNode, ["mystery", "dark-shadowed"], "mystery");
   }
 
   function renderHoneyRoastedCustom(parentNode, customRendering) {
@@ -187,10 +171,6 @@ define([
   }
 
   const gCustomRenderersByClass = {
-    [mixedNutsCardData.specialTypes.TrailMix]: renderTrailMixCustom,
-    [mixedNutsCardData.specialTypes.HotSpice]: renderHotSpiceCustom,
-    [mixedNutsCardData.specialTypes.HoneyRoasted]: renderHoneyRoastedCustom,
-    [mixedNutsCardData.specialTypes.Mystery]: renderMysteryCustom,
     [mixedNutsCardData.itemTypes.Walnut]: renderWalnutCustom,
     [mixedNutsCardData.itemTypes.Acorn]: renderAcornCustom,
   };
@@ -256,7 +236,7 @@ define([
     if (customRendering.useClassToIndexFunction) {
       var customRenderer = gCustomRenderersByClass[cardConfig.cardType];
       console.assert(
-        customRenderer,
+        customRenderer != null,
         "No custom renderer for " + cardConfig.cardType,
       );
       customRenderer(customRenderingWrapperNode, customRendering);
@@ -418,7 +398,7 @@ define([
   }
 
   function addStandardCraftingInfo(parentNode, itemType, itemCount, points) {
-    craftingNode = htmlUtils.addDiv(
+    var craftingNode = htmlUtils.addDiv(
       parentNode,
       ["craft-wrapper", "unbroken-row"],
       "craftWrapper",
@@ -478,13 +458,25 @@ define([
         "title-inner-wrapper",
       );
 
+      /*
       var colorIndex = index % mixedNutsCardData.numCardColors;
       var titleColor = mixedNutsCardData.cardColors[colorIndex];
       var titleColorLight = mixedNutsCardData.cardColorsLight[colorIndex];
+      */
+      var titleBorderColor = cardConfig.color;
+      console.assert(
+        titleBorderColor,
+        "titleBorderColor is null for cardConfig.title = " + cardConfig.title,
+      );
+      var titleBackgroundColor = htmlUtils.blendHexColors(
+        titleBorderColor,
+        "#ffffff",
+        0.5,
+      );
 
       domStyle.set(titleInnerWrapperNode, {
-        "border-color": titleColor,
-        background: titleColorLight,
+        "border-color": titleBorderColor,
+        background: titleBackgroundColor,
       });
 
       var titleNode = htmlUtils.addDiv(
@@ -607,7 +599,7 @@ define([
   function getNumCards() {
     // Wait until we're asked to calculate so system configs can be applied.
     if (gNumCards === 0) {
-      for (cardConfig of mixedNutsCardData.getCardConfigs()) {
+      for (var cardConfig of mixedNutsCardData.getCardConfigs()) {
         debugLog("getNumCards", "Doug: cardConfig.title = " + cardConfig.title);
         debugLog(
           "getNumCards",
@@ -619,50 +611,7 @@ define([
         mixedNutsCardData.getCardConfigs(),
       );
       debugLog("getNumCards", "Doug: gNumCards = " + gNumCards);
-
-      // While we're here: how many in a game?  We only use 3 specials.
-      var specialCount = 0;
-      var cardsPerGameByPlayer = {};
-      for (cardConfig of mixedNutsCardData.getCardConfigs()) {
-        var countConfigs = cardConfig.countConfigs;
-        if (cardConfig.playType == "special") {
-          specialCount += 1;
-          if (specialCount > 3) {
-            debugLog("getNumCards", "Doug: skipping " + cardConfig.title);
-            continue;
-          }
-        }
-        debugLog("getNumCards", "Doug: counting " + cardConfig.title);
-        for (var i = 0; i < countConfigs.length; i++) {
-          var countConfig = countConfigs[i];
-          var numPlayers = countConfig.numPlayers;
-          var numCards = countConfig.count;
-          if (!cardsPerGameByPlayer[numPlayers]) {
-            cardsPerGameByPlayer[numPlayers] = 0;
-          }
-          cardsPerGameByPlayer[numPlayers] += numCards;
-        }
-      }
-      debugLog(
-        "getNumCards",
-        "How many cards are put into the deck in a real game: all the basics plus 3 specials: ",
-        JSON.stringify(cardsPerGameByPlayer),
-      );
-
-      var cardsNeededByPlayer = {};
-      for (
-        var numPlayers = 2;
-        numPlayers <= gameInfo.maxPlayers;
-        numPlayers++
-      ) {
-        cardsNeededByPlayer[numPlayers] =
-          mixedNutsCardData.totalCardsPerPlayer(numPlayers);
-      }
-      debugLog(
-        "getNumCards",
-        "How many cards are dealt out of the deck in a real game: some multiple of num players plus remainder: ",
-        JSON.stringify(cardsNeededByPlayer),
-      );
+      console.assert(gNumCards > 0, "gNumCards must be greater than 0");
     }
     return gNumCards;
   }
