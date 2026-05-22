@@ -124,6 +124,10 @@
   margin-left: -20px;
   z-index: 10;
 }
+.card.front.mixed-nuts-component .main_wrapper .image-wrapper.trail-mix {
+  zoom: 1.6;
+  margin-bottom: -50px;
+}
 .card.front.mixed-nuts-component .main_wrapper .image-wrapper.deluxe {
   background-image: url("../images/Cards/aura.png");
   background-size: contain;
@@ -202,6 +206,8 @@
   font-family: "Roboto", sans-serif;
   font-size: 15px;
   margin-top: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 .card.front.mixed-nuts-component .custom-rendering-wrapper .custom-rendering-images {
   display: flex;
@@ -256,6 +262,9 @@
 .card.front.mixed-nuts-component .custom-rendering-wrapper.walnut {
   flex-direction: column;
   zoom: 0.5;
+}
+.card.front.mixed-nuts-component .custom-rendering-wrapper.trail-mix .craft-wrapper {
+  font-size: 40%;
 }
 .card.front.mixed-nuts-component .custom-rendering-wrapper.mixed-nuts .nut-rows {
   padding-right: 10px;

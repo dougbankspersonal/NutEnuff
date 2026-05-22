@@ -56,10 +56,15 @@
         mixedNutsCardData,
         mixedNutsCards,
       ) {
-        var sc = systemConfigs.getCardSystemConfigs();
-        sc.cardsPerRow = 12;
-        systemConfigs.setSystemConfigs(sc);
+        var overrides = {};
+        var queryParams = genericUtils.getCommonQueryParams();
+        if (queryParams.isScreentop) {
+          overrides.cardsPerRow = 12;
+        }
 
+        var sc = systemConfigs.getCardSystemConfigs(overrides);
+        console.log("sc = ", JSON.stringify(sc));
+        systemConfigs.setSystemConfigs(sc);
         mixedNutsCardData.setupCardConfigs();
 
         cards.addCards(
@@ -73,7 +78,277 @@
             },
             {
               callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["day"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
                 mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addCardBack(parent, index, ["night"]);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
+              },
+            },
+            {
+              callback: function (parent, index) {
+                mixedNutsCards.addTrailMixCard(parent);
               },
             },
           ],

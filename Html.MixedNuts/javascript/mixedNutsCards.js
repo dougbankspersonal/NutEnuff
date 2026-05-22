@@ -4,7 +4,6 @@ define([
   "sharedJavascript/debugLog",
   "sharedJavascript/htmlUtils",
   "sharedJavascript/systemConfigs",
-  "javascript/gameInfo",
   "javascript/mixedNutsCardData",
   "dojo/domReady!",
 ], function (
@@ -13,7 +12,6 @@ define([
   debugLogModule,
   htmlUtils,
   systemConfigs,
-  gameInfo,
   mixedNutsCardData,
 ) {
   var debugLog = debugLogModule.debugLog;
@@ -58,58 +56,6 @@ define([
     );
   }
 
-  function renderTrailMixCustom(parentNode, customRendering) {
-    // Parent is a flex row.
-    domStyle.set(parentNode, {
-      display: "flex",
-      "flex-direction": "row",
-      "align-items": "center",
-      "justify-content": "center",
-    });
-
-    // Left of row: all 4 nuts in a box, 2 and 2.
-    var nutRowsNode = htmlUtils.addDiv(parentNode, ["nut-rows"], "nutRows");
-    // First row: peanut plus almond plus.
-    var firstRowNode = htmlUtils.addDiv(nutRowsNode, ["nut-row"], "firstRow");
-    htmlUtils.addImage(
-      firstRowNode,
-      ["peanut", "dark-shadowed", "nut-image"],
-      "peanut",
-    );
-    htmlUtils.addDiv(firstRowNode, ["plus"], "plus", "+");
-    htmlUtils.addImage(
-      firstRowNode,
-      ["almond", "dark-shadowed", "nut-image"],
-      "almond",
-    );
-    htmlUtils.addDiv(firstRowNode, ["plus"], "plus", "+");
-
-    // Second row: cashew and macadamia.
-    var secondRowNode = htmlUtils.addDiv(nutRowsNode, ["nut-row"], "secondRow");
-    htmlUtils.addImage(
-      secondRowNode,
-      ["cashew", "dark-shadowed", "nut-image"],
-      "cashew",
-    );
-    htmlUtils.addDiv(secondRowNode, ["plus"], "plus", "+");
-    htmlUtils.addImage(
-      secondRowNode,
-      ["macadamia", "dark-shadowed", "nut-image"],
-      "macadamia",
-    );
-
-    // Right of row: n points node.
-    insertSomethingEqualsPointsNode(parentNode, customRendering.points);
-  }
-
-  function renderHotSpiceCustom(parentNode, _) {
-    // +1 per peanut.
-    htmlUtils.addDiv(parentNode, ["plus"], "plus", "+1");
-    htmlUtils.addImage(parentNode, ["coin", "dark-shadowed"], "coin");
-    htmlUtils.addDiv(parentNode, ["per"], "per", "/");
-    htmlUtils.addImage(parentNode, ["peanut", "dark-shadowed"], "peanut");
-  }
-
   function insertTextNode(parentNode, text) {
     return htmlUtils.addDiv(parentNode, ["text-node"], "textNode", text);
   }
@@ -140,39 +86,32 @@ define([
     }
   }
 
-  function renderHoneyRoastedCustom(parentNode, customRendering) {
-    // Table maps card type to bonus.
-    var nutToBonusMap = customRendering.nutToBonusMap;
-    // Parent is a column of rows.
-    domStyle.set(parentNode, {
-      display: "flex",
-      "flex-direction": "column",
-      "align-items": "center",
-      "justify-content": "center",
-    });
-
-    // Child is nut rows.
-    var nutRowsNode = htmlUtils.addDiv(parentNode, ["nut-rows"], "nut-rows");
-
-    for (var nut in nutToBonusMap) {
-      // Each row is a row of cells.
-      var rowNode = htmlUtils.addDiv(nutRowsNode, ["nut-row"], "nut-row");
-      // Add a plus
-      htmlUtils.addDiv(rowNode, ["plus"], "plus", "+");
-      // Add the nut image.
-      htmlUtils.addImage(
-        rowNode,
-        [nut, "dark-shadowed", "nut-image"],
-        nut + "Image",
+  function renderTrailMixCustom(parentNode, customRendering) {
+    insertTextNode(parentNode, customRendering.customText);
+    var pointsArray = customRendering.pointsArray;
+    for (var i = 0; i < pointsArray.length; i++) {
+      var pointsClause = pointsArray[i];
+      var itemCount = pointsClause.cards;
+      var points = pointsClause.points;
+      var wrapperNode = htmlUtils.addDiv(
+        parentNode,
+        ["craft-wrapper", "unbroken-row"],
+        "craftWrapper",
       );
-      // Add an equals and the points.
-      insertSomethingEqualsPointsNode(rowNode, nutToBonusMap[nut]);
+      htmlUtils.addDiv(
+        wrapperNode,
+        ["trail-mix-card-count"],
+        "trailMixCardCount",
+        itemCount + " Nuts",
+      );
+      insertSomethingEqualsPointsNode(wrapperNode, points);
     }
   }
 
   const gCustomRenderersByClass = {
     [mixedNutsCardData.itemTypes.Walnut]: renderWalnutCustom,
     [mixedNutsCardData.itemTypes.Acorn]: renderAcornCustom,
+    [mixedNutsCardData.itemTypes.TrailMix]: renderTrailMixCustom,
   };
 
   function maybeAddSpacer(parent, opt_index, opt_separator) {
@@ -571,6 +510,14 @@ define([
     return cardFrontNode;
   }
 
+  function addTrailMixCard(parent) {
+    var trailMixConfig = mixedNutsCardData.getConfigForCardType(
+      mixedNutsCardData.itemTypes.TrailMix,
+    );
+
+    return addCardFront(parent, trailMixConfig, "trail-mix", 0);
+  }
+
   function addCardFrontAtIndex(parent, index) {
     debugLog(
       "addCardFrontAtIndex",
@@ -633,6 +580,7 @@ define([
     addCardFront: addCardFront,
     addCardFrontAtIndex: addCardFrontAtIndex,
     addCardBack: addCardBack,
+    addTrailMixCard: addTrailMixCard,
     getCardConfigByTitle: getCardConfigByTitle,
   };
 });

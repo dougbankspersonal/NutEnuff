@@ -11,20 +11,19 @@ define([
   // Constants
   //
   //-----------------------------------------
-  const pistachioBackgroundColor = "rgb(168, 225, 193)";
-  const walnutBackgroundColor = "rgb(135, 124, 103)";
-  const acornBackgroundColor = "rgb(232, 185, 144)";
 
   const peanutBackgroundColor = "#ffe7bb";
   const almondBackgroundColor = "#f98f8f";
   const cashewBackgroundColor = "#a1dbff";
   const macadamiaBackgroundColor = "#dba4ff";
-  const badNutBackgroundColor = "#9e9e9e";
+  const walnutBackgroundColor = "rgb(135, 124, 103)";
+  const acornBackgroundColor = "rgb(232, 185, 144)";
+  const pistachioBackgroundColor = "rgb(168, 225, 193)";
 
   const raisinBackgroundColor = "#8bf3b1";
-  const quantunNutBackgroundColor = "#fb80ad";
-  const mixedNutsBackgroundColor = "#fdadfd";
-  const voteBackgroundColor = "#cec5fb";
+
+  const badNutBackgroundColor = "#9e9e9e";
+  const trailMixBackgroundColor = "#927fff";
 
   const gCardColors = ["#e62495", "#501fe4", "#f3fb0f"];
   const gCardColorsLight = ["#fcb0e8", "#bdb1ff", "#fef3a5"];
@@ -40,6 +39,7 @@ define([
   const gPistachio = "pistachio";
   const gWalnut = "walnut";
   const gAcorn = "acorn";
+
   const gDoubleTypePeanut = "double-peanut";
   const gDoubleTypeAlmond = "double-almond";
   const gDoubleTypeCashew = "double-cashew";
@@ -52,6 +52,7 @@ define([
   const gDeluxeTypePistachio = "deluxe-pistachio";
   const gSpecialTypeRaisin = "raisin";
   const gBadTypeBadNut = "bad-nut";
+  const gTrailMixType = "trail-mix";
 
   const gItemTypes = {
     Pistachio: gPistachio,
@@ -72,6 +73,7 @@ define([
     DeluxeTypePistachio: gDeluxeTypePistachio,
     Raisin: gSpecialTypeRaisin,
     BadNut: gBadTypeBadNut,
+    TrailMix: gTrailMixType,
   };
 
   const gDeckToTypeToCountMap = {
@@ -113,14 +115,6 @@ define([
       [gItemTypes.BadNut]: 4,
     },
   };
-
-  function cardsPerPlayerPerSeason(numPlayers) {
-    return 5 * numPlayers + 2;
-  }
-
-  function totalCardsPerPlayer(numPlayers) {
-    return cardsPerPlayerPerSeason(numPlayers) * 4;
-  }
 
   function addCardCountToConfig(cardConfig, deckId) {
     debugLog(
@@ -173,9 +167,11 @@ define([
         number: 3,
         points: 2,
       },
+      /*
       customRendering: {
         text: gPeanutSpecialString,
       },
+      */
       playType: "nut",
       color: peanutBackgroundColor,
       itemType: gItemTypes.Peanut,
@@ -190,17 +186,19 @@ define([
       },
       playType: "nut",
       itemType: gItemTypes.Almond,
+      /*
       customRendering: {
         text: gAlmondSpecialString,
-      },
+      }, */
     },
     {
       title: "Cashew",
       cardType: gItemTypes.Cashew,
       color: cashewBackgroundColor,
+      /*
       customRendering: {
         text: gCashewSpecialString,
-      },
+      },*/
       craft: {
         number: 3,
         points: 4,
@@ -270,9 +268,10 @@ define([
       extraImage: gItemTypes.Peanut,
       itemType: gItemTypes.Peanut,
       fontAdjustment: 0.8,
+      /*
       customRendering: {
         text: gPeanutSpecialString,
-      },
+      },*/
     },
     {
       title: "Double Almond",
@@ -286,17 +285,19 @@ define([
       extraImage: gItemTypes.Almond,
       itemType: gItemTypes.Almond,
       fontAdjustment: 0.8,
+      /*
       customRendering: {
         text: gAlmondSpecialString,
-      },
+      }, */
     },
     {
       title: "Double Cashew",
       cardType: gItemTypes.DoubleCashew,
       color: cashewBackgroundColor,
+      /*
       customRendering: {
         text: gCashewSpecialString,
-      },
+      },*/
       craft: {
         number: 3,
         points: 4,
@@ -332,9 +333,11 @@ define([
       color: peanutBackgroundColor,
       itemType: gItemTypes.Peanut,
       fontAdjustment: 0.8,
+      /*
       customRendering: {
         text: gPeanutSpecialString,
       },
+      */
     },
     {
       title: "Deluxe Almond",
@@ -348,9 +351,11 @@ define([
       playType: "nut",
       itemType: gItemTypes.Almond,
       fontAdjustment: 0.8,
+      /*
       customRendering: {
         text: gAlmondSpecialString,
       },
+      */
     },
     {
       title: "Deluxe Cashew",
@@ -360,9 +365,11 @@ define([
         number: 3,
         points: 5,
       },
+      /*
       customRendering: {
         text: gCashewSpecialString,
       },
+      */
       classes: ["deluxe"],
       playType: "nut",
       itemType: gItemTypes.Cashew,
@@ -421,9 +428,51 @@ define([
       playType: "bad",
       color: badNutBackgroundColor,
     },
+    {
+      title: "TrailMix",
+      cardType: gItemTypes.TrailMix,
+      customRendering: {
+        useClassToIndexFunction: true,
+        customText: "<i><b>DIFFERENT</b></i> types.",
+        pointsArray: [
+          {
+            cards: 4,
+            points: 5,
+          },
+          {
+            cards: 5,
+            points: 7,
+          },
+          {
+            cards: 6,
+            points: 10,
+          },
+          {
+            cards: 7,
+            points: 13,
+          },
+        ],
+      },
+      playType: "nut",
+      color: trailMixBackgroundColor,
+      itemType: gItemTypes.TrailMix,
+    },
   ];
 
   var gCardConfigs;
+
+  function getConfigForCardType(cardType) {
+    for (var cardConfig of gSharedDeckConfigs) {
+      if (cardConfig.cardType === cardType) {
+        return cardConfig;
+      }
+    }
+    console.assert(
+      false,
+      "getConfigForCardType: unexpected cardType: " + cardType,
+    );
+    return null;
+  }
 
   function addCountConfigInfo(deckId, cardConfigs) {
     for (var cardConfig of cardConfigs) {
@@ -489,8 +538,8 @@ define([
 
     generateCardConfigsForDeck: generateCardConfigsForDeck,
     setupCardConfigs: setupCardConfigs,
-    totalCardsPerPlayer: totalCardsPerPlayer,
     getCardConfigs: getCardConfigs,
     getClassesForCardConfig: getClassesForCardConfig,
+    getConfigForCardType: getConfigForCardType,
   };
 });
