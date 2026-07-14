@@ -32,15 +32,23 @@
   font-weight: bold;
 }
 
-.card.front.day {
-  border-color: #fde456;
+.card.front.starter,
+.card.back.mixed-nuts.starter {
+  border-color: #a2ffa1;
 }
 
-.card.front.starter {
-  border-color: #f1b863;
+.card.front.day,
+.card.back.mixed-nuts.day {
+  border-color: #ffe551;
 }
 
-.card.front.night {
+.card.front.afternoon,
+.card.back.mixed-nuts.afternoon {
+  border-color: #fea862;
+}
+
+.card.front.night,
+.card.back.mixed-nuts.night {
   border-color: #372658;
 }
 
@@ -269,11 +277,6 @@
       align-items: center;
     }
 
-    .pseudo-image.discard-2-cards {
-      width: 100px;
-      height: 100px;
-    }
-
     .pseudo-image.vote {
       width: 100px;
       height: 100px;
@@ -333,14 +336,19 @@
   margin: 0 6px;
 }
 
-.card.back.mixed-nuts.day,
 .card.back.mixed-nuts.starter {
-  border-color: #fde456;
-  background: radial-gradient(#cdcdfa 50%, #c4c4fd);
+  background: radial-gradient(#a2ffa1 50%, #d4ffd4);
+}
+
+.card.back.mixed-nuts.day {
+  background: radial-gradient(#fffcde 50%, #fff9b7);
+}
+
+.card.back.mixed-nuts.afternoon {
+  background: radial-gradient(#f1b863 50%, #ffc66b);
 }
 
 .card.back.mixed-nuts.night {
-  border-color: #372658;
   background: radial-gradient(#6a6379 50%, #756891);
 }
 
@@ -368,13 +376,10 @@
       justify-content: center;
       width: 150px;
       height: 150px;
-      position: absolute;
-      top: 20px;
       z-index: 1;
     }
 
     .title {
-      position: absolute;
       font-family: "Luckiest Guy";
       text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
         1px 1px 0 #fff;
@@ -392,14 +397,19 @@
 
     .title.small {
       font-size: 30px;
-      top: 170px;
       z-index: 2;
     }
 
     .title.big {
       font-size: 50px;
-      top: 190px;
       z-index: 3;
+    }
+
+    .shift {
+      font-family: "Arial Black", sans-serif;
+      font-size: 25px;
+      font-style: italic;
+      color: #332211;
     }
   }
 }

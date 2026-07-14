@@ -454,7 +454,7 @@ define([
     addTitleNode(parent, cardConfig, index);
   }
 
-  function addCardBack(parent, index, extraClasses) {
+  function addCardBack(parent, index, title, extraClasses) {
     debugLog("addCardBack", "index = " + index);
     var classes = extraClasses
       ? ["back", "mixed-nuts", ...extraClasses]
@@ -470,6 +470,7 @@ define([
       ["squirrel"],
       "mixed-nuts-back-image-" + index,
     );
+
     htmlUtils.addDiv(
       insetNode,
       ["title", "small"],
@@ -482,6 +483,8 @@ define([
       "title-big-" + index,
       "Enuff",
     );
+
+    htmlUtils.addDiv(insetNode, ["shift"], "shift-" + index, title);
 
     return backNode;
   }

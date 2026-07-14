@@ -53,6 +53,7 @@ define([
   const gSpecialTypeRaisin = "raisin";
   const gBadTypeBadNut = "bad-nut";
   const gTrailMixType = "trail-mix";
+  const gSnackType = "snack";
 
   const gItemTypes = {
     Pistachio: gPistachio,
@@ -74,6 +75,7 @@ define([
     Raisin: gSpecialTypeRaisin,
     BadNut: gBadTypeBadNut,
     TrailMix: gTrailMixType,
+    Snack: gSnackType,
   };
 
   const gDeckToTypeToCountMap = {
@@ -86,33 +88,67 @@ define([
     },
 
     day: {
-      [gItemTypes.Peanut]: 20,
-      [gItemTypes.Almond]: 14,
-      [gItemTypes.Cashew]: 10,
-      [gItemTypes.Macadamia]: 4,
+      [gItemTypes.Peanut]: 11,
+      [gItemTypes.Almond]: 9,
+      [gItemTypes.Cashew]: 8,
+      [gItemTypes.Macadamia]: 3,
       [gItemTypes.Pistachio]: 0,
+      [gItemTypes.Raisin]: 0,
+      [gItemTypes.BadNut]: 2,
       [gItemTypes.Walnut]: 3,
-      [gItemTypes.Acorn]: 6,
+      [gItemTypes.Acorn]: 5,
+      [gItemTypes.Snack]: 0,
       [gItemTypes.DoublePeanut]: 2,
       [gItemTypes.DoubleAlmond]: 2,
       [gItemTypes.DoubleCashew]: 2,
-      [gItemTypes.DoubleMacadamia]: 1,
-      [gItemTypes.Raisin]: 3,
+      [gItemTypes.DoubleMacadamia]: 2,
+      [gItemTypes.DeluxePeanut]: 0,
+      [gItemTypes.DeluxeAlmond]: 0,
+      [gItemTypes.DeluxeCashew]: 0,
+      [gItemTypes.DeluxeMacadamia]: 0,
+      [gItemTypes.DeluxePistachio]: 0,
+    },
+    afternoon: {
+      [gItemTypes.Peanut]: 11,
+      [gItemTypes.Almond]: 10,
+      [gItemTypes.Cashew]: 9,
+      [gItemTypes.Macadamia]: 4,
+      [gItemTypes.Pistachio]: 0,
+      [gItemTypes.Raisin]: 5,
       [gItemTypes.BadNut]: 3,
+      [gItemTypes.Walnut]: 4,
+      [gItemTypes.Acorn]: 0,
+      [gItemTypes.Snack]: 3,
+      [gItemTypes.DoublePeanut]: 0,
+      [gItemTypes.DoubleAlmond]: 0,
+      [gItemTypes.DoubleCashew]: 0,
+      [gItemTypes.DoubleMacadamia]: 0,
+      [gItemTypes.DeluxePeanut]: 0,
+      [gItemTypes.DeluxeAlmond]: 0,
+      [gItemTypes.DeluxeCashew]: 0,
+      [gItemTypes.DeluxeMacadamia]: 0,
+      [gItemTypes.DeluxePistachio]: 0,
     },
     night: {
-      [gItemTypes.Peanut]: 13,
-      [gItemTypes.Almond]: 11,
-      [gItemTypes.Cashew]: 9,
-      [gItemTypes.Macadamia]: 8,
+      [gItemTypes.Peanut]: 6,
+      [gItemTypes.Almond]: 5,
+      [gItemTypes.Cashew]: 4,
+      [gItemTypes.Macadamia]: 3,
       [gItemTypes.Pistachio]: 7,
-      [gItemTypes.Walnut]: 5,
-      [gItemTypes.DeluxePeanut]: 4,
-      [gItemTypes.DeluxeAlmond]: 4,
-      [gItemTypes.DeluxeCashew]: 4,
-      [gItemTypes.DeluxeMacadamia]: 4,
+      [gItemTypes.Raisin]: 0,
+      [gItemTypes.BadNut]: 3,
+      [gItemTypes.Walnut]: 4,
+      [gItemTypes.Acorn]: 0,
+      [gItemTypes.Snack]: 2,
+      [gItemTypes.DoublePeanut]: 0,
+      [gItemTypes.DoubleAlmond]: 0,
+      [gItemTypes.DoubleCashew]: 0,
+      [gItemTypes.DoubleMacadamia]: 0,
+      [gItemTypes.DeluxePeanut]: 3,
+      [gItemTypes.DeluxeAlmond]: 3,
+      [gItemTypes.DeluxeCashew]: 3,
+      [gItemTypes.DeluxeMacadamia]: 3,
       [gItemTypes.DeluxePistachio]: 3,
-      [gItemTypes.BadNut]: 4,
     },
   };
 
@@ -429,7 +465,7 @@ define([
       color: badNutBackgroundColor,
     },
     {
-      title: "TrailMix",
+      title: "Trail Mix",
       cardType: gItemTypes.TrailMix,
       customRendering: {
         useClassToIndexFunction: true,
@@ -456,6 +492,17 @@ define([
       playType: "nut",
       color: trailMixBackgroundColor,
       itemType: gItemTypes.TrailMix,
+    },
+    {
+      title: "Snack",
+      cardType: gItemTypes.Snack,
+      customRendering: {
+        text: "Immediately discard this and two more cards from your Desk.",
+        customRenderingImageClasses: ["discard-2-cards"],
+      },
+      playType: "nut",
+      color: trailMixBackgroundColor,
+      itemType: gItemTypes.Snack,
     },
   ];
 
@@ -523,9 +570,13 @@ define([
     );
     gSetupCalled = true;
     gCardConfigs = [];
+    var starterCardConfigs = generateCardConfigsForDeck("starter");
     var dayConfigs = generateCardConfigsForDeck("day");
+    var afternoonConfigs = generateCardConfigsForDeck("afternoon");
     var nightConfigs = generateCardConfigsForDeck("night");
+    gCardConfigs = gCardConfigs.concat(starterCardConfigs);
     gCardConfigs = gCardConfigs.concat(dayConfigs);
+    gCardConfigs = gCardConfigs.concat(afternoonConfigs);
     gCardConfigs = gCardConfigs.concat(nightConfigs);
   }
 
