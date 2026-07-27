@@ -3,7 +3,6 @@ define([
   "sharedJavascript/cards",
   "sharedJavascript/debugLog",
   "sharedJavascript/htmlUtils",
-  "sharedJavascript/systemConfigs",
   "javascript/cardsNutsAndBoxesData",
   "dojo/domReady!",
 ], function (
@@ -11,7 +10,6 @@ define([
   cards,
   debugLogModule,
   htmlUtils,
-  systemConfigs,
   cardsNutsAndBoxesData,
 ) {
   var debugLog = debugLogModule.debugLog;
@@ -19,15 +17,11 @@ define([
   function addPackageZone(parent, packageType) {
     var zoneNode = htmlUtils.addDiv(
       parent,
-      ["zone", "package"],
+      ["zone", "package", packageType],
       "package-zone",
     );
-    var packageImageNode = htmlUtils.addImage(
-      zoneNode,
-      ["package", packageType],
-      "package-image",
-    );
-    var textAndRewardNode = htmlUtils.addDiv(
+    htmlUtils.addImage(zoneNode, ["package", packageType], "package-image");
+    htmlUtils.addDiv(
       zoneNode,
       ["text-and-reward"],
       "package-text",
@@ -42,7 +36,7 @@ define([
         "🪙" +
         "</span>",
     );
-    var titleNode = htmlUtils.addDiv(
+    htmlUtils.addDiv(
       zoneNode,
       ["title"],
       "package-title",
@@ -57,8 +51,8 @@ define([
       ["zone", "nut", nutType],
       "nut-zone",
     );
-    var nutImageNode = htmlUtils.addImage(zoneNode, [nutType], "nut-image");
-    var titleNode = htmlUtils.addDiv(
+    htmlUtils.addImage(zoneNode, [nutType], "nut-image");
+    htmlUtils.addDiv(
       zoneNode,
       ["title"],
       "nut-title",
@@ -73,7 +67,7 @@ define([
     var idElements = ["mixed-nuts-component", index.toString()];
     var id = idElements.join(".");
 
-    var classArray = ["nut-enuff", cardConfig.nutType];
+    var classArray = ["nut-enuff", cardConfig.nutType, cardConfig.packageType];
     var cardFrontNode = cards.addCardFront(parent, classArray, id);
 
     domStyle.set(cardFrontNode, {
@@ -81,8 +75,8 @@ define([
       background: `radial-gradient(#ffffff 50%, ${cardConfig.color}`,
     });
 
-    addNutZone(cardFrontNode, cardConfig.nutType, index);
-    addPackageZone(cardFrontNode, cardConfig.packageType, index);
+    addNutZone(cardFrontNode, cardConfig.nutType);
+    addPackageZone(cardFrontNode, cardConfig.packageType);
     return cardFrontNode;
   }
 
@@ -94,15 +88,17 @@ define([
   }
 
   function addCardBack(parent, index) {
-    debugLog("addCardBack", "index = " + index);
+    debugLog("addCardBack", "NE parent = " + JSON.stringify(parent));
+    debugLog("addCardBack", "NE index = " + index);
     var classes = ["back", "nut-enuff"];
     var backNode = htmlUtils.addCard(parent, classes, "back-" + index);
+    debugLog("addCardBack", "NE backNode = " + JSON.stringify(backNode));
 
     cards.setCardSize(backNode);
 
     var insetNode = htmlUtils.addDiv(backNode, ["inset"], "inset-" + index);
 
-    var imageNode = htmlUtils.addImage(
+    htmlUtils.addImage(
       insetNode,
       ["squirrel"],
       "mixed-nuts-back-image-" + index,
@@ -121,6 +117,7 @@ define([
       "Enuff",
     );
 
+    debugLog("addCardBack", "NE returning = " + JSON.stringify(backNode));
     return backNode;
   }
 

@@ -73,9 +73,7 @@
           cardsNutsAndBoxes.addCardFrontAtIndex,
           [
             {
-              callback: function (parent, index) {
-                cardsNutsAndBoxes.addCardBack(parent, index);
-              },
+              callback: cardsNutsAndBoxes.addCardBack,
             },
           ],
         );

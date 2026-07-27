@@ -2,7 +2,7 @@ define([
   "sharedJavascript/cards",
   "sharedJavascript/debugLog",
   "dojo/domReady!",
-], function (cards, debugLogModule, gameInfo) {
+], function (cards, debugLogModule) {
   var debugLog = debugLogModule.debugLog;
 
   //-----------------------------------------
@@ -10,13 +10,6 @@ define([
   // Constants
   //
   //-----------------------------------------
-
-  const peanutBackgroundColor = "#ffe7bb";
-  const almondBackgroundColor = "#f98f8f";
-  const cashewBackgroundColor = "#a1dbff";
-  const macadamiaBackgroundColor = "#dba4ff";
-  const pistachioBackgroundColor = "rgb(168, 225, 193)";
-
   const gPeanut = "peanut";
   const gAlmond = "almond";
   const gCashew = "cashew";
@@ -99,9 +92,10 @@ define([
     },
   };
 
+  const gNumCopies = 3;
+
   var gSetupCalled = false;
   var gCardConfigs = [];
-  var gNumCopies = 2;
 
   function getCardConfigs() {
     console.assert(gSetupCalled, "setupCardConfigs not called yet");
