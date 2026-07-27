@@ -1,0 +1,227 @@
+@charset "UTF-8";
+.card.nut-enuff {
+  font-family: "Luckiest Guy";
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  font-weight: bold;
+}
+
+.card.front.nut-enuff {
+  position: relative;
+  border-width: 10px;
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.card.front.nut-enuff .zone {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.card.front.nut-enuff .zone .pseudo-image {
+  position: absolute;
+  z-index: 1;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+.card.front.nut-enuff .zone .text-and-reward,
+.card.front.nut-enuff .zone .title {
+  z-index: 10;
+}
+.card.front.nut-enuff .zone.nut {
+  font-size: 35px;
+}
+.card.front.nut-enuff .zone.package {
+  transform: rotate(180deg);
+}
+.card.front.nut-enuff .zone.package .title {
+  position: absolute;
+  bottom: 20px;
+  font-size: 20px;
+}
+.card.front.nut-enuff .zone.package .text-and-reward {
+  font-size: 40px;
+}
+.card.front.nut-enuff .zone.package .text-and-reward .coin {
+  font-size: 120%;
+}
+
+.card.front.package-0 {
+  border-color: #6b7ea6;
+}
+.card.front.package-0 .zone.package-0 {
+  border-color: #6b7ea6;
+  background: radial-gradient(circle, #edf2fa 50%, #bccbe8 100%);
+  color: #25344f;
+}
+
+.card.front.package-1 {
+  border-color: #8b6aa8;
+}
+.card.front.package-1 .zone.package-1 {
+  border-color: #8b6aa8;
+  background: radial-gradient(circle, #f4eef9 50%, #d5c2e5 100%);
+  color: #3e294e;
+}
+
+.card.front.package-2 {
+  border-color: #5c7f78;
+}
+.card.front.package-2 .zone.package-2 {
+  border-color: #5c7f78;
+  background: radial-gradient(circle, #edf5f3 50%, #b9d7d0 100%);
+  color: #213c38;
+}
+
+.card.front.package-3 {
+  border-color: #b37d59;
+}
+.card.front.package-3 .zone.package-3 {
+  border-color: #b37d59;
+  background: radial-gradient(circle, #faf1eb 50%, #e8c8b3 100%);
+  color: #4f2d1f;
+}
+
+.card.front.package-4 {
+  border-color: #708f56;
+}
+.card.front.package-4 .zone.package-4 {
+  border-color: #708f56;
+  background: radial-gradient(circle, #eff6e8 50%, #c6dcb2 100%);
+  color: #2c421d;
+}
+
+.card.front.package-5 {
+  border-color: #b05f6d;
+}
+.card.front.package-5 .zone.package-5 {
+  border-color: #b05f6d;
+  background: radial-gradient(circle, #faecef 50%, #e6bcc5 100%);
+  color: #4b2029;
+}
+
+.card.front.package-6 {
+  border-color: #7b7b7b;
+}
+.card.front.package-6 .zone.package-6 {
+  border-color: #7b7b7b;
+  background: radial-gradient(circle, #f4f4f4 50%, #d7d7d7 100%);
+  color: #303030;
+}
+
+/* ==========================
+   PEANUT
+   Warm golden tan
+   ========================== */
+.card.front.peanut {
+  border-color: #c89a3a;
+}
+.card.front.peanut .zone.peanut {
+  background: radial-gradient(circle, #f8edd1 50%, #dcc07a 100%);
+  color: #4a3415;
+}
+
+/* ==========================
+   ALMOND
+   Soft reddish brown
+   ========================== */
+.card.front.almond {
+  border-color: #b87457;
+}
+.card.front.almond .zone.almond {
+  background: radial-gradient(circle, #f6e5dd 50%, #d4a28c 100%);
+  color: #4d281d;
+}
+
+/* ==========================
+   CASHEW
+   Cream / ivory
+   ========================== */
+.card.front.cashew {
+  border-color: #bca36a;
+}
+.card.front.cashew .zone.cashew {
+  background: radial-gradient(circle, #fffaf0 50%, #eadab5 100%);
+  color: #534322;
+}
+
+/* ==========================
+   MACADAMIA
+   Pale buttery gold
+   ========================== */
+.card.front.macadamia {
+  border-color: #d0b357;
+}
+.card.front.macadamia .macadamia {
+  background: radial-gradient(circle, #fffbe9 50%, #f0dc95 100%);
+  color: #584816;
+}
+
+/* ==========================
+   PISTACHIO
+   Muted sage green
+   ========================== */
+.card.front.pistachio {
+  border-color: #88a45f;
+}
+.card.front.pistachio .zone.pistachio {
+  border-color: #88a45f;
+  background: radial-gradient(circle, #eef5e6 50%, #bfd39d 100%);
+  color: #31401d;
+}
+
+.card.back.nut-enuff {
+  border-width: 10px;
+  border-style: solid;
+  position: relative;
+  border-color: #5b6d62;
+  background: linear-gradient(145deg, #fcfaf4 0%, #e6e8d9 25%, #bcc7b5 55%, #7f9586 100%);
+}
+
+.inset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  position: relative;
+}
+.inset .squirrel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  z-index: 1;
+}
+.inset .title {
+  font-family: "Luckiest Guy";
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  font-weight: bold;
+  width: 80%;
+  color: #332211;
+  line-height: 1;
+  /* keeps text from pushing height */
+  text-align: center;
+  white-space: nowrap;
+  /* stops wrapping in print */
+  overflow: hidden;
+  /* ensures it won’t spill */
+}
+.inset .title.small {
+  font-size: 30px;
+  z-index: 2;
+}
+.inset .title.big {
+  font-size: 50px;
+  z-index: 3;
+}
+
+/*# sourceMappingURL=cards-nuts-and-boxes.css.map */

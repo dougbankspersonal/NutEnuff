@@ -174,4 +174,32 @@ div.pseudo-image.x {
   background-image: url("../images/Cards/X.png");
 }
 
+div.pseudo-image.package-0 {
+  background-image: url("../images/Cards/package-0.png");
+}
+
+div.pseudo-image.package-1 {
+  background-image: url("../images/Cards/package-1.png");
+}
+
+div.pseudo-image.package-2 {
+  background-image: url("../images/Cards/package-2.png");
+}
+
+div.pseudo-image.package-3 {
+  background-image: url("../images/Cards/package-3.png");
+}
+
+div.pseudo-image.package-4 {
+  background-image: url("../images/Cards/package-4.png");
+}
+
+div.pseudo-image.package-5 {
+  background-image: url("../images/Cards/package-5.png");
+}
+
+div.pseudo-image.package-6 {
+  background-image: url("../images/Cards/package-6.png");
+}
+
 /*# sourceMappingURL=mixed-nuts-images.css.map */
