@@ -1,11 +1,7 @@
 @charset "UTF-8";
 .card.nut-enuff {
   font-family: "Luckiest Guy";
-  text-shadow:
-    -1px -1px 0 #fff,
-    1px -1px 0 #fff,
-    -1px 1px 0 #fff,
-    1px 1px 0 #fff;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
   font-weight: bold;
 }
 
@@ -160,7 +156,7 @@
 .card.front.macadamia {
   border-color: #d0b357;
 }
-.card.front.macadamia .macadamia {
+.card.front.macadamia .zone.macadamia {
   background: radial-gradient(circle, #fffbe9 50%, #f0dc95 100%);
   color: #584816;
 }
@@ -183,13 +179,7 @@
   border-style: solid;
   position: relative;
   border-color: #5b6d62;
-  background: linear-gradient(
-    145deg,
-    #fcfaf4 0%,
-    #e6e8d9 25%,
-    #bcc7b5 55%,
-    #7f9586 100%
-  );
+  background: linear-gradient(145deg, #fcfaf4 0%, #e6e8d9 25%, #bcc7b5 55%, #7f9586 100%);
 }
 
 .inset {
@@ -213,11 +203,7 @@
 }
 .inset .title {
   font-family: "Luckiest Guy";
-  text-shadow:
-    -1px -1px 0 #fff,
-    1px -1px 0 #fff,
-    -1px 1px 0 #fff,
-    1px 1px 0 #fff;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
   font-weight: bold;
   width: 80%;
   color: #332211;
