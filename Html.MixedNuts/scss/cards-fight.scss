@@ -1,0 +1,73 @@
+.card.fight {
+  border: 10px solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card.fight.front {
+  .zone {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .pseudo-image {
+      height: 60%;
+      width: 60%;
+    }
+
+    .pow {
+      .mean-text {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 64px;
+        height: 64px;
+
+        font-family: "Roboto Slab", serif;
+        font-size: 32px;
+        font-weight: 900;
+        color: #4A2C1B;
+      }
+    }
+  }
+
+  .zone.mean {
+    transform: rotate(180deg);
+  }
+
+  .zone.mean {
+    .pseudo-image.squirrel-mean {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+    }
+
+    .pow {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 5;
+    }
+  }
+}
+
+.card.fight.back {
+  .pseudo-image {
+    height: 80%;
+    width: 80%;
+  }
+}

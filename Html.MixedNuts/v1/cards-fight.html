@@ -1,14 +1,18 @@
 <html>
   <head>
-    <link rel="stylesheet" href="../css/mixed-nuts-images.css" />
-    <link rel="stylesheet" href="../css/mixed-nuts-components.css" />
-    <link rel="stylesheet" href="../SharedWebBoardGame/css/card.css" />
+    <link rel="stylesheet" href="../css/images.css" />
+    <link rel="stylesheet" href="../css/cards-fight.css" />
+    <link rel="stylesheet" href="../SharedWebBoardGame/css/cards.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/main.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/image.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Chewy&family=Luckiest+Guy&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700;800;900&display=swap"
       rel="stylesheet"
     />
     <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
@@ -46,82 +50,40 @@
         "sharedJavascript/debugLog",
         "sharedJavascript/genericUtils",
         "sharedJavascript/systemConfigs",
-        "javascript/mixedNutsCardData",
-        "javascript/mixedNutsCards",
+        "javascript/cardsFightData",
+        "javascript/cardsFight",
+        "javascript/gameInfo",
       ], function (
         cards,
         debugLog,
         genericUtils,
         systemConfigs,
-        mixedNutsCardData,
-        mixedNutsCards,
+        cardsFightData,
+        cardsFight,
+        gameInfo,
       ) {
         var overrides = {};
         var queryParams = genericUtils.getCommonQueryParams();
 
         if (queryParams.isScreentop) {
-          overrides.cardsPerRow = 15;
+          overrides.itemsPerRow = 8;
         }
 
         var sc = systemConfigs.getCardSystemConfigs(overrides);
         console.log("sc = ", JSON.stringify(sc));
         systemConfigs.setSystemConfigs(sc);
-        mixedNutsCardData.setupCardConfigs();
+        cardsFightData.setupCardConfigs();
 
+        var backConfigs = [];
+        for (var i = 0; i < gameInfo.maxPlayers; i++) {
+          backConfigs.push({
+            callback: cardsFight.addCardBack,
+          });
+        }
         cards.addCards(
-          mixedNutsCards.getNumCards(),
-          mixedNutsCards.addCardFrontAtIndex,
-          [
-            {
-              callback: function (parent, index) {
-                mixedNutsCards.addCardBack(parent, index, "Morning", ["day"]);
-              },
-            },
-            {
-              callback: function (parent, index) {
-                mixedNutsCards.addCardBack(parent, index, "Afternoon", [
-                  "afternoon",
-                ]);
-              },
-            },
-            {
-              callback: function (parent, index) {
-                mixedNutsCards.addCardBack(parent, index, "Night", ["night"]);
-              },
-            },
-            {
-              callback: function (parent, index) {
-                mixedNutsCards.addCardBack(parent, index, "Starter", [
-                  "starter",
-                ]);
-              },
-            },
-            {
-              callback: function (parent, index) {
-                mixedNutsCards.addTrailMixCard(parent);
-              },
-            },
-            {
-              callback: function (parent, index) {
-                mixedNutsCards.addTrailMixCard(parent);
-              },
-            },
-            {
-              callback: function (parent, index) {
-                mixedNutsCards.addTrailMixCard(parent);
-              },
-            },
-            {
-              callback: function (parent, index) {
-                mixedNutsCards.addTrailMixCard(parent);
-              },
-            },
-            {
-              callback: function (parent, index) {
-                mixedNutsCards.addTrailMixCard(parent);
-              },
-            },
-          ],
+          cardsFightData.getNumCards(),
+          cardsFight.addCardFrontAtIndex,
+          backConfigs,
         );
       });
     </script>

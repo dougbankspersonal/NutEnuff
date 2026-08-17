@@ -1,9 +1,8 @@
 define([
   "sharedJavascript/cards",
   "sharedJavascript/debugLog",
-  "javascript/gameInfo",
   "dojo/domReady!",
-], function (cards, debugLogModule, gameInfo) {
+], function (cards, debugLogModule) {
   var debugLog = debugLogModule.debugLog;
 
   //-----------------------------------------
@@ -27,10 +26,6 @@ define([
 
   const gCardColors = ["#e62495", "#501fe4", "#f3fb0f"];
   const gCardColorsLight = ["#fcb0e8", "#bdb1ff", "#fef3a5"];
-
-  const gPeanutSpecialString = "<b>Most:</b> +5🪙<br><b>Fewest:</b> -5🪙";
-  const gAlmondSpecialString = "<b>Most:</b> +4🪙<br><b>Fewest:</b> -4🪙";
-  const gCashewSpecialString = "<b>Most:</b> +3🪙<br><b>Fewest:</b> -3🪙";
 
   const gPeanut = "peanut";
   const gAlmond = "almond";
@@ -74,11 +69,12 @@ define([
     DeluxeTypePistachio: gDeluxeTypePistachio,
     Raisin: gSpecialTypeRaisin,
     BadNut: gBadTypeBadNut,
-    TrailMix: gTrailMixType,
     Snack: gSnackType,
+    TrailMix: gTrailMixType,
   };
 
   const gDeckToTypeToCountMap = {
+    /*
     starter: {
       [gItemTypes.Peanut]: 1,
       [gItemTypes.Almond]: 1,
@@ -86,17 +82,18 @@ define([
       [gItemTypes.DoublePeanut]: 1,
       [gItemTypes.DoubleAlmond]: 1,
     },
+    */
 
     day: {
-      [gItemTypes.Peanut]: 11,
-      [gItemTypes.Almond]: 9,
-      [gItemTypes.Cashew]: 8,
-      [gItemTypes.Macadamia]: 3,
+      [gItemTypes.Peanut]: 14,
+      [gItemTypes.Almond]: 11,
+      [gItemTypes.Cashew]: 9,
+      [gItemTypes.Macadamia]: 4,
       [gItemTypes.Pistachio]: 0,
       [gItemTypes.Raisin]: 0,
-      [gItemTypes.BadNut]: 2,
-      [gItemTypes.Walnut]: 3,
-      [gItemTypes.Acorn]: 5,
+      [gItemTypes.BadNut]: 0,
+      [gItemTypes.Walnut]: 4,
+      [gItemTypes.Acorn]: 0,
       [gItemTypes.Snack]: 0,
       [gItemTypes.DoublePeanut]: 2,
       [gItemTypes.DoubleAlmond]: 2,
@@ -109,16 +106,16 @@ define([
       [gItemTypes.DeluxePistachio]: 0,
     },
     afternoon: {
-      [gItemTypes.Peanut]: 11,
-      [gItemTypes.Almond]: 10,
-      [gItemTypes.Cashew]: 9,
+      [gItemTypes.Peanut]: 13,
+      [gItemTypes.Almond]: 12,
+      [gItemTypes.Cashew]: 11,
       [gItemTypes.Macadamia]: 4,
       [gItemTypes.Pistachio]: 0,
       [gItemTypes.Raisin]: 5,
-      [gItemTypes.BadNut]: 3,
-      [gItemTypes.Walnut]: 4,
+      [gItemTypes.BadNut]: 0,
+      [gItemTypes.Walnut]: 5,
       [gItemTypes.Acorn]: 0,
-      [gItemTypes.Snack]: 3,
+      [gItemTypes.Snack]: 0,
       [gItemTypes.DoublePeanut]: 0,
       [gItemTypes.DoubleAlmond]: 0,
       [gItemTypes.DoubleCashew]: 0,
@@ -130,16 +127,16 @@ define([
       [gItemTypes.DeluxePistachio]: 0,
     },
     night: {
-      [gItemTypes.Peanut]: 6,
-      [gItemTypes.Almond]: 5,
-      [gItemTypes.Cashew]: 4,
+      [gItemTypes.Peanut]: 8,
+      [gItemTypes.Almond]: 7,
+      [gItemTypes.Cashew]: 6,
       [gItemTypes.Macadamia]: 3,
       [gItemTypes.Pistachio]: 7,
       [gItemTypes.Raisin]: 0,
-      [gItemTypes.BadNut]: 3,
+      [gItemTypes.BadNut]: 0,
       [gItemTypes.Walnut]: 4,
       [gItemTypes.Acorn]: 0,
-      [gItemTypes.Snack]: 2,
+      [gItemTypes.Snack]: 0,
       [gItemTypes.DoublePeanut]: 0,
       [gItemTypes.DoubleAlmond]: 0,
       [gItemTypes.DoubleCashew]: 0,
@@ -203,12 +200,6 @@ define([
         number: 3,
         points: 2,
       },
-      /*
-      customRendering: {
-        text: gPeanutSpecialString,
-      },
-      */
-      playType: "nut",
       color: peanutBackgroundColor,
       itemType: gItemTypes.Peanut,
     },
@@ -220,26 +211,16 @@ define([
         number: 3,
         points: 3,
       },
-      playType: "nut",
       itemType: gItemTypes.Almond,
-      /*
-      customRendering: {
-        text: gAlmondSpecialString,
-      }, */
     },
     {
       title: "Cashew",
       cardType: gItemTypes.Cashew,
       color: cashewBackgroundColor,
-      /*
-      customRendering: {
-        text: gCashewSpecialString,
-      },*/
       craft: {
         number: 3,
         points: 4,
       },
-      playType: "nut",
       itemType: gItemTypes.Cashew,
     },
 
@@ -252,7 +233,6 @@ define([
         number: 4,
         points: 7,
       },
-      playType: "nut",
       fontAdjustment: 0.8,
       itemType: gItemTypes.Macadamia,
     },
@@ -263,7 +243,6 @@ define([
         number: 2,
         points: 3,
       },
-      playType: "nut",
       color: pistachioBackgroundColor,
       itemType: gItemTypes.Pistachio,
     },
@@ -274,7 +253,6 @@ define([
         useClassToIndexFunction: true,
       },
 
-      playType: "nut",
       color: walnutBackgroundColor,
       itemType: gItemTypes.Walnut,
     },
@@ -286,7 +264,6 @@ define([
         points: 3,
         text: "3 Coins if the Acorn is on Desk.",
       },
-      playType: "special",
       color: acornBackgroundColor,
       itemType: gItemTypes.Acorn,
     },
@@ -299,15 +276,10 @@ define([
         number: 3,
         points: 2,
       },
-      playType: "double-nut",
       color: peanutBackgroundColor,
       extraImage: gItemTypes.Peanut,
       itemType: gItemTypes.Peanut,
       fontAdjustment: 0.8,
-      /*
-      customRendering: {
-        text: gPeanutSpecialString,
-      },*/
     },
     {
       title: "Double Almond",
@@ -317,7 +289,6 @@ define([
         number: 3,
         points: 3,
       },
-      playType: "double-nut",
       extraImage: gItemTypes.Almond,
       itemType: gItemTypes.Almond,
       fontAdjustment: 0.8,
@@ -338,7 +309,6 @@ define([
         number: 3,
         points: 4,
       },
-      playType: "double-nut",
       extraImage: gItemTypes.Cashew,
       itemType: gItemTypes.Cashew,
       fontAdjustment: 0.8,
@@ -351,7 +321,6 @@ define([
         number: 4,
         points: 7,
       },
-      playType: "double-nut",
       extraImage: gItemTypes.Macadamia,
       itemType: gItemTypes.Macadamia,
       fontAdjustment: 0.5,
@@ -365,15 +334,9 @@ define([
         points: 3,
       },
       classes: ["deluxe"],
-      playType: "deluxe-nut",
       color: peanutBackgroundColor,
       itemType: gItemTypes.Peanut,
       fontAdjustment: 0.8,
-      /*
-      customRendering: {
-        text: gPeanutSpecialString,
-      },
-      */
     },
     {
       title: "Deluxe Almond",
@@ -384,7 +347,6 @@ define([
         points: 4,
       },
       classes: ["deluxe"],
-      playType: "nut",
       itemType: gItemTypes.Almond,
       fontAdjustment: 0.8,
       /*
@@ -407,7 +369,6 @@ define([
       },
       */
       classes: ["deluxe"],
-      playType: "nut",
       itemType: gItemTypes.Cashew,
       fontAdjustment: 0.8,
     },
@@ -420,7 +381,6 @@ define([
         points: 8,
       },
       classes: ["deluxe"],
-      playType: "nut",
       itemType: gItemTypes.Macadamia,
       fontAdjustment: 0.6,
     },
@@ -434,7 +394,6 @@ define([
         points: 4,
       },
       classes: ["deluxe"],
-      playType: "nut",
       itemType: gItemTypes.Pistachio,
       fontAdjustment: 0.6,
     },
@@ -448,7 +407,6 @@ define([
         specialImagesSeparator: "/",
         text: "May be used as Peanut, Almond, or Cashew.",
       },
-      playType: "special",
       color: raisinBackgroundColor,
     },
     {
@@ -461,7 +419,6 @@ define([
         specialImagesSeparator: ":",
         text: "<b>Final Scoring</b>: Counts as two cards on the Floor.",
       },
-      playType: "bad",
       color: badNutBackgroundColor,
     },
     {
@@ -489,7 +446,6 @@ define([
           },
         ],
       },
-      playType: "nut",
       color: trailMixBackgroundColor,
       itemType: gItemTypes.TrailMix,
     },
@@ -500,7 +456,6 @@ define([
         text: "Immediately discard this and two more cards from your Desk.",
         customRenderingImageClasses: ["discard-2-cards"],
       },
-      playType: "nut",
       color: trailMixBackgroundColor,
       itemType: gItemTypes.Snack,
     },
@@ -570,14 +525,36 @@ define([
     );
     gSetupCalled = true;
     gCardConfigs = [];
-    var starterCardConfigs = generateCardConfigsForDeck("starter");
+    //    var starterCardConfigs = generateCardConfigsForDeck("starter");
     var dayConfigs = generateCardConfigsForDeck("day");
     var afternoonConfigs = generateCardConfigsForDeck("afternoon");
     var nightConfigs = generateCardConfigsForDeck("night");
-    gCardConfigs = gCardConfigs.concat(starterCardConfigs);
+    debugLog("setupCardConfigs", "nightConfigs:", JSON.stringify(nightConfigs));
+
+    var sum = 0;
+    for (var cardConfig of dayConfigs) {
+      sum += cardConfig.count;
+    }
+    debugLog("setupCardConfigs", "dayConfigs sum:", sum);
+    sum = 0;
+    for (var cardConfig of afternoonConfigs) {
+      sum += cardConfig.count;
+    }
+    debugLog("setupCardConfigs", "afternoonConfigs sum:", sum);
+    sum = 0;
+    for (var cardConfig of nightConfigs) {
+      sum += cardConfig.count;
+    }
+    debugLog("setupCardConfigs", "nightConfigs sum:", sum);
+
+    //    gCardConfigs = gCardConfigs.concat(starterCardConfigs);
     gCardConfigs = gCardConfigs.concat(dayConfigs);
     gCardConfigs = gCardConfigs.concat(afternoonConfigs);
     gCardConfigs = gCardConfigs.concat(nightConfigs);
+    var trailMixConfig = getConfigForCardType(gItemTypes.TrailMix);
+    gCardConfigs.push(trailMixConfig);
+
+    debugLog("setupCardConfigs", "gCardConfigs:", JSON.stringify(gCardConfigs));
   }
 
   // This returned object becomes the defined value of this module
@@ -587,7 +564,6 @@ define([
     numCardColors: gCardColors.length,
     cardColorsLight: gCardColorsLight,
 
-    generateCardConfigsForDeck: generateCardConfigsForDeck,
     setupCardConfigs: setupCardConfigs,
     getCardConfigs: getCardConfigs,
     getClassesForCardConfig: getClassesForCardConfig,

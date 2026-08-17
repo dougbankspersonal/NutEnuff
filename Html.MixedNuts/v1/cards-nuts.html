@@ -1,8 +1,8 @@
 <html>
   <head>
-    <link rel="stylesheet" href="../css/mixed-nuts-images.css" />
-    <link rel="stylesheet" href="../css/mixed-nuts-components.css" />
-    <link rel="stylesheet" href="../SharedWebBoardGame/css/card.css" />
+    <link rel="stylesheet" href="../css/images.css" />
+    <link rel="stylesheet" href="../css/cards-nuts.css" />
+    <link rel="stylesheet" href="../SharedWebBoardGame/css/cards.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/main.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/image.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -46,30 +46,56 @@
         "sharedJavascript/debugLog",
         "sharedJavascript/genericUtils",
         "sharedJavascript/systemConfigs",
-        "javascript/mixedNutsCardData",
-        "javascript/mixedNutsCards",
+        "javascript/cardsNutsData",
+        "javascript/cardsNuts",
       ], function (
         cards,
         debugLog,
         genericUtils,
         systemConfigs,
-        mixedNutsCardData,
-        mixedNutsCards,
+        cardsNutsData,
+        cardsNuts,
       ) {
-        var sc = systemConfigs.getCardSystemConfigs();
+        var overrides = {};
+        var queryParams = genericUtils.getCommonQueryParams();
+
+        if (queryParams.isScreentop) {
+          overrides.itemsPerRow = 15;
+        }
+
+        var sc = systemConfigs.getCardSystemConfigs(overrides);
+        console.log("sc = ", JSON.stringify(sc));
         systemConfigs.setSystemConfigs(sc);
+        cardsNutsData.setupCardConfigs();
 
-        mixedNutsCardData.setupCardConfigs("night");
-
-        cards.addCards(
-          mixedNutsCards.getNumCards(),
-          mixedNutsCards.addCardFrontAtIndex,
+        cards.addCards(cardsNuts.getNumCards(), cardsNuts.addCardFrontAtIndex, [
           {
             callback: function (parent, index) {
-              mixedNutsCards.addCardBack(parent, index, ["night"]);
+              return cardsNuts.addCardBack(parent, index, "Morning", ["day"]);
             },
           },
-        );
+          {
+            callback: function (parent, index) {
+              return cardsNuts.addCardBack(parent, index, "Afternoon", [
+                "afternoon",
+              ]);
+            },
+          },
+          {
+            callback: function (parent, index) {
+              return cardsNuts.addCardBack(parent, index, "Night", ["night"]);
+            },
+          },
+          /*
+            {
+              callback: function (parent, index) {
+                return cardsNuts.addCardBack(parent, index, "Starter", [
+                  "starter",
+                ]);
+              },
+            },
+            */
+        ]);
       });
     </script>
   </body>

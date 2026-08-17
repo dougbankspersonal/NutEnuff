@@ -1,7 +1,26 @@
+// General
 div.pseudo-image.squirrel {
   background-image: url("../images/Cards/v-squirrel.png");
 }
 
+// Fight cards
+div.pseudo-image.gloves {
+  background-image: url("../images/Cards/gloves.png");
+}
+
+div.pseudo-image.squirrel-mean {
+  background-image: url("../images/Cards/squirrel-mean.png");
+}
+
+div.pseudo-image.squirrel-nice {
+  background-image: url("../images/Cards/squirrel-nice.png");
+}
+
+div.pseudo-image.pow {
+  background-image: url("../images/Cards/pow.png");
+}
+
+// Nuts
 div.pseudo-image.pistachio {
   background-image: url("../images/Cards/v-pistachio.png");
 }
@@ -71,12 +90,6 @@ div.pseudo-image.vote {
   background-image: url("../images/Cards/vote.png");
 }
 
-div.pseudo-image.broom {
-  background-image: url("../images/Cards/special-sprites-1.png");
-  background-position: 100% 0%;
-  background-size: 200% 200%;
-}
-
 div.pseudo-image.no-symbol {
   background-image: url("../images/Cards/no-symbol.png");
 }
@@ -97,13 +110,6 @@ div.pseudo-image.player_mat_image {
   background-image: url("../images/PlayerMat/playerMat.png");
 }
 
-
-div.pseudo-image.hot-spice {
-  background-image: url("../images/Cards/special-sprites-2.png");
-  background-size: 200% 200%;
-  background-position: 0% 100%;
-}
-
 div.pseudo-image.whistle {
   background-image: url("../images/Cards/whistle.png");
 }
@@ -120,12 +126,6 @@ div.pseudo-image.right-arrow {
   background-image: url("../images/Cards/v-right-arrow.png");
 }
 
-div.pseudo-image.gloves {
-  background-image: url("../images/Cards/special-sprites-1.png");
-  background-size: 200% 200%;
-  background-position: 0% 100%;
-}
-
 div.pseudo-image.trail-mix {
   background-image: url("../images/Cards/v-trail-mix.png");
 }
@@ -136,12 +136,6 @@ div.pseudo-image.snack {
 
 div.pseudo-image.four-nuts {
   background-image: url("../images/Cards/four-nuts.png");
-}
-
-div.pseudo-image.coffee-break {
-  background-image: url("../images/Cards/special-sprites-2.png");
-  background-size: 200% 200%;
-  background-position: 100% 0%;
 }
 
 div.pseudo-image.floor {

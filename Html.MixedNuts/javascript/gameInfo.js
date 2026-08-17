@@ -1,6 +1,6 @@
 // For stuff like rules variants, etc.
 define(["dojo/domReady!"], function () {
-  var maxPlayers = 5;
+  var maxPlayers = 6;
   var minPlayers = 2;
 
   return {

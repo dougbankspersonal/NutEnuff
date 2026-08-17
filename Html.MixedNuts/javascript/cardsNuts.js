@@ -3,17 +3,9 @@ define([
   "sharedJavascript/cards",
   "sharedJavascript/debugLog",
   "sharedJavascript/htmlUtils",
-  "sharedJavascript/systemConfigs",
-  "javascript/mixedNutsCardData",
+  "javascript/cardsNutsData",
   "dojo/domReady!",
-], function (
-  domStyle,
-  cards,
-  debugLogModule,
-  htmlUtils,
-  systemConfigs,
-  mixedNutsCardData,
-) {
+], function (domStyle, cards, debugLogModule, htmlUtils, cardsNutsData) {
   var debugLog = debugLogModule.debugLog;
 
   //-----------------------------------------
@@ -79,7 +71,7 @@ define([
       var points = (itemCount * (itemCount + 1)) / 2;
       addStandardCraftingInfo(
         parentNode,
-        mixedNutsCardData.itemTypes.Walnut,
+        cardsNutsData.itemTypes.Walnut,
         itemCount,
         points,
       );
@@ -109,9 +101,9 @@ define([
   }
 
   const gCustomRenderersByClass = {
-    [mixedNutsCardData.itemTypes.Walnut]: renderWalnutCustom,
-    [mixedNutsCardData.itemTypes.Acorn]: renderAcornCustom,
-    [mixedNutsCardData.itemTypes.TrailMix]: renderTrailMixCustom,
+    [cardsNutsData.itemTypes.Walnut]: renderWalnutCustom,
+    [cardsNutsData.itemTypes.Acorn]: renderAcornCustom,
+    [cardsNutsData.itemTypes.TrailMix]: renderTrailMixCustom,
   };
 
   function maybeAddSpacer(parent, opt_index, opt_separator) {
@@ -164,7 +156,7 @@ define([
     var customRendering = cardConfig.customRendering;
     console.assert(customRendering, "customRendering is null");
 
-    var classes = mixedNutsCardData.getClassesForCardConfig(cardConfig);
+    var classes = cardsNutsData.getClassesForCardConfig(cardConfig);
     classes = classes.concat(["custom-rendering-wrapper"]);
     var customRenderingWrapperNode = htmlUtils.addDiv(
       parentNode,
@@ -217,7 +209,6 @@ define([
     );
     if (customRendering.wrapperScale) {
       var scale = customRendering.wrapperScale;
-      var marginAsPercent = Math.floor((1 - scale) * 50);
       debugLog("addCustomRendering", "scale = ", JSON.stringify(scale));
       domStyle.set(customRenderingWrapperNode, {
         zoom: `${scale}`,
@@ -236,8 +227,6 @@ define([
 
   // A display of n fixed-sized items
   function addCollectibleItemSetIndicator(parentNode, itemType, itemCount) {
-    var sc = systemConfigs.getSystemConfigs();
-    var collectableItemSetWidthPx = sc.cardWidthPx * 0.4;
     var collectableItemSetHeightPx = collectableItemSize;
 
     console.assert(itemCount > 0, "Item count must be defined");
@@ -284,8 +273,7 @@ define([
         cardConfig.title,
     );
 
-    var cardConfigClasses =
-      mixedNutsCardData.getClassesForCardConfig(cardConfig);
+    var cardConfigClasses = cardsNutsData.getClassesForCardConfig(cardConfig);
     cardConfigClasses = cardConfigClasses.concat(["image-wrapper"]);
     var imageWrapperNode = htmlUtils.addDiv(
       parent,
@@ -384,7 +372,7 @@ define([
     }
   }
 
-  function addTitleNode(parent, cardConfig, index) {
+  function addTitleNode(parent, cardConfig) {
     if (cardConfig.title) {
       var titleOuterWrapperNode = htmlUtils.addDiv(
         parent,
@@ -398,9 +386,9 @@ define([
       );
 
       /*
-      var colorIndex = index % mixedNutsCardData.numCardColors;
-      var titleColor = mixedNutsCardData.cardColors[colorIndex];
-      var titleColorLight = mixedNutsCardData.cardColorsLight[colorIndex];
+      var colorIndex = index % cardsNutsData.numCardColors;
+      var titleColor = cardsNutsData.cardColors[colorIndex];
+      var titleColorLight = cardsNutsData.cardColorsLight[colorIndex];
       */
       var titleBorderColor = cardConfig.color;
       console.assert(
@@ -451,7 +439,7 @@ define([
       addStarterIcons(mainWrapper);
     }
 
-    addTitleNode(parent, cardConfig, index);
+    addTitleNode(parent, cardConfig);
   }
 
   function addCardBack(parent, index, title, extraClasses) {
@@ -514,8 +502,8 @@ define([
   }
 
   function addTrailMixCard(parent) {
-    var trailMixConfig = mixedNutsCardData.getConfigForCardType(
-      mixedNutsCardData.itemTypes.TrailMix,
+    var trailMixConfig = cardsNutsData.getConfigForCardType(
+      cardsNutsData.itemTypes.TrailMix,
     );
 
     return addCardFront(parent, trailMixConfig, "trail-mix", 0);
@@ -526,7 +514,7 @@ define([
       "addCardFrontAtIndex",
       "Doug: addCardFrontAtIndex: index = " + index,
     );
-    var cardConfigs = mixedNutsCardData.getCardConfigs();
+    var cardConfigs = cardsNutsData.getCardConfigs();
     debugLog(
       "addCardFrontAtIndex",
       "Doug: addCardFrontAtIndex: cardConfigs = " + JSON.stringify(cardConfigs),
@@ -549,7 +537,7 @@ define([
   function getNumCards() {
     // Wait until we're asked to calculate so system configs can be applied.
     if (gNumCards === 0) {
-      for (var cardConfig of mixedNutsCardData.getCardConfigs()) {
+      for (var cardConfig of cardsNutsData.getCardConfigs()) {
         debugLog("getNumCards", "Doug: cardConfig.title = " + cardConfig.title);
         debugLog(
           "getNumCards",
@@ -557,9 +545,7 @@ define([
         );
       }
 
-      gNumCards = cards.getNumCardsFromConfigs(
-        mixedNutsCardData.getCardConfigs(),
-      );
+      gNumCards = cards.getNumCardsFromConfigs(cardsNutsData.getCardConfigs());
       debugLog("getNumCards", "Doug: gNumCards = " + gNumCards);
       console.assert(gNumCards > 0, "gNumCards must be greater than 0");
     }
@@ -567,7 +553,7 @@ define([
   }
 
   function getCardConfigByTitle(title) {
-    var cardConfigs = mixedNutsCardData.getCardConfigs();
+    var cardConfigs = cardsNutsData.getCardConfigs();
     for (var i = 0; i < cardConfigs.length; i++) {
       var cardConfig = cardConfigs[i];
       if (cardConfig.title == title) {

@@ -50,7 +50,7 @@
         "sharedJavascript/genericUtils",
         "sharedJavascript/htmlUtils",
         "sharedJavascript/systemConfigs",
-        "javascript/mixedNutsCards",
+        "javascript/cardsNuts",
       ], function (
         dom,
         domStyle,
@@ -59,7 +59,7 @@
         genericUtils,
         htmlUtils,
         systemConfigs,
-        mixedNutsCards,
+        cardsNuts,
       ) {
         var debugLog = debugLogModule.debugLog;
 
@@ -146,8 +146,9 @@
         );
 
         var bodyNode = dom.byId("body");
-        [_pageOfItemsNode, pageOfItemsContentsNode] =
-          htmlUtils.addPageOfItemsAndContents(bodyNode, ["card-array"]);
+        var pageOfItemsNode = htmlUtils.addPageOfItems(bodyNode, [
+          "card-array",
+        ]);
 
         // Add a row of bids.
         if (bidDetails) {
@@ -183,16 +184,16 @@
           }
 
           var title = myListOfTitles[i];
-          var cardConfig = mixedNutsCards.getCardConfigByTitle(title);
+          var cardConfig = cardsNuts.getCardConfigByTitle(title);
           if (!cardConfig) {
             debugLog.log("No card config found for title: " + title);
           } else {
             var cardNode;
             // Final card is face down.
             if (i == myListOfTitles.length - 1) {
-              cardNode = mixedNutsCards.addCardBack(cardArrayNode, i);
+              cardNode = cardsNuts.addCardBack(cardArrayNode, i);
             } else {
-              cardNode = mixedNutsCards.addCardFront(
+              cardNode = cardsNuts.addCardFront(
                 cardArrayNode,
                 cardConfig,
                 i,

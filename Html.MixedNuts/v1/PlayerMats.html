@@ -110,14 +110,13 @@
 
         for (var i = 0; i < gameInfo.maxPlayers; i++) {
           if (i % matsPerPage == 0) {
-            pageOfItemsContentsNode =
-              htmlUtils.addPageOfItemsAndContents(bodyNode);
-            domStyle.set(pageOfItemsContentsNode, {
+            var pageOfItemsNode = htmlUtils.addPageOfItems(bodyNode);
+            domStyle.set(pageOfItemsNode, {
               display: "inline-flex",
               "flex-direction": "column",
             });
           }
-          addPlayerMat(pageOfItemsContentsNode, i);
+          addPlayerMat(pageOfItemsNode, i);
         }
       });
     </script>
