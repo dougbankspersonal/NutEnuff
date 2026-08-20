@@ -17,12 +17,9 @@ define([
 
     gCardConfigs = [];
     for (var i = 0; i < gameInfo.maxPlayers; i++) {
-      for (var j = 0; j < gNumFightLevels; j++) {
-        gCardConfigs.push({
-          playerIndex: i,
-          fightLevel: j + 1,
-        });
-      }
+      gCardConfigs.push({
+        playerIndex: i,
+      });
     }
 
     return gCardConfigs;

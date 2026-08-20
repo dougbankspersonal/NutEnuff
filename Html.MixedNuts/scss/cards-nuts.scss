@@ -1,4 +1,4 @@
-.card-array>.page-of-items-contents>.card.mixed-nuts-component {
+.card-array>.page-of-items-contents>.card.nuts-component {
   //    filter: drop-shadow(0 0 8px red);
   box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.5);
 }
@@ -25,34 +25,34 @@
   width: 40px;
 }
 
-.card.mixed-nuts-component {
-  font-family: "Luckiest Guy";
+.card.nuts {
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
     1px 1px 0 #fff;
   font-weight: bold;
+  font-family: "Bungee", sans-serif;
 }
 
 .card.front.starter,
-.card.back.mixed-nuts.starter {
+.card.back.nuts.starter {
   border-color: #a2ffa1;
 }
 
 .card.front.day,
-.card.back.mixed-nuts.day {
+.card.back.nuts.day {
   border-color: #ffe551;
 }
 
 .card.front.afternoon,
-.card.back.mixed-nuts.afternoon {
+.card.back.nuts.afternoon {
   border-color: #fea862;
 }
 
 .card.front.night,
-.card.back.mixed-nuts.night {
+.card.back.nuts.night {
   border-color: #372658;
 }
 
-.card.front.mixed-nuts-component {
+.card.front.nuts {
   position: relative;
   border-width: 10px;
   border-style: solid;
@@ -93,7 +93,6 @@
 
       .title {
         font-size: 36px;
-        font-family: "Roboto", sans-serif;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -117,6 +116,11 @@
     z-index: 1;
     font-size: 40px;
     gap: 10px;
+    font-family: "Nunito Sans";
+
+    .deluxe.text {
+      font-size: 18px;
+    }
 
     .image-wrapper {
       display: flex;
@@ -240,7 +244,7 @@
     flex-direction: column;
 
     .text-node {
-      font-family: "Roboto", sans-serif;
+      font-family: "Nunito Sans";
       font-size: 15px;
       margin-top: 10px;
       padding-right: 10px;
@@ -317,7 +321,7 @@
     }
   }
 
-  .custom-rendering-wrapper.mixed-nuts {
+  .custom-rendering-wrapper.nuts {
     .nut-rows {
       padding-right: 10px;
     }
@@ -336,29 +340,27 @@
   }
 }
 
-.card.front.mixed-nuts .wrapper .special_customs_wrapper .special_custom {
+.card.front.nuts .wrapper .special_customs_wrapper .special_custom {
   margin: 0 6px;
 }
 
-.card.back.mixed-nuts.starter {
+.card.back.nuts.starter {
   background: radial-gradient(#a2ffa1 50%, #d4ffd4);
 }
 
-.card.back.mixed-nuts.day {
+.card.back.nuts.day {
   background: radial-gradient(#fffcde 50%, #fff9b7);
 }
 
-.card.back.mixed-nuts.afternoon {
+.card.back.nuts.afternoon {
   background: radial-gradient(#f1b863 50%, #ffc66b);
 }
 
-.card.back.mixed-nuts.night {
+.card.back.nuts.night {
   background: radial-gradient(#6a6379 50%, #756891);
 }
 
-
-
-.card.back.mixed-nuts {
+.card.back.nuts {
   border-width: 10px;
   border-style: solid;
   position: relative;
@@ -384,7 +386,6 @@
     }
 
     .title {
-      font-family: "Luckiest Guy";
       text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
         1px 1px 0 #fff;
       font-weight: bold;
@@ -410,9 +411,8 @@
     }
 
     .shift {
-      font-family: "Arial Black", sans-serif;
+      font-family: "Nunito Sans";
       font-size: 25px;
-      font-style: italic;
       color: #332211;
     }
   }

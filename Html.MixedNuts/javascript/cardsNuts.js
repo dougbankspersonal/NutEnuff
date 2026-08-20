@@ -40,7 +40,7 @@ define([
     } else {
       pointsString = ` : ${pointsPrefix}${points}`;
     }
-    pointsString += "🪙";
+    pointsString += cardsNutsData.coinString;
     htmlUtils.addDiv(
       parentNode,
       ["colon-and-points"],
@@ -380,6 +380,18 @@ define([
     }
   }
 
+  function addDeluxeText(parent) {
+    var deluxeNode = htmlUtils.addDiv(
+      parent,
+      ["deluxe", "text"],
+      "deluxe",
+      cardsNutsData.packageString +
+        ": +1" +
+        cardsNutsData.coinString +
+        "<br>(can only be applied once)",
+    );
+  }
+
   function addTitleNode(parent, cardConfig) {
     if (cardConfig.title) {
       var titleOuterWrapperNode = htmlUtils.addDiv(
@@ -439,6 +451,16 @@ define([
 
     maybeAddStandardFloorPenalty(mainWrapper, cardConfig);
 
+    debugLog(
+      "addFields",
+      "cardConfig.classes:",
+      JSON.stringify(cardConfig.classes),
+    );
+
+    if (cardConfig.classes && cardConfig.classes.includes("deluxe")) {
+      addDeluxeText(mainWrapper);
+    }
+
     if (cardConfig.customRendering) {
       addCustomRendering(mainWrapper, cardConfig);
     }
@@ -453,8 +475,8 @@ define([
   function addCardBack(parent, index, title, extraClasses) {
     debugLog("addCardBack", "index = " + index);
     var classes = extraClasses
-      ? ["back", "mixed-nuts", ...extraClasses]
-      : ["back", "mixed-nuts"];
+      ? ["back", "nuts", ...extraClasses]
+      : ["back", "nuts"];
     var backNode = htmlUtils.addCard(parent, classes, "back-" + index);
 
     cards.setCardSize(backNode);
@@ -491,11 +513,11 @@ define([
     var indexWithinConfig =
       opt_indexWithinConfig !== undefined ? opt_indexWithinConfig : 0;
 
-    var idElements = ["mixed-nuts-component", index.toString()];
+    var idElements = ["nuts", index.toString()];
     var id = idElements.join(".");
 
     var classArray = [];
-    classArray.push("mixed-nuts-component");
+    classArray.push("nuts");
     classArray.push(cardConfig.cardType);
     classArray.push(cardConfig.deckId);
     var cardFrontNode = cards.addCardFront(parent, classArray, id);

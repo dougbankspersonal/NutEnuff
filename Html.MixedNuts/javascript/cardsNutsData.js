@@ -10,6 +10,8 @@ define([
   // Constants
   //
   //-----------------------------------------
+  const gCoinString = "🪙";
+  const gPackageString = "📦";
 
   const peanutBackgroundColor = "#ffe7bb";
   const almondBackgroundColor = "#f98f8f";
@@ -331,7 +333,7 @@ define([
       cardType: gItemTypes.DeluxePeanut,
       craft: {
         number: 3,
-        points: 3,
+        points: 2,
       },
       classes: ["deluxe"],
       color: peanutBackgroundColor,
@@ -344,7 +346,7 @@ define([
       color: almondBackgroundColor,
       craft: {
         number: 3,
-        points: 4,
+        points: 3,
       },
       classes: ["deluxe"],
       itemType: gItemTypes.Almond,
@@ -361,7 +363,7 @@ define([
       color: cashewBackgroundColor,
       craft: {
         number: 3,
-        points: 5,
+        points: 4,
       },
       /*
       customRendering: {
@@ -378,7 +380,7 @@ define([
       color: macadamiaBackgroundColor,
       craft: {
         number: 4,
-        points: 8,
+        points: 7,
       },
       classes: ["deluxe"],
       itemType: gItemTypes.Macadamia,
@@ -391,7 +393,7 @@ define([
       color: pistachioBackgroundColor,
       craft: {
         number: 2,
-        points: 4,
+        points: 3,
       },
       classes: ["deluxe"],
       itemType: gItemTypes.Pistachio,
@@ -548,14 +550,19 @@ define([
     gCardConfigs = gCardConfigs.concat(dayConfigs);
     gCardConfigs = gCardConfigs.concat(afternoonConfigs);
     gCardConfigs = gCardConfigs.concat(nightConfigs);
+
+    /*
     var trailMixConfig = getConfigForCardType(gItemTypes.TrailMix);
     gCardConfigs.push(trailMixConfig);
+    */
 
     debugLog("setupCardConfigs", "gCardConfigs:", JSON.stringify(gCardConfigs));
   }
 
   // This returned object becomes the defined value of this module
   return {
+    coinString: gCoinString,
+    packageString: gPackageString,
     itemTypes: gItemTypes,
     cardColors: gCardColors,
     numCardColors: gCardColors.length,

@@ -4,7 +4,7 @@ define([
   "sharedJavascript/debugLog",
   "sharedJavascript/htmlUtils",
   "sharedJavascript/screentop/seatColors",
-  "javascript/cardsFightData",
+  "javascript/cardsTieBreakData",
   "dojo/domReady!",
 ], function (
   domStyle,
@@ -12,7 +12,7 @@ define([
   debugLogModule,
   htmlUtils,
   seatColors,
-  cardsFightData,
+  cardsTieBreakData,
 ) {
   var debugLog = debugLogModule.debugLog;
 
@@ -30,32 +30,38 @@ define([
     var classes = [
       "front",
       "card",
-      "fight",
+      "tie-break",
       "player-" + cardConfig.playerIndex,
     ];
     var cardFrontNode = cards.addCardFront(parent, classes, "card-front");
 
-    var niceZoneNode = htmlUtils.addDiv(
+    var shareZoneNode = htmlUtils.addDiv(
       cardFrontNode,
-      ["zone", "nice"],
+      ["zone", "zone-0", "nice"],
       "nice-zone",
     );
 
-    var niceImageNode = htmlUtils.addImage(
-      niceZoneNode,
-      ["squirrel-nice"],
-      "nice-image",
+    var niceTextNode = htmlUtils.addDiv(
+      shareZoneNode,
+      ["text"],
+      "share-text",
+      "Share",
+    );
+    htmlUtils.addImage(shareZoneNode, ["share"], "share-image");
+
+    var fightZoneNode = htmlUtils.addDiv(
+      cardFrontNode,
+      ["zone", "zone-1", "fight"],
+      "fight-zone",
     );
 
-    var meanZoneNode = htmlUtils.addDiv(
-      cardFrontNode,
-      ["zone", "mean"],
-      "mean-zone",
-    );
+    htmlUtils.addDiv(fightZoneNode, ["text"], "fight-text", "Fight");
+    htmlUtils.addImage(fightZoneNode, ["fight"], "fight-image");
+
     var colorFamily = seatColors.getLightColorFamilyForSeat(
       cardConfig.playerIndex,
     );
-    domStyle.set(meanZoneNode, {
+    domStyle.set(cardFrontNode, {
       background:
         "linear-gradient(" +
         seatColors.lightenedSeatColors[cardConfig.playerIndex] +
@@ -63,20 +69,6 @@ define([
         "#fff" +
         ")",
     });
-
-    var meanImageNode = htmlUtils.addImage(
-      meanZoneNode,
-      ["squirrel-mean"],
-      "mean-image",
-    );
-    var powImageNode = htmlUtils.addImage(meanZoneNode, ["pow"], "pow-image");
-    var meanTextNode = htmlUtils.addDiv(
-      powImageNode,
-      ["mean-text"],
-      "mean-text",
-      cardConfig.fightLevel.toString(),
-    );
-
     domStyle.set(cardFrontNode, {
       "border-color": seatColors.seatColors[cardConfig.playerIndex],
     });
@@ -85,26 +77,36 @@ define([
   }
 
   function addCardFrontAtIndex(parent, index) {
-    var cardConfigs = cardsFightData.getCardConfigs();
+    var cardConfigs = cardsTieBreakData.getCardConfigs();
     var cardConfig = cards.getCardConfigAtIndex(cardConfigs, index);
 
     return addCardFrontNode(parent, cardConfig);
   }
 
   function addCardBack(parent, index) {
-    var classes = ["back", "card", "fight", "player-" + index];
+    var classes = ["back", "card", "tie-break", "player-" + index];
     var cardBackNode = htmlUtils.addCard(parent, classes, "card-back");
 
-    var imageNode = htmlUtils.addImage(cardBackNode, ["gloves"], "gloves");
+    var zoneNode;
+
+    for (var i = 0; i < 2; i++) {
+      zoneNode = htmlUtils.addDiv(cardBackNode, ["zone", "zone-" + i], "zone");
+      htmlUtils.addDiv(
+        zoneNode,
+        ["cage-match", "text"],
+        "cage-match",
+        "Cage<br>Match!",
+      );
+    }
 
     var colorFamily = seatColors.getMediumColorFamilyForSeat(index);
     domStyle.set(cardBackNode, {
       "border-color": colorFamily.border,
       background:
         "linear-gradient(" +
-        colorFamily.gradient1 +
-        ", " +
         colorFamily.gradient2 +
+        ", " +
+        colorFamily.gradient1 +
         ")",
     });
 

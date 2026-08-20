@@ -2,16 +2,20 @@ div.pseudo-image.squirrel {
   background-image: url("../images/Cards/v-squirrel.png");
 }
 
+div.pseudo-image.cage-match {
+  background-image: url("../images/Cards/cage-match.png");
+}
+
 div.pseudo-image.gloves {
   background-image: url("../images/Cards/gloves.png");
 }
 
-div.pseudo-image.squirrel-mean {
-  background-image: url("../images/Cards/squirrel-mean.png");
+div.pseudo-image.share {
+  background-image: url("../images/Cards/share.png");
 }
 
-div.pseudo-image.squirrel-nice {
-  background-image: url("../images/Cards/squirrel-nice.png");
+div.pseudo-image.fight {
+  background-image: url("../images/Cards/fight.png");
 }
 
 div.pseudo-image.pow {

@@ -64,7 +64,7 @@ define([
   function addCardFront(parent, cardConfig, index) {
     debugLog("addCardFront", "cardConfig = " + JSON.stringify(cardConfig));
 
-    var idElements = ["mixed-nuts-component", index.toString()];
+    var idElements = ["nuts", index.toString()];
     var id = idElements.join(".");
 
     var classArray = ["nut-enuff", cardConfig.nutType, cardConfig.packageType];

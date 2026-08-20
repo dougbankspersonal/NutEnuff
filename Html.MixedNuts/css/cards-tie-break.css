@@ -1,0 +1,54 @@
+.card.tie-break.front,
+.card.tie-break.back {
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  font-weight: bold;
+  font-family: "Bungee", sans-serif;
+  border: 10px solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+.card.tie-break.front .zone,
+.card.tie-break.back .zone {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.card.tie-break.front .zone .text,
+.card.tie-break.back .zone .text {
+  font-size: 40px;
+  transform: rotate(-15deg);
+  z-index: 10;
+}
+.card.tie-break.front .zone.zone-1,
+.card.tie-break.back .zone.zone-1 {
+  transform: rotate(180deg);
+}
+
+.card.tie-break.front .zone {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 40px;
+}
+.card.tie-break.front .zone .pseudo-image {
+  height: 170px;
+  width: 170px;
+  position: absolute;
+  z-index: 1;
+}
+.card.tie-break.front .zone.fight {
+  transform: rotate(180deg);
+}
+
+/*# sourceMappingURL=cards-tie-break.css.map */

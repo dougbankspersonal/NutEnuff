@@ -1,18 +1,14 @@
 <html>
   <head>
     <link rel="stylesheet" href="../css/images.css" />
-    <link rel="stylesheet" href="../css/cards-fight.css" />
+    <link rel="stylesheet" href="../css/cards-tie-break.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/cards.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/main.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/image.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Chewy&family=Luckiest+Guy&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bungee&family=Nunito+Sans:opsz,wght@6..12,200..1000&display=swap"
       rel="stylesheet"
     />
     <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
@@ -50,16 +46,16 @@
         "sharedJavascript/debugLog",
         "sharedJavascript/genericUtils",
         "sharedJavascript/systemConfigs",
-        "javascript/cardsFightData",
-        "javascript/cardsFight",
+        "javascript/cardsTieBreakData",
+        "javascript/cardsTieBreak",
         "javascript/gameInfo",
       ], function (
         cards,
         debugLog,
         genericUtils,
         systemConfigs,
-        cardsFightData,
-        cardsFight,
+        cardsTieBreakData,
+        cardsTieBreak,
         gameInfo,
       ) {
         var overrides = {};
@@ -72,17 +68,17 @@
         var sc = systemConfigs.getCardSystemConfigs(overrides);
         console.log("sc = ", JSON.stringify(sc));
         systemConfigs.setSystemConfigs(sc);
-        cardsFightData.setupCardConfigs();
+        cardsTieBreakData.setupCardConfigs();
 
         var backConfigs = [];
         for (var i = 0; i < gameInfo.maxPlayers; i++) {
           backConfigs.push({
-            callback: cardsFight.addCardBack,
+            callback: cardsTieBreak.addCardBack,
           });
         }
         cards.addCards(
-          cardsFightData.getNumCards(),
-          cardsFight.addCardFrontAtIndex,
+          cardsTieBreakData.getNumCards(),
+          cardsTieBreak.addCardFrontAtIndex,
           backConfigs,
         );
       });

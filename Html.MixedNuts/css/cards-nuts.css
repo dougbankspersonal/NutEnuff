@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.card-array > .page-of-items-contents > .card.mixed-nuts-component {
+.card-array > .page-of-items-contents > .card.nuts-component {
   box-shadow: 4px 6px 8px rgba(0, 0, 0, 0.5);
 }
 
@@ -25,47 +25,47 @@
   width: 40px;
 }
 
-.card.mixed-nuts-component {
-  font-family: "Luckiest Guy";
+.card.nuts {
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
   font-weight: bold;
+  font-family: "Bungee", sans-serif;
 }
 
 .card.front.starter,
-.card.back.mixed-nuts.starter {
+.card.back.nuts.starter {
   border-color: #a2ffa1;
 }
 
 .card.front.day,
-.card.back.mixed-nuts.day {
+.card.back.nuts.day {
   border-color: #ffe551;
 }
 
 .card.front.afternoon,
-.card.back.mixed-nuts.afternoon {
+.card.back.nuts.afternoon {
   border-color: #fea862;
 }
 
 .card.front.night,
-.card.back.mixed-nuts.night {
+.card.back.nuts.night {
   border-color: #372658;
 }
 
-.card.front.mixed-nuts-component {
+.card.front.nuts {
   position: relative;
   border-width: 10px;
   border-style: solid;
 }
-.card.front.mixed-nuts-component .starter-text {
+.card.front.nuts .starter-text {
   font-size: 20px;
   position: absolute;
   top: 10px;
   right: 10px;
 }
-.card.front.mixed-nuts-component .drop_shadow.pseudo-image {
+.card.front.nuts .drop_shadow.pseudo-image {
   filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.4));
 }
-.card.front.mixed-nuts-component .title-outer-wrapper {
+.card.front.nuts .title-outer-wrapper {
   width: 100%;
   height: 25%;
   bottom: 0px;
@@ -77,7 +77,7 @@
   justify-content: center;
   align-items: center;
 }
-.card.front.mixed-nuts-component .title-outer-wrapper .title-inner-wrapper {
+.card.front.nuts .title-outer-wrapper .title-inner-wrapper {
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -88,9 +88,8 @@
   border: 14px solid #773333;
   border-radius: 10px;
 }
-.card.front.mixed-nuts-component .title-outer-wrapper .title-inner-wrapper .title {
+.card.front.nuts .title-outer-wrapper .title-inner-wrapper .title {
   font-size: 36px;
-  font-family: "Roboto", sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -100,7 +99,7 @@
   padding-top: 5px;
   padding-bottom: 5px;
 }
-.card.front.mixed-nuts-component .main_wrapper {
+.card.front.nuts .main_wrapper {
   width: 100%;
   height: 75%;
   display: inline-flex;
@@ -110,8 +109,12 @@
   z-index: 1;
   font-size: 40px;
   gap: 10px;
+  font-family: "Nunito Sans";
 }
-.card.front.mixed-nuts-component .main_wrapper .image-wrapper {
+.card.front.nuts .main_wrapper .deluxe.text {
+  font-size: 18px;
+}
+.card.front.nuts .main_wrapper .image-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,42 +122,42 @@
   padding: 30px;
   margin: -30px;
 }
-.card.front.mixed-nuts-component .main_wrapper .image-wrapper .component-image {
+.card.front.nuts .main_wrapper .image-wrapper .component-image {
   width: 80px;
   height: 80px;
   z-index: 2;
 }
-.card.front.mixed-nuts-component .main_wrapper .image-wrapper .component-image.index0.first {
+.card.front.nuts .main_wrapper .image-wrapper .component-image.index0.first {
   z-index: 10;
   margin-right: -20px;
 }
-.card.front.mixed-nuts-component .main_wrapper .image-wrapper .component-image.index0.second {
+.card.front.nuts .main_wrapper .image-wrapper .component-image.index0.second {
   margin-left: -20px;
   z-index: 10;
 }
-.card.front.mixed-nuts-component .main_wrapper .image-wrapper.trail-mix {
+.card.front.nuts .main_wrapper .image-wrapper.trail-mix {
   zoom: 1.6;
   margin-bottom: -50px;
 }
-.card.front.mixed-nuts-component .main_wrapper .image-wrapper.deluxe {
+.card.front.nuts .main_wrapper .image-wrapper.deluxe {
   background-image: url("../images/Cards/aura.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
-.card.front.mixed-nuts-component .unbroken-row {
+.card.front.nuts .unbroken-row {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   white-space: nowrap;
 }
-.card.front.mixed-nuts-component .reward_points {
+.card.front.nuts .reward_points {
   font-size: 14px;
   font-weight: bold;
   display: inline;
 }
-.card.front.mixed-nuts-component .craft-wrapper .collectable-item-set {
+.card.front.nuts .craft-wrapper .collectable-item-set {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -162,25 +165,25 @@
   flex-wrap: wrap;
   position: relative;
 }
-.card.front.mixed-nuts-component .craft-wrapper .collectable-item-set .collectable-item {
+.card.front.nuts .craft-wrapper .collectable-item-set .collectable-item {
   position: absolute;
   top: 0px;
 }
-.card.front.mixed-nuts-component .craft-wrapper .collectable-item-set .set-count {
+.card.front.nuts .craft-wrapper .collectable-item-set .set-count {
   display: inline-block;
 }
-.card.front.mixed-nuts-component .craft-wrapper .collectable-item-set .nut {
+.card.front.nuts .craft-wrapper .collectable-item-set .nut {
   height: 60px;
   width: 60px;
 }
-.card.front.mixed-nuts-component .cannot-be-crafted {
+.card.front.nuts .cannot-be-crafted {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   position: relative;
 }
-.card.front.mixed-nuts-component .cannot-be-crafted .no-symbol {
+.card.front.nuts .cannot-be-crafted .no-symbol {
   position: absolute;
   width: 100px;
   height: 100px;
@@ -188,10 +191,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.card.front.mixed-nuts-component .floor_wrapper .colon-and-points .negative {
+.card.front.nuts .floor_wrapper .colon-and-points .negative {
   color: #994444;
 }
-.card.front.mixed-nuts-component .colon-and-points {
+.card.front.nuts .colon-and-points {
   white-space: nowrap;
   display: flex;
   flex-direction: row;
@@ -200,40 +203,40 @@
   padding-left: 5px;
   padding-right: 5px;
 }
-.card.front.mixed-nuts-component .minicard {
+.card.front.nuts .minicard {
   border-radius: 10px;
   background-color: #fffff0;
   transform: rotate(-5deg);
   filter: drop-shadow(8px 8px 4px rgba(0, 0, 0, 0.15));
 }
-.card.front.mixed-nuts-component .custom-rendering-wrapper {
+.card.front.nuts .custom-rendering-wrapper {
   display: flex;
   flex-direction: column;
 }
-.card.front.mixed-nuts-component .custom-rendering-wrapper .text-node {
-  font-family: "Roboto", sans-serif;
+.card.front.nuts .custom-rendering-wrapper .text-node {
+  font-family: "Nunito Sans";
   font-size: 15px;
   margin-top: 10px;
   padding-right: 10px;
   padding-left: 10px;
 }
-.card.front.mixed-nuts-component .custom-rendering-wrapper .text-node .red {
+.card.front.nuts .custom-rendering-wrapper .text-node .red {
   color: #aa0044;
 }
-.card.front.mixed-nuts-component .custom-rendering-wrapper .custom-rendering-images {
+.card.front.nuts .custom-rendering-wrapper .custom-rendering-images {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-.card.front.mixed-nuts-component .custom-rendering-wrapper .custom-rendering-images .pseudo-image {
+.card.front.nuts .custom-rendering-wrapper .custom-rendering-images .pseudo-image {
   height: 50px;
   width: 50px;
 }
-.card.front.mixed-nuts-component .custom-rendering-wrapper .custom-rendering-images .pseudo-image.bad-nut-floor {
+.card.front.nuts .custom-rendering-wrapper .custom-rendering-images .pseudo-image.bad-nut-floor {
   width: 100px;
 }
-.card.front.mixed-nuts-component .custom-rendering-wrapper .mystery-card-wrapper {
+.card.front.nuts .custom-rendering-wrapper .mystery-card-wrapper {
   height: 70px;
   width: 50px;
   border-radius: 10px;
@@ -246,72 +249,72 @@
   /* horizontal centering */
   align-items: center;
 }
-.card.front.mixed-nuts-component .custom-rendering-wrapper .pseudo-image.vote {
+.card.front.nuts .custom-rendering-wrapper .pseudo-image.vote {
   width: 100px;
   height: 100px;
 }
-.card.front.mixed-nuts-component .custom-rendering-wrapper .nut-rows {
+.card.front.nuts .custom-rendering-wrapper .nut-rows {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.card.front.mixed-nuts-component .custom-rendering-wrapper .nut-rows .nut-row {
+.card.front.nuts .custom-rendering-wrapper .nut-rows .nut-row {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
-.card.front.mixed-nuts-component .custom-rendering-wrapper .nut-rows .nut-row .nut-image {
+.card.front.nuts .custom-rendering-wrapper .nut-rows .nut-row .nut-image {
   height: 40px;
   width: 40px;
 }
-.card.front.mixed-nuts-component .custom-rendering-wrapper.walnut {
+.card.front.nuts .custom-rendering-wrapper.walnut {
   flex-direction: column;
   zoom: 0.5;
 }
-.card.front.mixed-nuts-component .custom-rendering-wrapper.trail-mix .craft-wrapper {
+.card.front.nuts .custom-rendering-wrapper.trail-mix .craft-wrapper {
   font-size: 40%;
 }
-.card.front.mixed-nuts-component .custom-rendering-wrapper.mixed-nuts .nut-rows {
+.card.front.nuts .custom-rendering-wrapper.nuts .nut-rows {
   padding-right: 10px;
 }
-.card.front.mixed-nuts-component .custom {
+.card.front.nuts .custom {
   font-size: 35px;
 }
-.card.front.mixed-nuts-component .penalty {
+.card.front.nuts .penalty {
   white-space: nowrap;
 }
-.card.front.mixed-nuts-component .special_custom.small {
+.card.front.nuts .special_custom.small {
   font-size: 25px;
 }
 
-.card.front.mixed-nuts .wrapper .special_customs_wrapper .special_custom {
+.card.front.nuts .wrapper .special_customs_wrapper .special_custom {
   margin: 0 6px;
 }
 
-.card.back.mixed-nuts.starter {
+.card.back.nuts.starter {
   background: radial-gradient(#a2ffa1 50%, #d4ffd4);
 }
 
-.card.back.mixed-nuts.day {
+.card.back.nuts.day {
   background: radial-gradient(#fffcde 50%, #fff9b7);
 }
 
-.card.back.mixed-nuts.afternoon {
+.card.back.nuts.afternoon {
   background: radial-gradient(#f1b863 50%, #ffc66b);
 }
 
-.card.back.mixed-nuts.night {
+.card.back.nuts.night {
   background: radial-gradient(#6a6379 50%, #756891);
 }
 
-.card.back.mixed-nuts {
+.card.back.nuts {
   border-width: 10px;
   border-style: solid;
   position: relative;
 }
-.card.back.mixed-nuts .inset {
+.card.back.nuts .inset {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -321,7 +324,7 @@
   border-radius: 0;
   position: relative;
 }
-.card.back.mixed-nuts .inset .squirrel {
+.card.back.nuts .inset .squirrel {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -330,8 +333,7 @@
   height: 150px;
   z-index: 1;
 }
-.card.back.mixed-nuts .inset .title {
-  font-family: "Luckiest Guy";
+.card.back.nuts .inset .title {
   text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
   font-weight: bold;
   width: 80%;
@@ -344,18 +346,17 @@
   overflow: hidden;
   /* ensures it won’t spill */
 }
-.card.back.mixed-nuts .inset .title.small {
+.card.back.nuts .inset .title.small {
   font-size: 30px;
   z-index: 2;
 }
-.card.back.mixed-nuts .inset .title.big {
+.card.back.nuts .inset .title.big {
   font-size: 50px;
   z-index: 3;
 }
-.card.back.mixed-nuts .inset .shift {
-  font-family: "Arial Black", sans-serif;
+.card.back.nuts .inset .shift {
+  font-family: "Nunito Sans";
   font-size: 25px;
-  font-style: italic;
   color: #332211;
 }
 
