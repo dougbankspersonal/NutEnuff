@@ -217,6 +217,9 @@
   padding-right: 10px;
   padding-left: 10px;
 }
+.card.front.mixed-nuts-component .custom-rendering-wrapper .text-node .red {
+  color: #aa0044;
+}
 .card.front.mixed-nuts-component .custom-rendering-wrapper .custom-rendering-images {
   display: flex;
   flex-direction: row;

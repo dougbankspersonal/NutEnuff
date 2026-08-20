@@ -31,11 +31,12 @@ define([
     points,
     opt_pointsPrefix,
   ) {
+    debugLog("insertSomethingEqualsPointsNode", "points = ", points);
     console.assert(Number.isInteger(points), "Points must be an integer");
     var pointsString;
     var pointsPrefix = opt_pointsPrefix ? opt_pointsPrefix : "";
     if (points < 0) {
-      pointsString = ` :&nbsp;<div class="negative">${pointsPrefix}${points}</div>`;
+      pointsString = `<div class="negative">${pointsPrefix}${points}</div>`;
     } else {
       pointsString = ` : ${pointsPrefix}${points}`;
     }
@@ -229,7 +230,9 @@ define([
   function addCollectibleItemSetIndicator(parentNode, itemType, itemCount) {
     var collectableItemSetHeightPx = collectableItemSize;
 
-    console.assert(itemCount > 0, "Item count must be defined");
+    if (itemCount == 0) {
+      return null;
+    }
 
     var collectableItemSetNode = htmlUtils.addDiv(
       parentNode,
@@ -325,6 +328,15 @@ define([
   }
 
   function addStandardCraftingInfo(parentNode, itemType, itemCount, points) {
+    debugLog(
+      "addStandardCraftingInfo",
+      "itemType = " +
+        itemType +
+        ", itemCount = " +
+        itemCount +
+        ", points = " +
+        points,
+    );
     var craftingNode = htmlUtils.addDiv(
       parentNode,
       ["craft-wrapper", "unbroken-row"],
@@ -339,19 +351,15 @@ define([
     var craftingNode = null;
     if (cardConfig.craft) {
       var craftConfig = cardConfig.craft;
-      if (craftConfig.number > 0) {
-        var itemType = cardConfig.itemType
-          ? cardConfig.itemType
-          : cardConfig.cardType;
-        addStandardCraftingInfo(
-          parentNode,
-          itemType,
-          craftConfig.number,
-          craftConfig.points,
-        );
-      } else {
-        craftingNode = addCannotBeCraftedNode(parentNode);
-      }
+      var itemType = cardConfig.itemType
+        ? cardConfig.itemType
+        : cardConfig.cardType;
+      addStandardCraftingInfo(
+        parentNode,
+        itemType,
+        craftConfig.number,
+        craftConfig.points,
+      );
     }
     return craftingNode;
   }

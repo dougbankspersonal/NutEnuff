@@ -1,9 +1,11 @@
-.card.fight {
+.card.fight.front,
+.card.back.fight {
   border: 10px solid;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 20px;
 }
 
 .card.fight.front {
