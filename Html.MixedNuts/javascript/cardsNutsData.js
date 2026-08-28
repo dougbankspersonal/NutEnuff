@@ -87,15 +87,15 @@ define([
     */
 
     day: {
-      [gItemTypes.Peanut]: 13,
-      [gItemTypes.Almond]: 10,
-      [gItemTypes.Cashew]: 8,
+      [gItemTypes.Peanut]: 11,
+      [gItemTypes.Almond]: 8,
+      [gItemTypes.Cashew]: 7,
       [gItemTypes.Macadamia]: 4,
       [gItemTypes.Pistachio]: 0,
       [gItemTypes.Raisin]: 0,
       [gItemTypes.BadNut]: 3,
       [gItemTypes.Walnut]: 4,
-      [gItemTypes.Acorn]: 0,
+      [gItemTypes.Acorn]: 5,
       [gItemTypes.Snack]: 0,
       [gItemTypes.DoublePeanut]: 2,
       [gItemTypes.DoubleAlmond]: 2,
