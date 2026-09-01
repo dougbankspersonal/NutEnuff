@@ -68,8 +68,8 @@ define([
     debugLog("renderWalnutCustom", "Rendering walnut custom");
 
     for (var i = 0; i < 5; i++) {
-      var itemCount = i;
-      var points = (itemCount * (itemCount + 1)) / 2;
+      var itemCount = i + 1;
+      var points = (itemCount * (itemCount - 1)) / 2;
       addStandardCraftingInfo(
         parentNode,
         cardsNutsData.itemTypes.Walnut,

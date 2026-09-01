@@ -1,0 +1,50 @@
+.dice .die.player-0 {
+  background-color: #f5cdcd;
+  color: #58060d;
+}
+.dice .die.player-1 {
+  background-color: #d7f7d7;
+  color: #0e420e;
+}
+.dice .die.player-2 {
+  background-color: #f5f3ea;
+  color: #3f300d;
+}
+.dice .die.player-3 {
+  background-color: #d4dbf7;
+  color: #081020;
+}
+.dice .die.player-4 {
+  background-color: #f5dfd3;
+  color: #301d07;
+}
+.dice .die.player-5 {
+  background-color: #e6cef1;
+  color: #2f063f;
+}
+.dice .die.player-6 {
+  background-color: #d7f7f7;
+  color: #0b4242;
+}
+.dice .die.player-7 {
+  background-color: #f5f5f5;
+  color: #666666;
+}
+.dice .die.share-fight-die .face {
+  width: 150px;
+  height: 150px;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  font-weight: bold;
+  font-family: "Bungee", sans-serif;
+  box-sizing: border-box;
+  border: 5px solid #000;
+  border-radius: 10px;
+  position: relative;
+  font-size: 30px;
+}
+.dice .die.share-fight-die .face .text {
+  position: absolute;
+  bottom: 10%;
+}
+
+/*# sourceMappingURL=dice-fight-or-share.css.map */

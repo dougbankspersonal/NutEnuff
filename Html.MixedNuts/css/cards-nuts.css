@@ -26,7 +26,11 @@
 }
 
 .card.nuts {
-  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  text-shadow:
+    -1px -1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px 1px 0 #fff;
   font-weight: bold;
   font-family: "Bungee", sans-serif;
 }
@@ -229,11 +233,17 @@
   justify-content: center;
   align-items: center;
 }
-.card.front.nuts .custom-rendering-wrapper .custom-rendering-images .pseudo-image {
+.card.front.nuts
+  .custom-rendering-wrapper
+  .custom-rendering-images
+  .pseudo-image {
   height: 50px;
   width: 50px;
 }
-.card.front.nuts .custom-rendering-wrapper .custom-rendering-images .pseudo-image.bad-nut-floor {
+.card.front.nuts
+  .custom-rendering-wrapper
+  .custom-rendering-images
+  .pseudo-image.bad-nut-floor {
   width: 100px;
 }
 .card.front.nuts .custom-rendering-wrapper .mystery-card-wrapper {
@@ -334,7 +344,11 @@
   z-index: 1;
 }
 .card.back.nuts .inset .title {
-  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  text-shadow:
+    -1px -1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px 1px 0 #fff;
   font-weight: bold;
   width: 80%;
   color: #332211;
