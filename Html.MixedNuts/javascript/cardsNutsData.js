@@ -263,8 +263,8 @@ define([
       cardType: gAcorn,
       customRendering: {
         useClassToIndexFunction: true,
-        points: 3,
-        text: "3 Coins if the Acorn is on Desk.",
+        points: 2,
+        text: "2 " + gCoinString + " if on Desk at game end.",
       },
       color: acornBackgroundColor,
       itemType: gItemTypes.Acorn,
