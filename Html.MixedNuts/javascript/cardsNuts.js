@@ -388,7 +388,7 @@ define([
       cardsNutsData.packageString +
         ": +1" +
         cardsNutsData.coinString +
-        "<br>(can only be applied once)",
+        "per Deluxe Nut in Package",
     );
   }
 

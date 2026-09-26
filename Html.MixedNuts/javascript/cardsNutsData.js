@@ -37,16 +37,16 @@ define([
   const gWalnut = "walnut";
   const gAcorn = "acorn";
 
-  const gDoubleTypePeanut = "double-peanut";
-  const gDoubleTypeAlmond = "double-almond";
-  const gDoubleTypeCashew = "double-cashew";
-  const gDoubleTypeMacadamia = "double-macadamia";
+  const gDoublePeanut = "double-peanut";
+  const gDoubleAlmond = "double-almond";
+  const gDoubleCashew = "double-cashew";
+  const gDoubleMacadamia = "double-macadamia";
 
-  const gDeluxeTypePeanut = "deluxe-peanut";
-  const gDeluxeTypeAlmond = "deluxe-almond";
-  const gDeluxeTypeCashew = "deluxe-cashew";
-  const gDeluxeTypeMacadamia = "deluxe-macadamia";
-  const gDeluxeTypePistachio = "deluxe-pistachio";
+  const gDeluxePeanut = "deluxe-peanut";
+  const gDeluxeAlmond = "deluxe-almond";
+  const gDeluxeCashew = "deluxe-cashew";
+  const gDeluxeMacadamia = "deluxe-macadamia";
+  const gDeluxePistachio = "deluxe-pistachio";
   const gSpecialTypeRaisin = "raisin";
   const gBadTypeBadNut = "bad-nut";
   const gTrailMixType = "trail-mix";
@@ -60,15 +60,15 @@ define([
     Macadamia: gMacadamia,
     Walnut: gWalnut,
     Acorn: gAcorn,
-    DoublePeanut: gDoubleTypePeanut,
-    DoubleAlmond: gDoubleTypeAlmond,
-    DoubleCashew: gDoubleTypeCashew,
-    DoubleMacadamia: gDoubleTypeMacadamia,
-    DeluxeTypePeanut: gDeluxeTypePeanut,
-    DeluxeTypeAlmond: gDeluxeTypeAlmond,
-    DeluxeTypeCashew: gDeluxeTypeCashew,
-    DeluxeTypeMacadamia: gDeluxeTypeMacadamia,
-    DeluxeTypePistachio: gDeluxeTypePistachio,
+    DoublePeanut: gDoublePeanut,
+    DoubleAlmond: gDoubleAlmond,
+    DoubleCashew: gDoubleCashew,
+    DoubleMacadamia: gDoubleMacadamia,
+    DeluxePeanut: gDeluxePeanut,
+    DeluxeAlmond: gDeluxeAlmond,
+    DeluxeCashew: gDeluxeCashew,
+    DeluxeMacadamia: gDeluxeMacadamia,
+    DeluxePistachio: gDeluxePistachio,
     Raisin: gSpecialTypeRaisin,
     BadNut: gBadTypeBadNut,
     Snack: gSnackType,
@@ -87,7 +87,7 @@ define([
     */
 
     day: {
-      [gItemTypes.Peanut]: 11,
+      [gItemTypes.Peanut]: 9,
       [gItemTypes.Almond]: 8,
       [gItemTypes.Cashew]: 7,
       [gItemTypes.Macadamia]: 4,
@@ -96,7 +96,7 @@ define([
       [gItemTypes.BadNut]: 3,
       [gItemTypes.Walnut]: 4,
       [gItemTypes.Acorn]: 5,
-      [gItemTypes.Snack]: 0,
+      [gItemTypes.Snack]: 2,
       [gItemTypes.DoublePeanut]: 2,
       [gItemTypes.DoubleAlmond]: 2,
       [gItemTypes.DoubleCashew]: 2,
@@ -111,13 +111,13 @@ define([
       [gItemTypes.Peanut]: 12,
       [gItemTypes.Almond]: 11,
       [gItemTypes.Cashew]: 10,
-      [gItemTypes.Macadamia]: 4,
+      [gItemTypes.Macadamia]: 5,
       [gItemTypes.Pistachio]: 0,
-      [gItemTypes.Raisin]: 5,
+      [gItemTypes.Raisin]: 2,
       [gItemTypes.BadNut]: 3,
       [gItemTypes.Walnut]: 5,
       [gItemTypes.Acorn]: 0,
-      [gItemTypes.Snack]: 0,
+      [gItemTypes.Snack]: 2,
       [gItemTypes.DoublePeanut]: 0,
       [gItemTypes.DoubleAlmond]: 0,
       [gItemTypes.DoubleCashew]: 0,
@@ -138,7 +138,7 @@ define([
       [gItemTypes.BadNut]: 3,
       [gItemTypes.Walnut]: 4,
       [gItemTypes.Acorn]: 0,
-      [gItemTypes.Snack]: 0,
+      [gItemTypes.Snack]: 2,
       [gItemTypes.DoublePeanut]: 0,
       [gItemTypes.DoubleAlmond]: 0,
       [gItemTypes.DoubleCashew]: 0,
@@ -146,8 +146,8 @@ define([
       [gItemTypes.DeluxePeanut]: 3,
       [gItemTypes.DeluxeAlmond]: 3,
       [gItemTypes.DeluxeCashew]: 3,
-      [gItemTypes.DeluxeMacadamia]: 3,
-      [gItemTypes.DeluxePistachio]: 3,
+      [gItemTypes.DeluxeMacadamia]: 2,
+      [gItemTypes.DeluxePistachio]: 2,
     },
   };
 
@@ -246,6 +246,7 @@ define([
         points: 3,
       },
       color: pistachioBackgroundColor,
+      fontAdjustment: 0.8,
       itemType: gItemTypes.Pistachio,
     },
     {
@@ -416,7 +417,7 @@ define([
       cardType: gItemTypes.BadNut,
       craft: {
         number: 0,
-        points: -1,
+        points: -2,
       },
       color: badNutBackgroundColor,
     },
