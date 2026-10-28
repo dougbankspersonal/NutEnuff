@@ -1,0 +1,107 @@
+.card.flip-nuts {
+  box-sizing: border-box;
+  border-width: 10px;
+  border-style: solid;
+}
+.card.flip-nuts .title {
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  font-weight: bold;
+  width: 80%;
+  color: #332211;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: "Bree Serif", serif;
+  font-weight: 400;
+}
+
+.card.front.flip-nuts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.card.front.flip-nuts .title {
+  font-size: 35px;
+}
+.card.front.flip-nuts .flip-nut.pseudo-image {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+.card.front.flip-nuts .flip-nut.pseudo-image.center {
+  width: 60%;
+  height: 60%;
+  margin: -10%;
+}
+.card.front.flip-nuts .flip-nut.pseudo-image.top {
+  top: 10px;
+  left: 10px;
+  width: 20%;
+  height: 20%;
+  position: absolute;
+}
+.card.front.flip-nuts .score {
+  font-size: 35px;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 400;
+}
+.card.front.flip-nuts .score.gain {
+  color: #248824;
+}
+.card.front.flip-nuts .score.loss {
+  color: #902121;
+}
+
+.card.front.flip-nuts.special .flip-nut.pseudo-image.center {
+  width: 30%;
+  height: 30%;
+  margin: 0%;
+}
+.card.front.flip-nuts.special .pseudo-image.aux-image {
+  height: 20%;
+}
+
+.card.back.flip-nuts {
+  background: radial-gradient(#3e7d57 50%, #1d5232);
+  border-style: solid;
+  position: relative;
+  border-color: #093119;
+}
+.card.back.flip-nuts .inset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  position: relative;
+}
+.card.back.flip-nuts .inset .new-squirrel {
+  position: absolute;
+  top: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 80%;
+  z-index: 1;
+  filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.3));
+}
+.card.back.flip-nuts .inset .title {
+  position: absolute;
+}
+.card.back.flip-nuts .inset .title.small {
+  font-size: 45px;
+  z-index: 2;
+  top: 200px;
+}
+.card.back.flip-nuts .inset .title.big {
+  font-size: 65px;
+  z-index: 3;
+  top: 220px;
+}
+
+/*# sourceMappingURL=cards-flip-nuts.css.map */
