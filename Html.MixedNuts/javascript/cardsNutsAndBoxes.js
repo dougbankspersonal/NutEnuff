@@ -4,6 +4,7 @@ define([
   "sharedJavascript/debugLog",
   "sharedJavascript/htmlUtils",
   "javascript/cardsNutsAndBoxesData",
+  "javascript/gameInfo",
   "dojo/domReady!",
 ], function (
   domStyle,
@@ -11,6 +12,7 @@ define([
   debugLogModule,
   htmlUtils,
   cardsNutsAndBoxesData,
+  gameInfo,
 ) {
   var debugLog = debugLogModule.debugLog;
 
@@ -33,7 +35,7 @@ define([
         cardsNutsAndBoxesData.packageDetails[packageType].reward.toString() +
         "</span>" +
         "<span class=coin>" +
-        "🪙" +
+        gameInfo.coinString +
         "</span>",
     );
     htmlUtils.addDiv(

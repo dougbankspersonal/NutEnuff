@@ -1,0 +1,75 @@
+.card.nut-values.back {
+  font-family: "Bree Serif", serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 52px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+
+  color: #f8edc8;
+
+  text-shadow:
+    1px 1px 0 #8d7025,
+    2px 3px 4px rgba(0, 0, 0, 0.35);
+
+  border: 6px solid #c9a84a;
+  background: #17452f;
+  box-shadow:
+    inset 0 0 0 5px #17452f,
+    inset 0 0 0 7px #c9a84a,
+    0 4px 10px rgba(0, 0, 0, 0.3);
+
+  .title-0 {
+    font-size: 40px;
+  }
+}
+
+.card.nut-values.front {
+  font-family: "Nunito Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+
+  background: linear-gradient(135deg,
+      #fff6cc 0%,
+      #e8c96e 25%,
+      #fff0ad 45%,
+      #d6ad45 70%,
+      #f5df91 100%);
+  border: 2px solid #9c7625;
+  box-sizing: border-box;
+
+  .table {
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nut-value-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    box-sizing: border-box;
+    border: solid 5px black;
+    border-radius: 5px;
+
+
+    .pseudo-image {
+      height: 30px;
+      width: 30px;
+    }
+  }
+}

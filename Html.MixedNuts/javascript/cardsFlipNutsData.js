@@ -1,8 +1,9 @@
 define([
   "sharedJavascript/cards",
   "sharedJavascript/debugLog",
+  "javascript/gameInfo",
   "dojo/domReady!",
-], function (cards, debugLogModule) {
+], function (cards, debugLogModule, gameInfo) {
   var debugLog = debugLogModule.debugLog;
 
   //-----------------------------------------
@@ -15,55 +16,6 @@ define([
 
   const gSpecialNutString = "No Bust/No Danger/Flip Again";
 
-  const almondBackgroundColor = "#f98f8f";
-  const cashewBackgroundColor = "#a1dbff";
-  const hazelnutBackgroundColor = "#dba4ff";
-  const pistachioBackgroundColor = "rgb(155, 224, 161)";
-  const peanutBackgroundColor = "#f8e6c1";
-  const walnutBackgroundColor = "rgb(241, 186, 83)";
-
-  const acornBackgroundColor = "rgb(243, 243, 60)";
-  const badNutBackgroundColor = "rgb(88, 88, 88)";
-
-  const gNutTypes = {
-    Almond: "almond",
-    Cashew: "cashew",
-    Hazelnut: "hazelnut",
-    Pistachio: "pistachio",
-    Peanut: "peanut",
-    Walnut: "walnut",
-  };
-
-  const gSpecialNutTypes = {
-    Acorn: "acorn",
-    BadNut: "bad-nut",
-  };
-
-  const gNutNames = {
-    [gNutTypes.Almond]: "Almond",
-    [gNutTypes.Cashew]: "Cashew",
-    [gNutTypes.Hazelnut]: "Hazelnut",
-    [gNutTypes.Peanut]: "Peanut",
-    [gNutTypes.Pistachio]: "Pistachio",
-    [gNutTypes.Walnut]: "Walnut",
-    [gSpecialNutTypes.Acorn]: "Acorn",
-    [gSpecialNutTypes.BadNut]: "Bad Nut",
-  };
-
-  const gNutColors = {
-    [gNutTypes.Almond]: almondBackgroundColor,
-    [gNutTypes.Cashew]: cashewBackgroundColor,
-    [gNutTypes.Hazelnut]: hazelnutBackgroundColor,
-    [gNutTypes.Pistachio]: pistachioBackgroundColor,
-    [gNutTypes.Peanut]: peanutBackgroundColor,
-    [gNutTypes.Walnut]: walnutBackgroundColor,
-    [gSpecialNutTypes.Acorn]: acornBackgroundColor,
-    [gSpecialNutTypes.BadNut]: badNutBackgroundColor,
-  };
-
-  const gNutTypesArray = Object.values(gNutTypes);
-  const gSpecialNutTypesArray = Object.values(gSpecialNutTypes);
-
   var gCardConfigs = null;
 
   function generateCardConfigs() {
@@ -72,30 +24,30 @@ define([
     }
 
     gCardConfigs = [];
-    for (var i = 0; i < gNutTypesArray.length; i++) {
-      var nutType = gNutTypesArray[i];
+    for (var i = 0; i < gameInfo.nutTypesArray.length; i++) {
+      var nutType = gameInfo.nutTypesArray[i];
       var config = {
         nutType: nutType,
-        title: gNutNames[nutType],
-        color: gNutColors[nutType],
+        title: gameInfo.nutNames[nutType],
+        color: gameInfo.nutColors[nutType],
         count: gCommonNutInstances,
       };
       gCardConfigs.push(config);
     }
 
     gCardConfigs.push({
-      nutType: gSpecialNutTypes.Acorn,
-      title: gNutNames[gSpecialNutTypes.Acorn],
-      color: gNutColors[gSpecialNutTypes.Acorn],
+      nutType: gameInfo.specialNutTypes.Acorn,
+      title: gameInfo.nutNames[gameInfo.specialNutTypes.Acorn],
+      color: gameInfo.nutColors[gameInfo.specialNutTypes.Acorn],
       count: gSpecialNutInstances,
       score: 5,
       scoreClass: "gain",
       auxImage: "no-bust-flip-again",
     });
     gCardConfigs.push({
-      nutType: gSpecialNutTypes.BadNut,
-      title: gNutNames[gSpecialNutTypes.BadNut],
-      color: gNutColors[gSpecialNutTypes.BadNut],
+      nutType: gameInfo.specialNutTypes.BadNut,
+      title: gameInfo.nutNames[gameInfo.specialNutTypes.BadNut],
+      color: gameInfo.nutColors[gameInfo.specialNutTypes.BadNut],
       count: gSpecialNutInstances,
       score: -1,
       scoreClass: "loss",
@@ -119,12 +71,6 @@ define([
 
   // This returned object becomes the defined value of this module
   return {
-    nutTypes: gNutTypes,
-    specialNutTypes: gSpecialNutTypes,
-    nutTypesArray: gNutTypesArray,
-    specialNutTypesArray: gSpecialNutTypesArray,
-    nutNames: gNutNames,
-
     getCardConfigs: getCardConfigs,
     getNumCards: getNumCards,
   };

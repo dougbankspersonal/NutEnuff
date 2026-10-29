@@ -4,7 +4,11 @@
   border-style: solid;
 }
 .card.flip-nuts .title {
-  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  text-shadow:
+    -1px -1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px 1px 0 #fff;
   font-weight: bold;
   width: 80%;
   color: #332211;

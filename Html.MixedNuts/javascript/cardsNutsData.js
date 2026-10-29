@@ -1,8 +1,9 @@
 define([
   "sharedJavascript/cards",
   "sharedJavascript/debugLog",
+  "javascript/gameInfo",
   "dojo/domReady!",
-], function (cards, debugLogModule) {
+], function (cards, debugLogModule, gameInfo) {
   var debugLog = debugLogModule.debugLog;
 
   //-----------------------------------------
@@ -10,9 +11,6 @@ define([
   // Constants
   //
   //-----------------------------------------
-  const gCoinString = "🪙";
-  const gPackageString = "📦";
-
   const peanutBackgroundColor = "#ffe7bb";
   const almondBackgroundColor = "#f98f8f";
   const cashewBackgroundColor = "#a1dbff";
@@ -265,7 +263,7 @@ define([
       customRendering: {
         useClassToIndexFunction: true,
         points: 2,
-        text: "2 " + gCoinString + " if on Desk at game end.",
+        text: "2 " + gameInfo.coinString + " if on Desk at game end.",
       },
       color: acornBackgroundColor,
       itemType: gItemTypes.Acorn,
@@ -562,8 +560,6 @@ define([
 
   // This returned object becomes the defined value of this module
   return {
-    coinString: gCoinString,
-    packageString: gPackageString,
     itemTypes: gItemTypes,
     cardColors: gCardColors,
     numCardColors: gCardColors.length,

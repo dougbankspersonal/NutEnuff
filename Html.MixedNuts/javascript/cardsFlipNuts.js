@@ -5,6 +5,7 @@ define([
   "sharedJavascript/genericUtils",
   "sharedJavascript/htmlUtils",
   "javascript/cardsFlipNutsData",
+  "javascript/gameInfo",
   "dojo/domReady!",
 ], function (
   domStyle,
@@ -13,6 +14,7 @@ define([
   genericUtils,
   htmlUtils,
   cardsFlipNutsData,
+  gameInfo,
 ) {
   var debugLog = debugLogModule.debugLog;
 
@@ -48,12 +50,7 @@ define([
       "cardFrontNode = " + JSON.stringify(cardFrontNode),
     );
 
-    // card styling.
-    var borderColor = genericUtils.darkenColor(cardConfig.color, 50);
-    domStyle.set(cardFrontNode, {
-      background: `radial-gradient(#ffffff 50%, ${cardConfig.color})`,
-      "border-color": borderColor,
-    });
+    htmlUtils.styleWithColor(cardFrontNode, cardConfig.color);
 
     // Title
     htmlUtils.addDiv(
@@ -85,7 +82,7 @@ define([
         cardFrontNode,
         classes,
         "score-" + index,
-        cardConfig.score + "🪙",
+        cardConfig.score + gameInfo.coinString,
       );
     }
 
