@@ -105,11 +105,7 @@ define([
 
     var insetNode = htmlUtils.addDiv(backNode, ["inset"]);
 
-    var imageNode = htmlUtils.addImage(
-      insetNode,
-      ["new-squirrel"],
-      "new-squirrel",
-    );
+    var imageNode = htmlUtils.addImage(insetNode, ["squirrel"], "squirrel");
 
     htmlUtils.addDiv(insetNode, ["title", "small"], "title-small", "Nut");
     htmlUtils.addDiv(insetNode, ["title", "big"], "title-big", "Enuff");

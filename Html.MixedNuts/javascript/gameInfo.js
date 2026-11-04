@@ -3,54 +3,80 @@ define(["dojo/domReady!"], function () {
   var maxPlayers = 5;
   var minPlayers = 2;
 
-  const almondBackgroundColor = "#f98f8f";
-  const cashewBackgroundColor = "#a1dbff";
-  const hazelnutBackgroundColor = "#dba4ff";
-  const pistachioBackgroundColor = "rgb(155, 224, 161)";
-  const peanutBackgroundColor = "#f8e6c1";
-  const walnutBackgroundColor = "rgb(241, 186, 83)";
+  // Nut colors: alphabetical.
+  const almondBackgroundColor = "#ffb4b4";
+  const brazilBackgroundColor = "#ffd79b";
+  const cashewBackgroundColor = "#f4ffae";
+  const hazelnutBackgroundColor = "#cdffa2";
+  const macadamiaBackgroundColor = "#9bffe8";
+  const peanutBackgroundColor = "#97aaff";
+  const pistachioBackgroundColor = "rgb(164, 134, 255)";
+  const walnutBackgroundColor = "rgb(255, 131, 212)";
 
-  const acornBackgroundColor = "rgb(243, 243, 60)";
-  const badNutBackgroundColor = "rgb(88, 88, 88)";
+  const badNutBackgroundColor = "#9e9e9e";
 
+  // Nut types: alphabetical.
   const gNutTypes = {
     Almond: "almond",
+    DoubleAlmond: "double-almond",
+    Brazil: "brazil",
     Cashew: "cashew",
+    DoubleCashew: "double-cashew",
     Hazelnut: "hazelnut",
-    Pistachio: "pistachio",
+    Macadamia: "macadamia",
+    DoubleMacadamia: "double-macadamia",
     Peanut: "peanut",
+    DoublePeanut: "double-peanut",
+    Pistachio: "pistachio",
     Walnut: "walnut",
-  };
 
-  const gSpecialNutTypes = {
-    Acorn: "acorn",
     BadNut: "bad-nut",
   };
 
   const gNutNames = {
     [gNutTypes.Almond]: "Almond",
+    [gNutTypes.DoubleAlmond]: "Double Almond",
+    [gNutTypes.Brazil]: "Brazil Nut",
     [gNutTypes.Cashew]: "Cashew",
+    [gNutTypes.DoubleCashew]: "Double Cashew",
     [gNutTypes.Hazelnut]: "Hazelnut",
+    [gNutTypes.Macadamia]: "Macadamia",
+    [gNutTypes.DoubleMacadamia]: "Double Macadamia",
     [gNutTypes.Peanut]: "Peanut",
+    [gNutTypes.DoublePeanut]: "Double Peanut",
     [gNutTypes.Pistachio]: "Pistachio",
     [gNutTypes.Walnut]: "Walnut",
-    [gSpecialNutTypes.Acorn]: "Acorn",
-    [gSpecialNutTypes.BadNut]: "Bad Nut",
+    [gNutTypes.BadNut]: "Bad Nut",
   };
 
   const gNutColors = {
     [gNutTypes.Almond]: almondBackgroundColor,
+    [gNutTypes.Brazil]: brazilBackgroundColor,
     [gNutTypes.Cashew]: cashewBackgroundColor,
     [gNutTypes.Hazelnut]: hazelnutBackgroundColor,
+    [gNutTypes.Macadamia]: macadamiaBackgroundColor,
     [gNutTypes.Peanut]: peanutBackgroundColor,
+    [gNutTypes.DoubleAlmond]: almondBackgroundColor,
+    [gNutTypes.DoubleCashew]: cashewBackgroundColor,
+    [gNutTypes.DoubleMacadamia]: macadamiaBackgroundColor,
+    [gNutTypes.DoublePeanut]: peanutBackgroundColor,
     [gNutTypes.Pistachio]: pistachioBackgroundColor,
     [gNutTypes.Walnut]: walnutBackgroundColor,
-    [gSpecialNutTypes.Acorn]: acornBackgroundColor,
-    [gSpecialNutTypes.BadNut]: badNutBackgroundColor,
+    [gNutTypes.BadNut]: badNutBackgroundColor,
   };
 
-  const gNutTypesArray = Object.values(gNutTypes);
-  const gSpecialNutTypesArray = Object.values(gSpecialNutTypes);
+  const gNutTypesArray = [
+    gNutTypes.Peanut,
+    gNutTypes.DoublePeanut,
+    gNutTypes.Almond,
+    gNutTypes.DoubleAlmond,
+    gNutTypes.Cashew,
+    gNutTypes.DoubleCashew,
+    gNutTypes.Macadamia,
+    gNutTypes.DoubleMacadamia,
+    gNutTypes.Walnut,
+    gNutTypes.BadNut,
+  ];
 
   const gCoinString = "🪙";
   const gPackageString = "📦";
@@ -60,9 +86,7 @@ define(["dojo/domReady!"], function () {
     minPlayers: minPlayers,
 
     nutTypes: gNutTypes,
-    specialNutTypes: gSpecialNutTypes,
     nutTypesArray: gNutTypesArray,
-    specialNutTypesArray: gSpecialNutTypesArray,
     nutNames: gNutNames,
     nutColors: gNutColors,
 

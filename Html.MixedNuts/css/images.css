@@ -1,41 +1,41 @@
 div.pseudo-image.almond {
-  background-image: url("../images/Cards/v-almond.png");
+  background-image: url("../images/Cards/nut-almond.png");
+}
+
+div.pseudo-image.brazil {
+  background-image: url("../images/Cards/nut-brazil.png");
 }
 
 div.pseudo-image.cashew {
-  background-image: url("../images/Cards/v-cashew.png");
+  background-image: url("../images/Cards/nut-cashew.png");
 }
 
 div.pseudo-image.hazelnut {
-  background-image: url("../images/Cards/hazelnut.png");
-}
-
-div.pseudo-image.pistachio {
-  background-image: url("../images/Cards/v-pistachio.png");
+  background-image: url("../images/Cards/nut-hazelnut.png");
 }
 
 div.pseudo-image.peanut {
-  background-image: url("../images/Cards/v-peanut.png");
+  background-image: url("../images/Cards/nut-peanut.png");
+}
+
+div.pseudo-image.pistachio {
+  background-image: url("../images/Cards/nut-pistachio.png");
+}
+
+div.pseudo-image.macadamia {
+  background-image: url("../images/Cards/nut-macadamia.png");
 }
 
 div.pseudo-image.walnut {
-  background-image: url("../images/Cards/v-walnut.png");
-}
-
-div.pseudo-image.acorn {
-  background-image: url("../images/Cards/v-acorn.png");
+  background-image: url("../images/Cards/nut-walnut.png");
 }
 
 div.pseudo-image.bad-nut {
-  background-image: url("../images/Cards/v-bad-nut.png");
+  background-image: url("../images/Cards/nut-bad-nut.png");
 }
 
 div.pseudo-image.squirrel {
-  background-image: url("../images/Cards/v-squirrel.png");
-}
-
-div.pseudo-image.new-squirrel {
-  background-image: url("../images/Cards/new-squirrel.png");
+  background-image: url("../images/Cards/squirrel-nuts.png");
 }
 
 div.pseudo-image.no-bust-flip-again {

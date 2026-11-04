@@ -60,44 +60,19 @@
         var queryParams = genericUtils.getCommonQueryParams();
 
         if (queryParams.isScreentop) {
-          overrides.itemsPerRow = 15;
+          overrides.itemsPerRow = 12;
         }
 
         var sc = systemConfigs.getCardSystemConfigs(overrides);
         console.log("sc = ", JSON.stringify(sc));
         systemConfigs.setSystemConfigs(sc);
-        cardsNutsData.setupCardConfigs();
 
-        cards.addCards(cardsNuts.getNumCards(), cardsNuts.addCardFrontAtIndex, [
+        cards.addCards(cardsNutsData.getNumCards(), cardsNuts.addCardFront, [
           {
-            callback: function (parent, index) {
-              return cardsNuts.addCardBack(parent, index, "Morning", ["day"]);
-            },
+            callback: cardsNuts.addCardBack,
           },
-          {
-            callback: function (parent, index) {
-              return cardsNuts.addCardBack(parent, index, "Afternoon", [
-                "afternoon",
-              ]);
-            },
-          },
-          {
-            callback: function (parent, index) {
-              return cardsNuts.addCardBack(parent, index, "Night", ["night"]);
-            },
-          },
-          /*
-            {
-              callback: function (parent, index) {
-                return cardsNuts.addCardBack(parent, index, "Starter", [
-                  "starter",
-                ]);
-              },
-            },
-            */
         ]);
       });
     </script>
   </body>
 </html>
-a

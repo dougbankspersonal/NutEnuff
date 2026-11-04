@@ -32,24 +32,12 @@
   font-family: "Bungee", sans-serif;
 }
 
-.card.front.starter,
-.card.back.nuts.starter {
-  border-color: #a2ffa1;
-}
-
-.card.front.day,
-.card.back.nuts.day {
+.card.front.nuts.double-almond,
+.card.front.nuts.double-peanut,
+.card.front.nuts.double-cashew,
+.card.front.nuts.double-macadamia {
   border-color: #ffe551;
-}
 
-.card.front.afternoon,
-.card.back.nuts.afternoon {
-  border-color: #fea862;
-}
-
-.card.front.night,
-.card.back.nuts.night {
-  border-color: #372658;
 }
 
 .card.front.nuts {
@@ -344,23 +332,8 @@
   margin: 0 6px;
 }
 
-.card.back.nuts.starter {
-  background: radial-gradient(#a2ffa1 50%, #d4ffd4);
-}
-
-.card.back.nuts.day {
-  background: radial-gradient(#fffcde 50%, #fff9b7);
-}
-
-.card.back.nuts.afternoon {
-  background: radial-gradient(#f1b863 50%, #ffc66b);
-}
-
-.card.back.nuts.night {
-  background: radial-gradient(#6a6379 50%, #756891);
-}
-
 .card.back.nuts {
+  background: radial-gradient(#eeda79 50%, #6f673c);
   border-width: 10px;
   border-style: solid;
   position: relative;
@@ -375,7 +348,7 @@
     border-radius: 0;
     position: relative;
 
-    .squirrel {
+    .pseudo-image {
       display: flex;
       flex-direction: column;
       align-items: center;
