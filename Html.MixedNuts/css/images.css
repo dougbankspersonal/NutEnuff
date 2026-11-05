@@ -46,4 +46,8 @@ div.pseudo-image.no-bust {
   background-image: url("../images/Cards/no-bust.png");
 }
 
+div.pseudo-image.package {
+  background-image: url("../images/Cards/package.png");
+}
+
 /*# sourceMappingURL=images.css.map */

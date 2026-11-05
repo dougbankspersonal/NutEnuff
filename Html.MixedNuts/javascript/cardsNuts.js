@@ -2,6 +2,7 @@ define([
   "dojo/dom-style",
   "sharedJavascript/cards",
   "sharedJavascript/debugLog",
+  "sharedJavascript/genericUtils",
   "sharedJavascript/htmlUtils",
   "javascript/cardsNutsData",
   "javascript/gameInfo",
@@ -10,6 +11,7 @@ define([
   domStyle,
   cards,
   debugLogModule,
+  genericUtils,
   htmlUtils,
   cardsNutsData,
   gameInfo,
@@ -97,7 +99,7 @@ define([
     return collectableItemSetNode;
   }
 
-  function addCardImage(parent, cardConfig) {
+  function addCardImageNode(parent, cardConfig) {
     var imageClass = cardConfig.imageClass;
     var imageCount = cardConfig.imageCount;
 
@@ -113,12 +115,10 @@ define([
     );
 
     for (var i = 0; i < imageCount; i++) {
-      var imageClasses = [
-        dropShadowClass,
-        "component-image",
-        imageClass,
-        "image-" + i,
-      ];
+      var imageClasses = [dropShadowClass, "component-image", imageClass];
+      if (imageCount > 1) {
+        imageClasses.push("image-" + i);
+      }
 
       htmlUtils.addImage(imageWrapperNode, imageClasses, "image-" + i);
     }
@@ -144,9 +144,9 @@ define([
     insertSomethingEqualsPointsNode(craftingNode, points);
   }
 
-  function maybeAddStandardCraftingInfo(parentNode, cardConfig) {
+  function maybeAddStandardCraftingNode(parentNode, cardConfig) {
     var craftingNode = null;
-    if (cardConfig.craft) {
+    if (cardConfig.craft && cardConfig.craft.points != 0) {
       var craftConfig = cardConfig.craft;
       var imageClass = cardConfig.imageClass;
       addStandardCraftingInfo(
@@ -209,13 +209,32 @@ define([
     }
   }
 
-  function addCardText(parent, cardConfig) {
+  function addTextNode(parent, cardConfig) {
     if (cardConfig.text) {
+      debugLog("addTextNode", "cardConfig = " + JSON.stringify(cardConfig));
       var textNode = htmlUtils.addDiv(
         parent,
-        ["card-text"],
-        "card-text",
+        ["text"],
+        "text",
         cardConfig.text,
+      );
+      return textNode;
+    }
+    return null;
+  }
+
+  function addCustomInfo(parent, cardConfig) {
+    if (cardConfig.nutType == gameInfo.nutTypes.BadNut) {
+      var customInfoNode = htmlUtils.addDiv(
+        parent,
+        ["custom-info"],
+        "custom-info",
+      );
+      htmlUtils.addDiv(
+        customInfoNode,
+        ["text"],
+        "text",
+        "Cannot be packaged.<br>Cannot be held at the end of a round.",
       );
     }
   }
@@ -223,12 +242,12 @@ define([
   function addFields(parent, cardConfig) {
     var mainWrapper = htmlUtils.addDiv(parent, ["main_wrapper"], "mainWapper");
     // These are the icons in upper left and lower corner of card.
-    addCardImage(mainWrapper, cardConfig);
-
-    maybeAddStandardCraftingInfo(mainWrapper, cardConfig);
+    addCardImageNode(mainWrapper, cardConfig);
+    maybeAddStandardCraftingNode(mainWrapper, cardConfig);
+    addTextNode(mainWrapper, cardConfig);
+    addCustomInfo(mainWrapper, cardConfig);
 
     addTitleNode(parent, cardConfig);
-    addCardText(parent, cardConfig);
   }
 
   function addCardBack(parent) {
@@ -244,6 +263,21 @@ define([
     htmlUtils.addDiv(insetNode, ["title", "big"], "title-big", "Enuff");
 
     return backNode;
+  }
+
+  function getBorderColor(cardConfig) {
+    if (
+      cardConfig.nutType == gameInfo.nutTypes.DoublePeanut ||
+      cardConfig.nutType == gameInfo.nutTypes.DoubleAlmond ||
+      cardConfig.nutType == gameInfo.nutTypes.DoubleCashew ||
+      cardConfig.nutType == gameInfo.nutTypes.DoubleMacadamia
+    ) {
+      return "#ffed64";
+    }
+
+    var nutColor = gameInfo.nutColors[cardConfig.nutType];
+    var adjustedColor = genericUtils.darkenColor(nutColor, 50);
+    return adjustedColor;
   }
 
   function addCardFront(parent, index) {
@@ -268,12 +302,12 @@ define([
 
     var classArray = [];
     classArray.push("nuts");
-    classArray.push(cardConfig.cardType);
+    classArray.push(cardConfig.nutType);
     var cardFrontNode = cards.addCardFront(parent, classArray, id);
-
+    var borderColor = getBorderColor(cardConfig);
     domStyle.set(cardFrontNode, {
-      "border-radius": "20px",
       background: `radial-gradient(#ffffff 50%, ${cardConfig.color}`,
+      "border-color": borderColor,
     });
 
     addFields(cardFrontNode, cardConfig);

@@ -81,6 +81,43 @@ define(["dojo/domReady!"], function () {
   const gCoinString = "🪙";
   const gPackageString = "📦";
 
+  function getCraftNumber(nutType) {
+    if (
+      nutType == gNutTypes.Macadamia ||
+      nutType == gNutTypes.DoubleMacadamia
+    ) {
+      return 7;
+    }
+    if (nutType == gNutTypes.Walnut) {
+      return 2;
+    }
+    return 3;
+  }
+
+  function getCraftPoints(nutType) {
+    if (
+      nutType == gNutTypes.Macadamia ||
+      nutType == gNutTypes.DoubleMacadamia
+    ) {
+      return 7;
+    }
+
+    if (nutType == gNutTypes.Peanut || nutType == gNutTypes.DoublePeanut) {
+      return 2;
+    }
+    if (
+      nutType == gNutTypes.Almond ||
+      nutType == gNutTypes.Walnut ||
+      nutType == gNutTypes.DoubleAlmond
+    ) {
+      return 3;
+    }
+    if (nutType == gNutTypes.Cashew || nutType == gNutTypes.DoubleCashew) {
+      return 4;
+    }
+    return 0;
+  }
+
   return {
     maxPlayers: maxPlayers,
     minPlayers: minPlayers,
@@ -92,5 +129,8 @@ define(["dojo/domReady!"], function () {
 
     coinString: gCoinString,
     packageString: gPackageString,
+
+    getCraftNumber: getCraftNumber,
+    getCraftPoints: getCraftPoints,
   };
 });

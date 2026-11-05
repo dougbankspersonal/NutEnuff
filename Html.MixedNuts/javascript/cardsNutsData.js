@@ -39,49 +39,6 @@ define([
     return 1;
   }
 
-  function getCraftNumber(nutType) {
-    if (
-      nutType == gameInfo.nutTypes.Macadamia ||
-      nutType == gameInfo.nutTypes.DoubleMacadamia
-    ) {
-      return 7;
-    }
-    if (nutType == gameInfo.nutTypes.Walnut) {
-      return 2;
-    }
-    return 3;
-  }
-
-  function getCraftPoints(nutType) {
-    if (
-      nutType == gameInfo.nutTypes.Macadamia ||
-      nutType == gameInfo.nutTypes.DoubleMacadamia
-    ) {
-      return 7;
-    }
-
-    if (
-      nutType == gameInfo.nutTypes.Peanut ||
-      nutType == gameInfo.nutTypes.DoublePeanut
-    ) {
-      return 2;
-    }
-    if (
-      nutType == gameInfo.nutTypes.Almond ||
-      nutType == gameInfo.nutTypes.Walnut ||
-      nutType == gameInfo.nutTypes.DoubleAlmond
-    ) {
-      return 3;
-    }
-    if (
-      nutType == gameInfo.nutTypes.Cashew ||
-      nutType == gameInfo.nutTypes.DoubleCashew
-    ) {
-      return 4;
-    }
-    return 0;
-  }
-
   function getCardCount(nutType) {
     if (nutType == gameInfo.nutTypes.Peanut) {
       return 24;
@@ -139,11 +96,11 @@ define([
     var config = {
       title: gameInfo.nutNames[nutType],
       craft: {
-        number: getCraftNumber(nutType),
-        points: getCraftPoints(nutType),
+        number: gameInfo.getCraftNumber(nutType),
+        points: gameInfo.getCraftPoints(nutType),
       },
       color: gameInfo.nutColors[nutType],
-      cardType: nutType,
+      nutType: nutType,
       imageClass: getImageClass(nutType),
       imageCount: getImageCount(nutType),
       count: getCardCount(nutType),
