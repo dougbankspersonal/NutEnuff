@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <title>Tiles: Player Token</title>
+    <link rel="stylesheet" href="../css/images.css" />
+    <link rel="stylesheet" href="../css/tiles-player-token.css" />
+    <link rel="stylesheet" href="../SharedWebBoardGame/css/die.css" />
+    <link rel="stylesheet" href="../SharedWebBoardGame/css/main.css" />
+    <link rel="stylesheet" href="../SharedWebBoardGame/css/image.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bungee&family=Nunito+Sans:opsz,wght@6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+    <style type="text/css"></style>
+  </head>
+
+  <body id="body">
+    <!-- configure Dojo -->
+    <script>
+      // Instead of using data-dojo-config, we're creating a dojoConfig
+      // object *before* we load dojo.js; they're functionally identical,
+      // it's just easier to read this approach with a larger configuration.
+      var dojoConfig = {
+        baseUrl: "..",
+        async: true,
+        // This code registers the correct location of the "demo"
+        // package so we can load Dojo from the CDN whilst still
+        // being able to load local modules
+        packages: [
+          { name: "dojo", location: "../../bower_components/dojo" },
+          { name: "javascript", location: "javascript" },
+          {
+            name: "sharedJavascript",
+            location: "SharedWebBoardgame/javascript",
+          },
+        ],
+      };
+    </script>
+    <!-- load Dojo -->
+    <script src="../../../bower_components/dojo/dojo.js"></script>
+
+    <script>
+      require([
+        "sharedJavascript/dieUtils",
+        "sharedJavascript/debugLog",
+        "sharedJavascript/genericUtils",
+        "sharedJavascript/systemConfigs",
+        "javascript/tilesPlayerTokenData",
+      ], function (
+        dieUtils,
+        debugLogModule,
+        genericUtils,
+        systemConfigs,
+        tilesPlayerTokenData,
+      ) {
+        var debugLog = debugLogModule.debugLog;
+        var sc = systemConfigs.getCardSystemConfigs({});
+        systemConfigs.setSystemConfigs(sc);
+
+        var bodyNode = document.getElementById("body");
+        var diceConfig = tilesPlayerTokenData.getDiceConfig();
+
+        var isScreentop = genericUtils.getCommonQueryParams().isScreentop;
+        var classes;
+        if (!isScreentop) {
+          classes = ["no-screentop"];
+        }
+
+        debugLog("html", "diceConfig = ", JSON.stringify(diceConfig));
+
+        dieUtils.addDiceNode(bodyNode, diceConfig, classes);
+      });
+    </script>
+  </body>
+</html>

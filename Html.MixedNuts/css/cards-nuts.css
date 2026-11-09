@@ -5,20 +5,104 @@
 
 .card.front.nuts,
 .card.back.nuts {
-  text-shadow:
-    -1px -1px 0 #fff,
-    1px -1px 0 #fff,
-    -1px 1px 0 #fff,
-    1px 1px 0 #fff;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
   font-weight: bold;
   font-family: "Bungee", sans-serif;
   border-radius: 20px;
+}
+
+.card.front.nuts.bad-nut .main-wrapper,
+.card.front.nuts.double-peanut .main-wrapper,
+.card.front.nuts.double-almond .main-wrapper,
+.card.front.nuts.double-cashew .main-wrapper,
+.card.front.nuts.double-macadamia .main-wrapper {
+  margin-top: 10px;
 }
 
 .card.front.nuts {
   position: relative;
   border-width: 10px;
   border-style: solid;
+}
+.card.front.nuts .main-wrapper {
+  margin-top: 30px;
+  width: 100%;
+  height: 75%;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  z-index: 1;
+  font-size: 32px;
+  gap: 10px;
+  font-family: "Nunito Sans";
+  position: relative;
+}
+.card.front.nuts .main-wrapper .text {
+  font-size: 18px;
+  width: 90%;
+}
+.card.front.nuts .main-wrapper .image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.card.front.nuts .main-wrapper .image-wrapper .component-image {
+  width: 80px;
+  height: 80px;
+  z-index: 2;
+}
+.card.front.nuts .main-wrapper .image-wrapper .component-image.image-0 {
+  z-index: 10;
+  margin-right: -25px;
+  transform: rotate(-10deg);
+}
+.card.front.nuts .main-wrapper .image-wrapper .component-image.image-1 {
+  margin-left: -20px;
+  z-index: 10;
+  transform: rotate(10deg);
+}
+.card.front.nuts .craft-wrapper {
+  margin-top: -20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.card.front.nuts .craft-wrapper .separator {
+  margin-left: 10px;
+  font-size: 50px;
+  font-weight: bold;
+}
+.card.front.nuts .craft-wrapper .collectible-item-set {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  width: 100%;
+}
+.card.front.nuts .craft-wrapper .collectible-item-set .collectible-item {
+  margin-left: -13px;
+  margin-right: -13px;
+}
+.card.front.nuts .craft-wrapper .collectible-item-set .collectible-item.index-0 {
+  margin-top: 0px;
+  transform: rotate(-10deg);
+}
+.card.front.nuts .craft-wrapper .collectible-item-set .collectible-item.index-1 {
+  margin-bottom: 10px;
+  transform: rotate(10deg);
+}
+.card.front.nuts .craft-wrapper .collectible-item-set .set-count {
+  display: inline-block;
+}
+.card.front.nuts .craft-wrapper .collectible-item-set .nut {
+  height: 60px;
+  width: 60px;
 }
 .card.front.nuts .drop_shadow.pseudo-image {
   filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.4));
@@ -55,216 +139,27 @@
   padding-top: 5px;
   padding-bottom: 5px;
 }
-.card.front.nuts .main_wrapper {
-  width: 100%;
-  height: 75%;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-  font-size: 32px;
-  gap: 10px;
-  font-family: "Nunito Sans";
-}
-.card.front.nuts .main_wrapper .custom-info .text {
-  font-size: 18px;
-  width: 90%;
-}
-.card.front.nuts .main_wrapper .text {
-  font-size: 18px;
-  width: 90%;
-}
-.card.front.nuts .main_wrapper .image-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  padding: 30px;
-  margin: -30px;
-}
-.card.front.nuts .main_wrapper .image-wrapper .component-image {
-  width: 80px;
-  height: 80px;
-  z-index: 2;
-}
-.card.front.nuts .main_wrapper .image-wrapper .component-image.image-0 {
-  z-index: 10;
-  margin-right: -20px;
-  transform: rotate(-10deg);
-}
-.card.front.nuts .main_wrapper .image-wrapper .component-image.image-1 {
+
+.card.front.nuts.macadamia .craft-wrapper .collectible-item-set .collectible-item,
+.card.front.nuts.double-macadamia .craft-wrapper .collectible-item-set .collectible-item {
   margin-left: -20px;
-  z-index: 10;
-  transform: rotate(10deg);
+  margin-right: -20px;
 }
-.card.front.nuts .main_wrapper .image-wrapper.trail-mix {
-  zoom: 1.6;
-  margin-bottom: -50px;
+.card.front.nuts.macadamia .craft-wrapper .collectible-item-set .collectible-item.index-0,
+.card.front.nuts.double-macadamia .craft-wrapper .collectible-item-set .collectible-item.index-0 {
+  margin-top: 0px;
 }
-.card.front.nuts .main_wrapper .image-wrapper.deluxe {
-  background-image: url("../images/Cards/aura.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.card.front.nuts .unbroken-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-}
-.card.front.nuts .reward_points {
-  font-size: 14px;
-  font-weight: bold;
-  display: inline;
-}
-.card.front.nuts .craft-wrapper .collectable-item-set {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  position: relative;
-}
-.card.front.nuts .craft-wrapper .collectable-item-set .collectable-item {
-  position: absolute;
-  top: 0px;
-}
-.card.front.nuts .craft-wrapper .collectable-item-set .set-count {
-  display: inline-block;
-}
-.card.front.nuts .craft-wrapper .collectable-item-set .nut {
-  height: 60px;
-  width: 60px;
-}
-.card.front.nuts .cannot-be-crafted {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-.card.front.nuts .cannot-be-crafted .no-symbol {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.card.front.nuts .floor_wrapper .colon-and-points .negative {
-  color: #994444;
-}
-.card.front.nuts .colon-and-points {
-  white-space: nowrap;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-.card.front.nuts .minicard {
-  border-radius: 10px;
-  background-color: #fffff0;
-  transform: rotate(-5deg);
-  filter: drop-shadow(8px 8px 4px rgba(0, 0, 0, 0.15));
-}
-.card.front.nuts .custom-rendering-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-.card.front.nuts .custom-rendering-wrapper .text-node {
-  font-family: "Nunito Sans";
-  font-size: 15px;
-  margin-top: 10px;
-  padding-right: 10px;
-  padding-left: 10px;
-}
-.card.front.nuts .custom-rendering-wrapper .text-node .red {
-  color: #aa0044;
-}
-.card.front.nuts .custom-rendering-wrapper .custom-rendering-images {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-.card.front.nuts
-  .custom-rendering-wrapper
-  .custom-rendering-images
-  .pseudo-image {
-  height: 50px;
-  width: 50px;
-}
-.card.front.nuts
-  .custom-rendering-wrapper
-  .custom-rendering-images
-  .pseudo-image.bad-nut-floor {
-  width: 100px;
-}
-.card.front.nuts .custom-rendering-wrapper .mystery-card-wrapper {
-  height: 70px;
-  width: 50px;
-  border-radius: 10px;
-  border: 4px solid black;
-  background-color: #fffff0;
-  transform: rotate(-5deg);
-  filter: drop-shadow(8px 8px 4px rgba(0, 0, 0, 0.15));
-  display: flex;
-  justify-content: center;
-  /* horizontal centering */
-  align-items: center;
-}
-.card.front.nuts .custom-rendering-wrapper .pseudo-image.vote {
-  width: 100px;
-  height: 100px;
-}
-.card.front.nuts .custom-rendering-wrapper .nut-rows {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.card.front.nuts .custom-rendering-wrapper .nut-rows .nut-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-.card.front.nuts .custom-rendering-wrapper .nut-rows .nut-row .nut-image {
-  height: 40px;
-  width: 40px;
-}
-.card.front.nuts .custom-rendering-wrapper.walnut {
-  flex-direction: column;
-  zoom: 0.5;
-}
-.card.front.nuts .custom-rendering-wrapper.trail-mix .craft-wrapper {
-  font-size: 40%;
-}
-.card.front.nuts .custom-rendering-wrapper.nuts .nut-rows {
-  padding-right: 10px;
-}
-.card.front.nuts .custom {
-  font-size: 35px;
-}
-.card.front.nuts .penalty {
-  white-space: nowrap;
-}
-.card.front.nuts .special_custom.small {
-  font-size: 25px;
+.card.front.nuts.macadamia .craft-wrapper .collectible-item-set .collectible-item.index-1,
+.card.front.nuts.double-macadamia .craft-wrapper .collectible-item-set .collectible-item.index-1 {
+  margin-bottom: 40px;
 }
 
-.card.front.nuts.macadamia .title-outer-wrapper .title,
-.card.front.nuts.double-macadamia .title-outer-wrapper .title {
-  font-size: 30px;
+.card.front.nuts.bad-nut .image-wrapper .pseudo-image.component-image.bad-nut {
+  width: 120px;
+  height: 120px;
 }
-
-.card.front.nuts .wrapper .special_customs_wrapper .special_custom {
-  margin: 0 6px;
+.card.front.nuts.bad-nut .text {
+  font-size: 26px;
 }
 
 .card.back.nuts {
@@ -293,11 +188,7 @@
   z-index: 1;
 }
 .card.back.nuts .inset .title {
-  text-shadow:
-    -1px -1px 0 #fff,
-    1px -1px 0 #fff,
-    -1px 1px 0 #fff,
-    1px 1px 0 #fff;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
   font-weight: bold;
   width: 80%;
   color: #332211;

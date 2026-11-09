@@ -1,0 +1,72 @@
+.dice.no-screentop {
+  margin: 20px;
+}
+
+.dice {
+  .die.ctr-counter-package {
+    .face {
+      box-sizing: border-box;
+      border: 4px solid black;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      height: 300px;
+      width: 150px;
+
+      .reward {
+        position: absolute;
+        top: 90px;
+        font-family: "Bungee", sans-serif;
+        font-size: 24px;
+        z-index: 50;
+        padding: 2px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        border: 3px solid black;
+        filter:
+          drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.45)) drop-shadow(2px 3px 5px rgba(0, 0, 0, 0.35));
+        background: linear-gradient(#ffffff 50%, #bbbbbb 100%);
+      }
+
+      .pseudo-image.nut {
+        position: absolute;
+        z-index: 40;
+        width: 60px;
+        height: 60px;
+        aspect-ratio: 1 / 1;
+        top: 30px;
+        left: 30px;
+        filter:
+          drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.45)) drop-shadow(2px 3px 5px rgba(0, 0, 0, 0.35));
+      }
+
+      .pseudo-image.discard,
+      .pseudo-image.package {
+        position: absolute;
+        top: 5px;
+        width: 100px;
+        height: 100px
+      }
+
+      .pseudo-image.package {
+        z-index: 40;
+        filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5));
+      }
+
+      .pseudo-image.discard {}
+
+      .counter-box {
+        position: absolute;
+        bottom: 10px;
+        width: 130px;
+        height: 130px;
+        box-sizing: border-box;
+        border: 4px solid black;
+        border-radius: 10px;
+        background: radial-gradient(circle, #edf2fa 50%, #bccbe8 100%);
+      }
+    }
+  }
+}

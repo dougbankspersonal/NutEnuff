@@ -69,7 +69,7 @@ define([
       return 10;
     }
     if (nutType == gameInfo.nutTypes.BadNut) {
-      return 7;
+      return 8;
     }
 
     console.assert(false, "Unknown nut type: " + nutType);
@@ -77,18 +77,19 @@ define([
   }
 
   function getCardText(nutType) {
-    if (nutType == gameInfo.nutTypes.DoublePeanut) {
-      return "Counts as 2 Peanuts<br>Cannot be split";
+    if (
+      nutType == gameInfo.nutTypes.DoublePeanut ||
+      nutType == gameInfo.nutTypes.DoubleAlmond ||
+      nutType == gameInfo.nutTypes.DoubleCashew ||
+      nutType == gameInfo.nutTypes.DoubleMacadamia
+    ) {
+      return "2 Nuts: Can't be split";
     }
-    if (nutType == gameInfo.nutTypes.DoubleAlmond) {
-      return "Counts as 2 Almonds<br>Cannot be split";
+
+    if (nutType == gameInfo.nutTypes.BadNut) {
+      return "Must be discarded.";
     }
-    if (nutType == gameInfo.nutTypes.DoubleCashew) {
-      return "Counts as 2 Cashews<br>Cannot be split";
-    }
-    if (nutType == gameInfo.nutTypes.DoubleMacadamia) {
-      return "Counts as 2 Macadamias<br>Cannot be split";
-    }
+
     return null;
   }
 

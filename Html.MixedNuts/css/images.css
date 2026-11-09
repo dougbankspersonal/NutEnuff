@@ -50,4 +50,12 @@ div.pseudo-image.package {
   background-image: url("../images/Cards/package.png");
 }
 
+div.pseudo-image.crown {
+  background-image: url("../images/Cards/crown.png");
+}
+
+div.pseudo-image.discard {
+  background-image: url("../images/Cards/discard.png");
+}
+
 /*# sourceMappingURL=images.css.map */

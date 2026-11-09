@@ -1,7 +1,8 @@
 <html>
   <head>
+    <title>Tiles: King</title>
     <link rel="stylesheet" href="../css/images.css" />
-    <link rel="stylesheet" href="../css/tiles-packages.css" />
+    <link rel="stylesheet" href="../css/tiles-king.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/die.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/main.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/image.css" />
@@ -46,20 +47,27 @@
         "sharedJavascript/debugLog",
         "sharedJavascript/genericUtils",
         "sharedJavascript/systemConfigs",
-        "javascript/tilesPackagesData",
+        "javascript/tilesKingData",
       ], function (
         dieUtils,
         debugLog,
         genericUtils,
         systemConfigs,
-        tilesPackagesData,
+        tilesKingData,
       ) {
-        var sc = systemConfigs.getCardSystemConfigs();
+        var sc = systemConfigs.getCardSystemConfigs({});
         systemConfigs.setSystemConfigs(sc);
 
         var bodyNode = document.getElementById("body");
-        var diceConfig = tilesPackagesData.getDiceConfig();
-        dieUtils.addDiceNode(bodyNode, diceConfig);
+        var diceConfig = tilesKingData.getDiceConfig();
+
+        var isScreentop = genericUtils.getCommonQueryParams().isScreentop;
+        var classes;
+        if (!isScreentop) {
+          classes = ["no-screentop"];
+        }
+
+        dieUtils.addDiceNode(bodyNode, diceConfig, classes);
       });
     </script>
   </body>

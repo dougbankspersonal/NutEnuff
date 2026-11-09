@@ -1,7 +1,7 @@
 // For stuff like rules variants, etc.
 define(["dojo/domReady!"], function () {
-  var maxPlayers = 5;
-  var minPlayers = 2;
+  const gMaxPlayers = 5;
+  const gMinPlayers = 2;
 
   // Nut colors: alphabetical.
   const almondBackgroundColor = "#ffb4b4";
@@ -86,12 +86,25 @@ define(["dojo/domReady!"], function () {
       nutType == gNutTypes.Macadamia ||
       nutType == gNutTypes.DoubleMacadamia
     ) {
-      return 7;
+      return 4;
     }
     if (nutType == gNutTypes.Walnut) {
       return 2;
     }
     return 3;
+  }
+
+  function getKingPoints(nutType) {
+    if (nutType == gNutTypes.Peanut) {
+      return 7;
+    }
+    if (nutType == gNutTypes.Almond) {
+      return 6;
+    }
+    if (nutType == gNutTypes.Cashew) {
+      return 5;
+    }
+    return 4;
   }
 
   function getCraftPoints(nutType) {
@@ -119,8 +132,8 @@ define(["dojo/domReady!"], function () {
   }
 
   return {
-    maxPlayers: maxPlayers,
-    minPlayers: minPlayers,
+    maxPlayers: gMaxPlayers,
+    minPlayers: gMinPlayers,
 
     nutTypes: gNutTypes,
     nutTypesArray: gNutTypesArray,
@@ -132,5 +145,6 @@ define(["dojo/domReady!"], function () {
 
     getCraftNumber: getCraftNumber,
     getCraftPoints: getCraftPoints,
+    getKingPoints: getKingPoints,
   };
 });

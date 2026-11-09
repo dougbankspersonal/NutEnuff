@@ -24,45 +24,18 @@ define([
   //
   //-----------------------------------------
   const dropShadowClass = "drop_shadow";
-  const defaultFontSizePx = 32;
+  const defaultFontSizePx = 24;
 
-  const collectableItemSize = 55;
+  const collectibleItemSize = 55;
 
   //-----------------------------------------
   //
   // Functions
   //
   //-----------------------------------------
-  // We already have a parent wrapper.
-  // add in a "= n" node and a coin image.
-  // Returns nothing.
-  function insertSomethingEqualsPointsNode(
-    parentNode,
-    points,
-    opt_pointsPrefix,
-  ) {
-    debugLog("insertSomethingEqualsPointsNode", "points = ", points);
-
-    console.assert(Number.isInteger(points), "Points must be an integer");
-    var pointsString;
-    var pointsPrefix = opt_pointsPrefix ? opt_pointsPrefix : "";
-    if (points < 0) {
-      pointsString = `<div class="negative">${pointsPrefix}${points}</div>`;
-    } else {
-      pointsString = ` : ${pointsPrefix}${points}`;
-    }
-    pointsString += gameInfo.coinString;
-    htmlUtils.addDiv(
-      parentNode,
-      ["colon-and-points"],
-      "colonAndPoints",
-      pointsString,
-    );
-  }
-
   // A display of n fixed-sized items
   function addCollectibleItemSetIndicator(parentNode, itemType, itemCount) {
-    var collectableItemSetHeightPx = collectableItemSize;
+    var collectibleItemSetHeightPx = collectibleItemSize;
 
     debugLog(
       "addCollectibleItemSetIndicator",
@@ -73,30 +46,27 @@ define([
       return null;
     }
 
-    var collectableItemSetNode = htmlUtils.addDiv(
+    var collectibleItemSetNode = htmlUtils.addDiv(
       parentNode,
-      ["collectable-item-set"],
-      "collectable-item-set",
+      ["collectible-item-set"],
+      "collectible-item-set",
     );
 
-    domStyle.set(collectableItemSetNode, {
-      height: `${collectableItemSetHeightPx}px`,
-    });
+    for (var i = 0; i < itemCount; i++) {
+      htmlUtils.addImage(
+        collectibleItemSetNode,
+        [
+          itemType,
+          "nut",
+          "dark-shadowed",
+          "collectible-item",
+          "index-" + (i % 2),
+        ],
+        "item + i",
+      );
+    }
 
-    htmlUtils.addDiv(
-      collectableItemSetNode,
-      ["set-count"],
-      "set-count",
-      itemCount,
-    );
-
-    htmlUtils.addImage(
-      collectableItemSetNode,
-      [itemType, "nut", "dark-shadowed"],
-      "item",
-    );
-
-    return collectableItemSetNode;
+    return collectibleItemSetNode;
   }
 
   function addCardImageNode(parent, cardConfig) {
@@ -141,7 +111,13 @@ define([
     );
 
     addCollectibleItemSetIndicator(craftingNode, itemType, itemCount);
-    insertSomethingEqualsPointsNode(craftingNode, points);
+    htmlUtils.addDiv(craftingNode, ["separator"], "separator", "/");
+    htmlUtils.addDiv(
+      craftingNode,
+      ["points"],
+      "points",
+      points.toString() + gameInfo.coinString,
+    );
   }
 
   function maybeAddStandardCraftingNode(parentNode, cardConfig) {
@@ -223,29 +199,12 @@ define([
     return null;
   }
 
-  function addCustomInfo(parent, cardConfig) {
-    if (cardConfig.nutType == gameInfo.nutTypes.BadNut) {
-      var customInfoNode = htmlUtils.addDiv(
-        parent,
-        ["custom-info"],
-        "custom-info",
-      );
-      htmlUtils.addDiv(
-        customInfoNode,
-        ["text"],
-        "text",
-        "Cannot be packaged.<br>Cannot be held at the end of a round.",
-      );
-    }
-  }
-
   function addFields(parent, cardConfig) {
-    var mainWrapper = htmlUtils.addDiv(parent, ["main_wrapper"], "mainWapper");
+    var mainWrapper = htmlUtils.addDiv(parent, ["main-wrapper"], "mainWapper");
     // These are the icons in upper left and lower corner of card.
     addCardImageNode(mainWrapper, cardConfig);
     maybeAddStandardCraftingNode(mainWrapper, cardConfig);
     addTextNode(mainWrapper, cardConfig);
-    addCustomInfo(mainWrapper, cardConfig);
 
     addTitleNode(parent, cardConfig);
   }
