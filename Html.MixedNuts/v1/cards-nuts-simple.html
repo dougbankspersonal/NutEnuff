@@ -1,23 +1,15 @@
 <html>
   <head>
-    <title>Cards: Nut Values</title>
+    <title>Cards: Nuts Simple</title>
     <link rel="stylesheet" href="../css/images.css" />
-    <link rel="stylesheet" href="../css/cards-nut-values.css" />
-    <link
-      rel="stylesheet"
-      href="../SharedWebBoardGame/css/triangle-cards.css.map"
-    />
-    <link rel="stylesheet" href="../SharedWebBoardGame/css/main.css" />
+    <link rel="stylesheet" href="../css/cards-nuts-simple.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/cards.css" />
+    <link rel="stylesheet" href="../SharedWebBoardGame/css/main.css" />
     <link rel="stylesheet" href="../SharedWebBoardGame/css/image.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Nunito+Sans:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bungee&family=Nunito+Sans:opsz,wght@6..12,200..1000&display=swap"
       rel="stylesheet"
     />
     <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
@@ -53,38 +45,45 @@
       require([
         "sharedJavascript/cards",
         "sharedJavascript/debugLog",
+        "sharedJavascript/genericMeasurements",
         "sharedJavascript/genericUtils",
         "sharedJavascript/systemConfigs",
-        "javascript/cardsNutValuesData",
-        "javascript/cardsNutValues",
+        "javascript/cardsNutsData",
+        "javascript/cardsNutsSimple",
       ], function (
         cards,
-        debugLog,
+        debugLogModule,
+        genericMeasurements,
         genericUtils,
         systemConfigs,
-        cardsNutValuesData,
-        cardsNutValues,
+        cardsNutsData,
+        cardsNutsSimple,
       ) {
-        var overrides = {
-          cardWidthPx: 240,
-          cardHeightPx: 360,
-        };
+        var debugLog = debugLogModule.debugLog;
+
+        var overrides = {};
         var queryParams = genericUtils.getCommonQueryParams();
+        if (queryParams.isScreentop) {
+          overrides.itemsPerRow = 12;
+        }
+        overrides.cardHeightPx = genericMeasurements.standardCardWidthPx;
+        debugLog("html", "overrides = ", JSON.stringify(overrides));
 
         var sc = systemConfigs.getCardSystemConfigs(overrides);
-        console.log("sc = ", JSON.stringify(sc));
+        debugLog("html", "sc = ", JSON.stringify(sc));
         systemConfigs.setSystemConfigs(sc);
 
         cards.addCards(
-          cardsNutValuesData.getNumCards(),
-          cardsNutValues.addCardFront,
+          cardsNutsData.getNumCards(),
+          cardsNutsSimple.addCardFront,
           [
             {
-              callback: cardsNutValues.addCardBack,
+              callback: cardsNutsSimple.addCardBack,
             },
           ],
         );
       });
     </script>
   </body>
+  .
 </html>

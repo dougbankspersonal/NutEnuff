@@ -8,17 +8,7 @@
     1px 1px 0 #fff;
   font-weight: bold;
   font-family: "Bungee", sans-serif;
-  border-radius: 20px;
-}
-
-.card.front.nuts.bad-nut,
-.card.front.nuts.double-peanut,
-.card.front.nuts.double-almond,
-.card.front.nuts.double-cashew,
-.card.front.nuts.double-macadamia {
-  .main-wrapper {
-    margin-top: 10px;
-  }
+  border-radius: 50%;
 }
 
 .card.front.nuts {
@@ -33,10 +23,9 @@
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    justify-content: start;
+    justify-content: center;
     z-index: 1;
     font-size: 32px;
-    gap: 10px;
     font-family: "Nunito Sans";
     position: relative;
 
@@ -52,72 +41,19 @@
       flex-direction: row;
 
       .component-image {
-        width: 80px;
-        height: 80px;
-        z-index: 2;
+        width: 200px;
+        height: 200px;
+        z-index: 4;
       }
 
       .component-image.image-0 {
-        z-index: 10;
-        margin-right: -25px;
         transform: rotate(-10deg);
       }
 
       .component-image.image-1 {
-        margin-left: -20px;
-        z-index: 10;
+        z-index: 3;
+        margin-left: -150px;
         transform: rotate(10deg);
-      }
-    }
-  }
-
-  .craft-wrapper {
-    margin-top: -20px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-
-    .points {}
-
-    .separator {
-      margin-left: 10px;
-      font-size: 50px;
-      font-weight: bold;
-    }
-
-    .collectible-item-set {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      position: relative;
-      width: 100%;
-
-      .collectible-item {
-        margin-left: -13px;
-        margin-right: -13px;
-      }
-
-      .collectible-item.index-0 {
-        margin-top: 0px;
-        transform: rotate(-10deg);
-      }
-
-      .collectible-item.index-1 {
-        margin-bottom: 10px;
-        transform: rotate(10deg);
-      }
-
-      .set-count {
-        display: inline-block;
-      }
-
-      .nut {
-        height: 60px;
-        width: 60px;
       }
     }
   }
@@ -127,14 +63,17 @@
   }
 
   .title-outer-wrapper {
+    z-index: 10;
     width: 100%;
-    bottom: 0px;
     display: flex;
     position: absolute;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
     .title-inner-wrapper {
       background-color: white;
@@ -142,9 +81,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      width: 86%;
-      height: 70px;
-      border: 14px solid #773333;
+      border: 5px solid #773333;
       border-radius: 10px;
 
       .title {
@@ -155,8 +92,6 @@
         align-items: center;
         white-space: pre-line;
         line-height: 1;
-        padding-top: 5px;
-        padding-bottom: 5px;
       }
     }
   }
@@ -184,21 +119,8 @@
   }
 }
 
-.card.front.nuts.bad-nut {
-  .image-wrapper {
-    .pseudo-image.component-image.bad-nut {
-      width: 120px;
-      height: 120px;
-    }
-  }
-
-  .text {
-    font-size: 26px;
-  }
-}
-
 .card.back.nuts {
-  background: radial-gradient(#eeda79 50%, #6f673c);
+  background: radial-gradient(#b4d7b4 50%, #3b7c3b);
   border-width: 10px;
   border-style: solid;
   position: relative;

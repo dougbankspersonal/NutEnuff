@@ -73,11 +73,6 @@ define([
     var imageClass = cardConfig.imageClass;
     var imageCount = cardConfig.imageCount;
 
-    debugLog(
-      "addCardImage",
-      "Doug: cardConfig = " + JSON.stringify(cardConfig),
-    );
-
     var imageWrapperNode = htmlUtils.addDiv(
       parent,
       ["image-wrapper"],
@@ -187,7 +182,10 @@ define([
 
   function addTextNode(parent, cardConfig) {
     if (cardConfig.text) {
-      debugLog("addTextNode", "cardConfig = " + JSON.stringify(cardConfig));
+      debugLog(
+        "addTextNode",
+        "normal nuts cardConfig = " + JSON.stringify(cardConfig),
+      );
       var textNode = htmlUtils.addDiv(
         parent,
         ["text"],
@@ -254,7 +252,10 @@ define([
     console.assert(parent, "parent is null");
     var cardConfig = cards.getCardConfigAtIndex(cardConfigs, index);
 
-    debugLog("addCardFront", "cardConfig = " + JSON.stringify(cardConfig));
+    debugLog(
+      "addCardFront",
+      "normal nuts cardConfig = " + JSON.stringify(cardConfig),
+    );
 
     var idElements = ["nuts", index.toString()];
     var id = idElements.join(".");

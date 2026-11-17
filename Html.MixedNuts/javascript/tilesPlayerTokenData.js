@@ -16,11 +16,11 @@ define([
 ) {
   var debugLog = debugLogModule.debugLog;
 
-  function configureDieFace(parent, color) {
-    var borderColor = genericUtils.darkenColor(color, 50);
+  function configureDieFace(parent, colorA, colorB) {
+    var borderColor = genericUtils.darkenColor(colorA, 50);
 
     domStyle.set(parent, {
-      background: `radial-gradient(#ffffff 50%, ${color}`,
+      background: `radial-gradient(${colorB} 50%, ${colorA})`,
       "border-color": borderColor,
     });
 
@@ -36,8 +36,9 @@ define([
     for (let i = 0; i < gameInfo.maxPlayers; i++) {
       var face = {
         callback: (parent) => {
-          var color = seatColors.lightenedSeatColors[i];
-          configureDieFace(parent, color);
+          var colorA = seatColors.seatColors[i];
+          var colorB = seatColors.lightenedSeatColors[i];
+          configureDieFace(parent, colorA, colorB);
         },
       };
       dieConfig.faces.push(face);

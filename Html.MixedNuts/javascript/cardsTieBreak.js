@@ -64,9 +64,9 @@ define([
     domStyle.set(cardFrontNode, {
       background:
         "linear-gradient(" +
-        seatColors.lightenedSeatColors[cardConfig.playerIndex] +
+        seatColors.seatColors[cardConfig.playerIndex] +
         ", " +
-        "#fff" +
+        seatColors.lightenedSeatColors[cardConfig.playerIndex] +
         ")",
     });
     domStyle.set(cardFrontNode, {

@@ -29,7 +29,20 @@ define([
     colorDiv(parent, gameInfo.nutColors[nutType]);
 
     htmlUtils.addImage(parent, ["package"], "package");
-    htmlUtils.addImage(parent, ["nut", nutType], "nut");
+    var craftWrapperNode = htmlUtils.addDiv(
+      parent,
+      ["craft-wrapper"],
+      "craft-wrapper",
+    );
+    var craftNumber = gameInfo.getCraftNumber(nutType);
+    htmlUtils.addDiv(
+      craftWrapperNode,
+      ["craft-number"],
+      "craft-number",
+      craftNumber,
+    );
+    htmlUtils.addDiv(craftWrapperNode, ["times"], "times", "x");
+    htmlUtils.addImage(craftWrapperNode, ["nut", nutType], "nut");
     htmlUtils.addDiv(
       parent,
       ["reward"],

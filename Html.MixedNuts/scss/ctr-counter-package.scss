@@ -15,6 +15,37 @@
       height: 300px;
       width: 150px;
 
+      .craft-wrapper {
+        top: 15px;
+        left: 30px;
+        position: absolute;
+        z-index: 40;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        font-family: "Bungee", sans-serif;
+
+        .craft-number {
+          font-size: 36px;
+          margin-right: 5px;
+          -webkit-text-stroke: 2px white;
+        }
+
+        .times {
+          font-size: 24px;
+          -webkit-text-stroke: 2px white;
+        }
+
+        .pseudo-image.nut {
+          width: 60px;
+          height: 60px;
+          aspect-ratio: 1 / 1;
+          filter:
+            drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.45)) drop-shadow(2px 3px 5px rgba(0, 0, 0, 0.35));
+        }
+      }
+
       .reward {
         position: absolute;
         top: 90px;
@@ -30,32 +61,24 @@
         background: linear-gradient(#ffffff 50%, #bbbbbb 100%);
       }
 
-      .pseudo-image.nut {
-        position: absolute;
-        z-index: 40;
-        width: 60px;
-        height: 60px;
-        aspect-ratio: 1 / 1;
-        top: 30px;
-        left: 30px;
-        filter:
-          drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.45)) drop-shadow(2px 3px 5px rgba(0, 0, 0, 0.35));
-      }
-
       .pseudo-image.discard,
       .pseudo-image.package {
         position: absolute;
-        top: 5px;
-        width: 100px;
-        height: 100px
       }
 
       .pseudo-image.package {
         z-index: 40;
         filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5));
+        width: 80px;
+        height: 80px;
+        top: 70px;
       }
 
-      .pseudo-image.discard {}
+      .pseudo-image.discard {
+        top: 5px;
+        width: 100px;
+        height: 100px
+      }
 
       .counter-box {
         position: absolute;
