@@ -10,8 +10,8 @@ define(["dojo/domReady!"], function () {
   const hazelnutBackgroundColor = "#cdffa2";
   const macadamiaBackgroundColor = "#9bffe8";
   const peanutBackgroundColor = "#97aaff";
-  const pistachioBackgroundColor = "rgb(164, 134, 255)";
-  const walnutBackgroundColor = "rgb(255, 131, 212)";
+  const pistachioBackgroundColor = "#A486FF";
+  const walnutBackgroundColor = "#FF83D4";
 
   const badNutBackgroundColor = "#9e9e9e";
 
@@ -67,15 +67,12 @@ define(["dojo/domReady!"], function () {
 
   const gNutTypesArray = [
     gNutTypes.Peanut,
-    gNutTypes.DoublePeanut,
     gNutTypes.Almond,
-    gNutTypes.DoubleAlmond,
     gNutTypes.Cashew,
-    gNutTypes.DoubleCashew,
     gNutTypes.Macadamia,
-    gNutTypes.DoubleMacadamia,
     gNutTypes.Walnut,
-    gNutTypes.BadNut,
+    gNutTypes.Pistachio,
+    gNutTypes.Hazelnut,
   ];
 
   const gCoinString = "🪙";

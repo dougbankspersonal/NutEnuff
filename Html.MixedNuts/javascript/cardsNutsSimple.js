@@ -33,42 +33,6 @@ define([
   // Functions
   //
   //-----------------------------------------
-  // A display of n fixed-sized items
-  function addCollectibleItemSetIndicator(parentNode, itemType, itemCount) {
-    var collectibleItemSetHeightPx = collectibleItemSize;
-
-    debugLog(
-      "addCollectibleItemSetIndicator",
-      "itemType = " + itemType + ", itemCount = " + itemCount,
-    );
-
-    if (itemCount == 0) {
-      return null;
-    }
-
-    var collectibleItemSetNode = htmlUtils.addDiv(
-      parentNode,
-      ["collectible-item-set"],
-      "collectible-item-set",
-    );
-
-    for (var i = 0; i < itemCount; i++) {
-      htmlUtils.addImage(
-        collectibleItemSetNode,
-        [
-          itemType,
-          "nut",
-          "dark-shadowed",
-          "collectible-item",
-          "index-" + (i % 2),
-        ],
-        "item + i",
-      );
-    }
-
-    return collectibleItemSetNode;
-  }
-
   function addCardImageNode(parent, cardConfig) {
     var imageClass = cardConfig.imageClass;
     var imageCount = cardConfig.imageCount;
@@ -92,47 +56,7 @@ define([
 
       htmlUtils.addImage(imageWrapperNode, imageClasses, "image-" + i);
     }
-  }
-
-  function addStandardCraftingInfo(parentNode, itemType, itemCount, points) {
-    debugLog(
-      "addStandardCraftingInfo",
-      "itemType = " +
-        itemType +
-        ", itemCount = " +
-        itemCount +
-        ", points = " +
-        points,
-    );
-    var craftingNode = htmlUtils.addDiv(
-      parentNode,
-      ["craft-wrapper", "unbroken-row"],
-      "craftWrapper",
-    );
-
-    addCollectibleItemSetIndicator(craftingNode, itemType, itemCount);
-    htmlUtils.addDiv(craftingNode, ["separator"], "separator", "/");
-    htmlUtils.addDiv(
-      craftingNode,
-      ["points"],
-      "points",
-      points.toString() + gameInfo.coinString,
-    );
-  }
-
-  function maybeAddStandardCraftingNode(parentNode, cardConfig) {
-    var craftingNode = null;
-    if (cardConfig.craft && cardConfig.craft.points != 0) {
-      var craftConfig = cardConfig.craft;
-      var imageClass = cardConfig.imageClass;
-      addStandardCraftingInfo(
-        parentNode,
-        imageClass,
-        craftConfig.number,
-        craftConfig.points,
-      );
-    }
-    return craftingNode;
+    return imageWrapperNode;
   }
 
   function addTitleNode(parent, cardConfig) {
@@ -185,26 +109,47 @@ define([
     }
   }
 
-  function addTextNode(parent, cardConfig) {
-    if (cardConfig.text) {
-      debugLog("addTextNode", "cardConfig = " + JSON.stringify(cardConfig));
-      var textNode = htmlUtils.addDiv(
-        parent,
-        ["text"],
-        "text",
-        cardConfig.text,
-      );
-      return textNode;
-    }
-    return null;
-  }
-
   function addFields(parent, cardConfig) {
     debugLog("addFields", "cardConfig = " + JSON.stringify(cardConfig));
+
+    if (cardConfig.mustMatch !== undefined) {
+      if (cardConfig.mustMatch) {
+        htmlUtils.addDiv(
+          parent,
+          ["must-match", "equal", "decorated"],
+          "must-match",
+          "=",
+        );
+      } else {
+        htmlUtils.addDiv(
+          parent,
+          ["must-match", "not-equal", "decorated"],
+          "must-match",
+          "≠",
+        );
+      }
+      return;
+    }
+
     var mainWrapper = htmlUtils.addDiv(parent, ["main-wrapper"], "mainWapper");
     // These are the icons in upper left and lower corner of card.
     addCardImageNode(mainWrapper, cardConfig);
     addTitleNode(parent, cardConfig);
+
+    if (cardConfig.question) {
+      htmlUtils.addDiv(parent, ["space-config", "question"], "question", "?");
+    }
+    if (cardConfig.required) {
+      htmlUtils.addDiv(parent, ["space-config", "required"], "required", "!");
+    }
+    if (cardConfig.bonus) {
+      htmlUtils.addDiv(
+        parent,
+        ["space-config", "bonus"],
+        "bonus",
+        `+${cardConfig.bonus}` + gameInfo.coinString,
+      );
+    }
   }
 
   function addCardBack(parent) {
@@ -229,8 +174,8 @@ define([
       return "#ffed64";
     }
 
-    var nutColor = gameInfo.nutColors[cardConfig.nutType];
-    var adjustedColor = genericUtils.darkenColor(nutColor, 50);
+    var baseColor = cardConfig.color;
+    var adjustedColor = genericUtils.darkenColor(baseColor, 50);
     return adjustedColor;
   }
 
@@ -248,13 +193,26 @@ define([
     var idElements = ["nuts", index.toString()];
     var id = idElements.join(".");
 
-    var classArray = [];
-    classArray.push("nuts");
-    classArray.push(cardConfig.nutType);
+    var classArray = cardConfig.classes;
+
     var cardFrontNode = cards.addCardFront(parent, classArray, id);
     var borderColor = getBorderColor(cardConfig);
+    if (cardConfig.question) {
+      borderColor = "#ffff00";
+    }
+    var bgColor1 = "#ffffff";
+    var bgColor2 = cardConfig.color;
+    if (cardConfig.required) {
+      bgColor1 += "88";
+      bgColor2 += "88";
+    }
+    debugLog(
+      "addCardFront",
+      "bgColor1 = " + bgColor1 + ", bgColor2 = " + bgColor2,
+    );
+
     domStyle.set(cardFrontNode, {
-      background: `radial-gradient(#ffffff 50%, ${cardConfig.color}`,
+      background: `radial-gradient(${bgColor1} 50%, ${bgColor2})`,
       "border-color": borderColor,
     });
 

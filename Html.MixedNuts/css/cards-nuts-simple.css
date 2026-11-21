@@ -11,12 +11,52 @@
   border-radius: 50%;
 }
 
+.card.front.nuts.space-config,
+.card.back.nuts.space-config {
+  border-radius: 20%;
+}
+
 .card.front.nuts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: relative;
   border-width: 10px;
   border-style: solid;
+  overflow: visible;
+}
+.card.front.nuts .equal,
+.card.front.nuts .not-equal {
+  color: #000000;
+  -webkit-text-stroke: 2px #ffff00;
+  font-size: 140px;
+}
+.card.front.nuts .not-equal {
+  -webkit-text-stroke: 4px #ffff00;
+}
+.card.front.nuts .drop_shadow.pseudo-image {
+  filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.4));
+}
+.card.front.nuts .space-config {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 30;
+  color: #000000;
+  -webkit-text-stroke: 2px #ffff00;
+  font-size: 100px;
+  top: 0px;
+  left: 20px;
+}
+.card.front.nuts .space-config.bonus {
+  font-size: 80px;
+  left: 0px;
 }
 .card.front.nuts .main-wrapper {
+  z-index: 1;
   margin-top: 30px;
   width: 100%;
   height: 75%;
@@ -24,7 +64,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 1;
   font-size: 32px;
   font-family: "Nunito Sans";
   position: relative;
@@ -52,11 +91,12 @@
   margin-left: -150px;
   transform: rotate(10deg);
 }
-.card.front.nuts .drop_shadow.pseudo-image {
-  filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.4));
-}
 .card.front.nuts .title-outer-wrapper {
-  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
   width: 100%;
   display: flex;
   position: absolute;

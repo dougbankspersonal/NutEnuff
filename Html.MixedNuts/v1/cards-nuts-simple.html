@@ -64,7 +64,7 @@
         var overrides = {};
         var queryParams = genericUtils.getCommonQueryParams();
         if (queryParams.isScreentop) {
-          overrides.itemsPerRow = 12;
+          overrides.itemsPerRow = 6;
         }
         overrides.cardHeightPx = genericMeasurements.standardCardWidthPx;
         debugLog("html", "overrides = ", JSON.stringify(overrides));
@@ -76,11 +76,7 @@
         cards.addCards(
           cardsNutsData.getNumCards(),
           cardsNutsSimple.addCardFront,
-          [
-            {
-              callback: cardsNutsSimple.addCardBack,
-            },
-          ],
+          [],
         );
       });
     </script>
