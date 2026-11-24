@@ -76,7 +76,11 @@
         cards.addCards(
           cardsNutsData.getNumCards(),
           cardsNutsSimple.addCardFront,
-          [],
+          [
+            {
+              callback: cardsNutsSimple.addCardBack,
+            },
+          ],
         );
       });
     </script>

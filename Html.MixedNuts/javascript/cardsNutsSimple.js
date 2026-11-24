@@ -112,44 +112,10 @@ define([
   function addFields(parent, cardConfig) {
     debugLog("addFields", "cardConfig = " + JSON.stringify(cardConfig));
 
-    if (cardConfig.mustMatch !== undefined) {
-      if (cardConfig.mustMatch) {
-        htmlUtils.addDiv(
-          parent,
-          ["must-match", "equal", "decorated"],
-          "must-match",
-          "=",
-        );
-      } else {
-        htmlUtils.addDiv(
-          parent,
-          ["must-match", "not-equal", "decorated"],
-          "must-match",
-          "≠",
-        );
-      }
-      return;
-    }
-
     var mainWrapper = htmlUtils.addDiv(parent, ["main-wrapper"], "mainWapper");
     // These are the icons in upper left and lower corner of card.
     addCardImageNode(mainWrapper, cardConfig);
     addTitleNode(parent, cardConfig);
-
-    if (cardConfig.question) {
-      htmlUtils.addDiv(parent, ["space-config", "question"], "question", "?");
-    }
-    if (cardConfig.required) {
-      htmlUtils.addDiv(parent, ["space-config", "required"], "required", "!");
-    }
-    if (cardConfig.bonus) {
-      htmlUtils.addDiv(
-        parent,
-        ["space-config", "bonus"],
-        "bonus",
-        `+${cardConfig.bonus}` + gameInfo.coinString,
-      );
-    }
   }
 
   function addCardBack(parent) {
